@@ -1,110 +1,109 @@
-﻿@page
+﻿<script src="~/scripts.js"></script>
 @using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
       integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-    <style>
-        .user {
-            text-align: center;
+<style>
+    .user {
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: 20px 0;
+        background-color: rgba(0, 0, 0, 0.8);
+        color: white;
+        font-family: Bahnschrift, Arial, Helvetica, sans-serif;
+    }
+
+        .user ul {
             display: flex;
-            flex-direction: column;
             justify-content: center;
-            padding: 20px 0;
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            font-family: Bahnschrift, Arial, Helvetica, sans-serif;
         }
 
-            .user ul {
-                display: flex;
-                justify-content: center;
-            }
+    .user-data {
+        margin: 20px 0;
+        font-size: 22px;
+    }
 
-        .user-data {
-            margin: 20px 0;
-            font-size: 22px;
-        }
+    .change-data {
+        display: block;
+        list-style-type: none;
+        font-size: 20px;
+        margin: 30px 20px;
+    }
 
-        .change-data {
-            display: block;
-            list-style-type: none;
-            font-size: 20px;
-            margin: 30px 20px;
-        }
+    button.changedata {
+        padding: 10px 20px;
+        background-color: dodgerblue;
+        color: white;
+        font-weight: bold;
+        border: none;
+    }
 
-        button.changedata {
-            padding: 10px 20px;
-            background-color: dodgerblue;
-            color: white;
-            font-weight: bold;
-            border: none;
-        }
-
-            button.changedata:hover {
-                cursor: pointer;
-                background-color: mediumspringgreen;
-                color: black;
-            }
-
-        #profileimg {
-            max-width: 100px;
-            border: 2px solid white;
-            padding: 20px;
-            border-radius: 200px;
-        }
-
-        .employerads {
-            text-align: left !important;
-            font-family: Bahnschrift, Arial, Helvetica, sans-serif;
-            color: white;
-            padding: 20px;
-        }
-
-        .signs i {
-            font-size: 30px;
-        }
-
-        .ads {
-            background-color: rgba(0, 0, 0, 0.8);
-            padding: 20px;
-        }
-
-        .empty {
-            height: 50px;
-        }
-        .deleteads i {
-            color: white;
-        }
-
-        .deleteads button {
-            background: none;
-            border: none;
+        button.changedata:hover {
             cursor: pointer;
+            background-color: mediumspringgreen;
+            color: black;
         }
 
-        .deleteads i:hover {
-            color: crimson;
+    #profileimg {
+        max-width: 100px;
+        border: 2px solid white;
+        padding: 20px;
+        border-radius: 200px;
+    }
+
+    .employerads {
+        text-align: left !important;
+        font-family: Bahnschrift, Arial, Helvetica, sans-serif;
+        color: white;
+        padding: 20px;
+    }
+
+    .signs i {
+        font-size: 30px;
+    }
+
+    .ads {
+        background-color: rgba(0, 0, 0, 0.8);
+        padding: 20px;
+    }
+
+    .empty {
+        height: 50px;
+    }
+
+    .deleteads i {
+        color: white;
+    }
+
+    .deleteads button {
+        background: none;
+        border: none;
+        cursor: pointer;
+    }
+
+    .deleteads i:hover {
+        color: crimson;
+    }
+
+    .ads a {
+        font-size: 20px;
+        color: mediumspringgreen;
+    }
+
+        .ads a:hover {
+            color: dodgerblue;
         }
 
-        .ads a {
-            font-size: 20px;
-            color: mediumspringgreen;
-        }
-
-            .ads a:hover {
-                color: dodgerblue;
-            }
-
-        .ads-title {
-            font-style: italic;
-        }
-    </style>
-@{
-
-    int? id = @HttpContextAccessor.HttpContext.Session.GetInt32("Id");
-    string url = (@HttpContextAccessor.HttpContext.Session.Keys.Contains("Company")) ? "/users/employers/id=" : "/users/students/id=";
-    url += id;
+    .ads-title {
+        font-style: italic;
+    }
+</style>
+@{ int? id = @HttpContextAccessor.HttpContext.Session.GetInt32("Id");
+                string url = (@HttpContextAccessor.HttpContext.Session.Keys.Contains("Company")) ? "/users/employers/id=" : "/users/students/id=";
+                url += id;
     <script>
         let user = null;
         $.ajax({
@@ -218,8 +217,7 @@
             }
         });
 
-    </script>
-}
+    </script> }
 <div class="user">
     <div><img src="https://flaticons.net/icon.php?slug_category=application&slug_icon=user-profile" id="profileimg"></div>
     <div>
@@ -245,7 +243,9 @@
             <form method="post" id="changepass-form" style="margin-top: 20px">
                 <input type="password" name="changepass" style="border: none; font-size: 16px; padding: 5px"><br />
                 <button type="submit" class="signout" style="border:none; color: white; padding: 0 10px;
-                        font-size: 22px; background-color: dodgerblue; font-family: Bahnschrift, Arial, serif; cursor: pointer; margin-top: 20px">Подтвердить</button>
+                        font-size: 22px; background-color: dodgerblue; font-family: Bahnschrift, Arial, serif; cursor: pointer; margin-top: 20px">
+                    Подтвердить
+                </button>
             </form>
             <h5 id="changepassinfo" style="margin-top: 20px"></h5>
         </li>
