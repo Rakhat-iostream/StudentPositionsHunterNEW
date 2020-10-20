@@ -32,5 +32,10 @@ namespace IndustrialStudentPositionHunters.Controllers.ViewControllers
         {
             return View("Index");
         }
+
+        public IActionResult Articles()
+        {
+            return View("Index");
+        }
     }
 }

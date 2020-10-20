@@ -125,6 +125,10 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                 {
                     @await Html.PartialAsync("Advertisement");
                 }
+                else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/articles/id"))
+                {
+                    @await Html.PartialAsync("ArticlePage");
+                }
             }
         </div>
         <div style="flex: 0 0 10%; max-width: 10%;"></div>
