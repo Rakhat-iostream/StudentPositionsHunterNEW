@@ -98,7 +98,7 @@
                 <label for="title">Заголовок</label>
             </div>
             <div class="col-75">
-                <input type="text" id="title" name="title" placeholder="Ваш заголовок..." class="adsfield">
+                <input type="text" id="newstitle" name="title" placeholder="Ваш заголовок..." class="adsfield">
             </div>
         </div>
         <div class="row">
@@ -106,7 +106,7 @@
                 <label for="salary">Дата публикации</label>
             </div>
             <div class="col-75">
-                <input type="date" id="publishDate" name="publishDate" placeholder="Ваша дата публикации..." class="adsfield">
+                <input type="date" id="newspublishDate" name="publishDate" placeholder="Ваша дата публикации..." class="adsfield">
             </div>
         </div>
         <div class="row">
@@ -114,7 +114,7 @@
                 <label for="description">Описание</label>
             </div>
             <div class="col-75">
-                <textarea id="description" class="adsfield" name="description" placeholder="Разместите здесь описание новостей..." style="height:200px"></textarea>
+                <textarea id="newsdescription" class="adsfield" name="description" placeholder="Разместите здесь описание новостей..." style="height:200px"></textarea>
             </div>
         </div>
         <div class="row">
@@ -127,9 +127,9 @@
     $('#addnewsform').submit(function (e) {
         e.preventDefault();
         let art = {
-            Title: $('#title').val(),
-            PublishDate: $('#publishDate').val(),
-            Description: $('#description').val()
+            Title: $('#newstitle').val(),
+            PublishDate: $('#newspublishDate').val(),
+            Description: $('#newsdescription').val()
         };
         alert(JSON.stringify(art));
         var isValid = false;
@@ -152,7 +152,7 @@
                 },
                 error: function (response) {
                     alert(JSON.stringify(response));
-                    $('#adserror').html("These news already exists");
+                    $('#adserror').html("These news already exist");
                 }
             });
         }

@@ -59,10 +59,10 @@ $(document).ready(function () {
     $('div.news article a').hover(function () {
         $('div.news article a').css('color', 'skyblue');
     });
-
-    function substr(index, str) {
+    
+});
+function substr(index, str) {
         var s = "";
         for (let i = index; i < str.length; i++) s += str[i];
         return s;
     }
-});

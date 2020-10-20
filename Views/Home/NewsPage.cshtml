@@ -1,0 +1,51 @@
+﻿<style>
+    div.newsblock {
+        font-family: Bahnschrift, Arial, serif;
+        padding: 40px;
+        background-color: white;
+        color: black;
+    }
+
+    .newsblock h1 {
+        margin: 20px 0;
+        border-bottom: 2px solid dodgerblue;
+    }
+
+    .newsblock p {
+        margin-top: 20px;
+        font-style: italic;
+    }
+
+    .newsimg {
+        display: block;
+        max-width: 70%;
+        position: relative;
+        left: 15%;
+        border: 2px solid black;
+    }
+
+    .newsdate {
+        margin-top: 20px;
+        color: darkorange;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        let newsUrl = substr(5, location.pathname);
+        $.get(
+            newsUrl
+        ).done(function (data) {
+            $('.newsblock').append(data);
+            $('.newsblock h1').html(data.title);
+            $('.newsdate').html("Дата публикации: " + data.publishDateString);
+            $('.newsblock p').html(data.description);
+        });
+    });
+</script>
+<div class="newsblock">
+    <div class="newsimgblock"><img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" class="newsimg"></div>
+    <div class="newsdate"></div>
+    <h1></h1>
+    <p>
+    </p>
+</div>

@@ -73,3 +73,4 @@ C:\Users\ASUS\source\repos\NewStudentPos\obj\Debug\netcoreapp3.1\NewStudentPos.d
 C:\Users\ASUS\source\repos\NewStudentPos\obj\Debug\netcoreapp3.1\NewStudentPos.pdb
 C:\Users\ASUS\source\repos\NewStudentPos\obj\Debug\netcoreapp3.1\NewStudentPos.genruntimeconfig.cache
 C:\Users\ASUS\source\repos\NewStudentPos\obj\Debug\netcoreapp3.1\Razor\Views\Home\ArticlePage.cshtml.g.cs
+C:\Users\ASUS\source\repos\NewStudentPos\obj\Debug\netcoreapp3.1\Razor\Views\Home\NewsPage.cshtml.g.cs

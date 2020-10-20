@@ -1,5 +1,4 @@
-﻿<script src="~/scripts.js"></script>
-@using Microsoft.AspNetCore.Http
+﻿@using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
@@ -105,118 +104,119 @@
                 string url = (@HttpContextAccessor.HttpContext.Session.Keys.Contains("Company")) ? "/users/employers/id=" : "/users/students/id=";
                 url += id;
     <script>
-        let user = null;
-        $.ajax({
-            method: "GET",
-            headers: {
-                'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
-            },
-            url: "@url",
-            success: function (data) {
-                user = data;
-                $('.names').append(user.firstName + " " + user.lastName);
-                $('.email').append(user.email);
-                if (user.hasOwnProperty('companyName')) {
-                    $('.changedataul').append('<li class="change-data" id="company-field"><button type="button" id="changecompany" class="changedata">'
-                        + "Изменить компанию" + '</button></li>');
-                    $('#addadsbtn').html('Добавить обьявление');
-                    let ads = user.advertisements;
-                    for (let i = 0; i < ads.length; i++) {
-                        $('.employerads').append('<div class="ads"><div class="signs"><form class="deleteads"><button type="submit"><i class="fas fa-trash-alt"></i></button></form>' +
-                            '</div><h2 class="ads-title">' + ads[i].title + '</h2><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>'
-                            + '<div class="empty"></div>');
+        $(document).ready(function () {
+            let user = null;
+            $.ajax({
+                method: "GET",
+                headers: {
+                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                },
+                url: "@url",
+                success: function (data) {
+                    user = data;
+                    $('.names').append(user.firstName + " " + user.lastName);
+                    $('.email').append(user.email);
+                    if (user.hasOwnProperty('companyName')) {
+                        $('.changedataul').append('<li class="change-data" id="company-field"><button type="button" id="changecompany" class="changedata">'
+                            + "Изменить компанию" + '</button></li>');
+                        $('#addadsbtn').html('Добавить обьявление');
+                        let ads = user.advertisements;
+                        for (let i = 0; i < ads.length; i++) {
+                            $('.employerads').append('<div class="ads"><div class="signs"><form class="deleteads"><button type="submit"><i class="fas fa-trash-alt"></i></button></form>' +
+                                '</div><h2 class="ads-title">' + ads[i].title + '</h2><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>'
+                                + '<div class="empty"></div>');
+                        }
+                        $('.deleteads').each(function (id) {
+                            $(this).submit(function () {
+                                $.ajax({
+                                    type: "DELETE",
+                                    headers: {
+                                        'Authorization': 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")'
+                                    },
+                                    async: false,
+                                    url: '/advertisements/id=' + ads[id].advertisementId + '/delete',
+                                    error: function (response) {
+                                        alert(JSON.stringify(response));
+                                    }
+                                });
+                            });
+                        });
+
+                    } else {
+                        $('#addadsbtn').hide();
+                        $('.changedataul').append('<li class="change-data"><button type="button" id="addresume" class="changedata">'
+                            + "Добавить резюме" + '</button></li>');
                     }
-                    $('.deleteads').each(function (id) {
-                        $(this).submit(function () {
+                    $('#changepass-form').hide();
+                    $('#changeemail-form').hide();
+                    $('button#changepass').click(function () {
+                        let userdto = {
+                            FirstName: user.firstName,
+                            LastName: user.lastName,
+                            Email: user.email,
+                            CompanyName: user.companyName,
+                            Password: ""
+                        };
+                        $('#changepass-form').show();
+                        $('#changepass-form').submit(function (e) {
+                            e.preventDefault();
+                            userdto.Password = $('input[name="changepass"]').val();
                             $.ajax({
-                                type: "DELETE",
+                                method: "PUT",
                                 headers: {
-                                    'Authorization': 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")'
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
                                 },
                                 async: false,
-                                url: '/advertisements/id=' + ads[id].advertisementId + '/delete',
-                                error: function (response) {
-                                    alert(JSON.stringify(response));
+                                url: "@url/update/password",
+                                data: JSON.stringify(userdto),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    $('#changepass-form').hide();
+                                    $('#changepassinfo').html("<span style='color: mediumspringgreen;'>Password updated successfully</span>");
+                                },
+                                error: function (data) {
+                                    $('#changepassinfo').html("<span style='color: crimson;'>Failed to update password</span>");
                                 }
                             });
                         });
                     });
 
-                } else {
-                    $('#addadsbtn').hide();
-                    $('.changedataul').append('<li class="change-data"><button type="button" id="addresume" class="changedata">'
-                        + "Добавить резюме" + '</button></li>');
+
+                    $('button#changeemail').click(function () {
+                        let userdto = {
+                            FirstName: user.firstName,
+                            LastName: user.lastName,
+                            Email: "",
+                            CompanyName: user.companyName,
+                            Password: "Roflan"
+                        };
+                        $('#changeemail-form').show();
+                        $('#changeemail-form').submit(function (e) {
+                            e.preventDefault();
+                            userdto.Email = $('input[name="changeemail"]').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "@url/update/email",
+                                data: JSON.stringify(userdto),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    $('#changeemail-form').hide();
+                                    $('#changeemailinfo').html("<span style='color: mediumspringgreen;'>Email updated successfully</span>");
+                                },
+                                error: function (data) {
+                                    alert(JSON.stringify(data));
+                                    $('#changeemailinfo').html("<span style='color: crimson;'>Failed to update email</span>");
+                                }
+                            });
+                        });
+                    });
                 }
-                $('#changepass-form').hide();
-                $('#changeemail-form').hide();
-                $('button#changepass').click(function () {
-                    let userdto = {
-                        FirstName: user.firstName,
-                        LastName: user.lastName,
-                        Email: user.email,
-                        CompanyName: user.companyName,
-                        Password: ""
-                    };
-                    $('#changepass-form').show();
-                    $('#changepass-form').submit(function (e) {
-                        e.preventDefault();
-                        userdto.Password = $('input[name="changepass"]').val();
-                        $.ajax({
-                            method: "PUT",
-                            headers: {
-                                'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
-                            },
-                            async: false,
-                            url: "@url/update/password",
-                            data: JSON.stringify(userdto),
-                            contentType: "application/json; charset=utf-8",
-                            success: function (data) {
-                                $('#changepass-form').hide();
-                                $('#changepassinfo').html("<span style='color: mediumspringgreen;'>Password updated successfully</span>");
-                            },
-                            error: function (data) {
-                                $('#changepassinfo').html("<span style='color: crimson;'>Failed to update password</span>");
-                            }
-                        });
-                    });
-                });
-
-
-                $('button#changeemail').click(function () {
-                    let userdto = {
-                        FirstName: user.firstName,
-                        LastName: user.lastName,
-                        Email: "",
-                        CompanyName: user.companyName,
-                        Password: "Roflan"
-                    };
-                    $('#changeemail-form').show();
-                    $('#changeemail-form').submit(function (e) {
-                        e.preventDefault();
-                        userdto.Email = $('input[name="changeemail"]').val();
-                        $.ajax({
-                            method: "PUT",
-                            headers: {
-                                'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
-                            },
-                            async: false,
-                            url: "@url/update/email",
-                            data: JSON.stringify(userdto),
-                            contentType: "application/json; charset=utf-8",
-                            success: function (data) {
-                                $('#changeemail-form').hide();
-                                $('#changeemailinfo').html("<span style='color: mediumspringgreen;'>Email updated successfully</span>");
-                            },
-                            error: function (data) {
-                                alert(JSON.stringify(data));
-                                $('#changeemailinfo').html("<span style='color: crimson;'>Failed to update email</span>");
-                            }
-                        });
-                    });
-                });
-            }
+            });
         });
-
     </script> }
 <div class="user">
     <div><img src="https://flaticons.net/icon.php?slug_category=application&slug_icon=user-profile" id="profileimg"></div>

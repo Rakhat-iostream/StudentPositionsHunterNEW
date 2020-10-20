@@ -1,4 +1,5 @@
 ﻿<script>
+    $(document).ready(function(){
         var url = substr(5, location.pathname);
         $.get(
             url
@@ -9,6 +10,7 @@
                     '<h3>Зарплата: ' + ads[i].salary + ' KZT</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Узнать больше...</a></div>');
             }
         });
+    });
     </script>
     <style>
         .advertisementspos {
