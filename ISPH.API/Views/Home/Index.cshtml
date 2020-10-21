@@ -110,7 +110,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                 }
                 else
                 {
-                    <div class="row content" style="flex: 0 0 60%; max-width: 60%;">
+                    <div class="row content" style="flex: 0 0 70%; max-width: 70%;">
                         @{
                             if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("profile"))
                             {
@@ -123,7 +123,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                                     @await Html.PartialAsync("ArticleForm");
                                     @await Html.PartialAsync("NewsForm");
                                 }
-                                <h3 style="margin: 50px 0; color: white; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Компании: </h3>
+                                <h3 style="margin: 50px 0; color: white; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Компании: </h3>
                                 <ul class="companies">
                                 </ul>
                                 <div id="positions">
@@ -146,9 +146,9 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                             }
                         }
                     </div>
-                    <div style="flex: 0 0 10%; max-width: 10%;"></div>
-                    <div class="row" style="flex: 0 0 30%; max-width: 30%;">
-                        <h1 style="margin: 50px 0; color: white; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Новости: </h1>
+                    <div style="flex: 0 0 5%; max-width: 5%;"></div>
+                    <div class="row" style="flex: 0 0 25%; max-width: 25%;">
+                        <h1 style="margin: 50px 0; color: white; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Новости: </h1>
                         <div class="news" onload="getNews();">
 
                         </div>

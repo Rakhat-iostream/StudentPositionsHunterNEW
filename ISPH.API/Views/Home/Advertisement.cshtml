@@ -1,18 +1,48 @@
 ﻿@using Microsoft.AspNetCore.Http
 @inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<script src="~/microsoft/signalr/dist/browser/signalr.min.js"></script>
 <script>
+    let emp = null;
     var url = substr(5, location.pathname);
     $.get(
         url
     ).done(function (data) {
         let ad = data;
-        let emp = ad.employer;
+        emp = ad.employer;
         $('.adstitle').html(ad.title);
         $('.adssalary').html('Зарплата: ' + ad.salary + ' KZT');
         $('.adscompany').html('Компания: ' + emp.companyName);
         $('.adsinfo').html(ad.description);
         $('.contact-name').html(emp.firstName + " " + emp.lastName);
         $('.contact-email').html('Почта: ' + emp.email);
+        let userName = '@HttpContextAccessor.HttpContext.Session.GetString("Name")';
+        let isStudent = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
+        if (userName !== '') {
+            const hubConnection = new signalR.HubConnectionBuilder()
+                .withUrl("/chat")
+                .build();
+            // получение сообщения от сервера
+            hubConnection.on('Send', function (message, userName) {
+                console.log(message + " " + userName);
+                $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
+                // создаем элемент <b> для имени пользователя
+                @*let userNameElem = document.createElement("b");
+                userNameElem.appendChild(document.createTextNode(userName + ': '));
+                
+                // создает элемент <p> для сообщения пользователя
+                let elem = document.createElement("p");
+                elem.appendChild(userNameElem);
+                elem.appendChild(document.createTextNode(message));
+
+                var firstElem = document.getElementById("chatroom").firstChild;
+                document.getElementById("chatroom").insertBefore(elem, firstElem);*@
+            });
+            document.getElementById("sendBtn").addEventListener("click", function (e) {
+                let message = document.getElementById("message").value;
+                hubConnection.invoke("Send", message, userName, emp.firstName, isStudent);
+            });
+            hubConnection.start();
+        }
     });
 </script>
 <style>
@@ -56,7 +86,6 @@
     }
 </style>
 <div class="adsblock">
-    <h1>@HttpContextAccessor.HttpContext.Session.GetString("Name")</h1>
     <h1 class="adstitle" style="margin: 20px 0;"></h1>
     <div class="adssalary" style="margin: 20px 0;"></div>
     <div class="adscompany" style="margin: 20px 0;"></div>
@@ -64,7 +93,15 @@
     </div>
     <ul class="contact-list" style="margin: 20px 0;">
         <h2 class="contact-title">Контакты:</h2>
-        <li class="contact-name">Жасмуханова Жанна</li>
-        <li class="contact-email">Почта: z.zhasmuhanova@gmail.com</li>
+        <li class="contact-name"></li>
+        <li class="contact-email"></li>
     </ul>
+    <div class="chat">
+        <h4>Написать </h4>
+        <div id="chatroom" style="border: 2px solid black; padding: 20px; max-width: 50%; margin: 20px"></div>
+        <div id="inputForm">
+            <textarea type="text" id="message"></textarea>
+            <button type="button" id="sendBtn" style="border: none; background: dodgerblue; color: white; padding: 10px 20px; margin-left: 20px;">Отправить</button>
+        </div>
+    </div>
 </div>

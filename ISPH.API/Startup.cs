@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using ISPH.Core.Data;
 using ISPH.Infrastructure;
+using ISPH.Infrastructure.Hubs;
 
 namespace ISPH.API
 {
@@ -56,6 +57,7 @@ namespace ISPH.API
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
+            services.AddSignalR();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
         }
@@ -75,6 +77,7 @@ namespace ISPH.API
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllers();
                 endpoints.MapControllerRoute(
                     name: "default",

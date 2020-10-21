@@ -98,7 +98,6 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.Bcl.A
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.Bcl.HashCode.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Abstractions.dll
-C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Relational.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Abstractions.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.Extensions.Caching.Memory.dll
