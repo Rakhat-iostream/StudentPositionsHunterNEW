@@ -4,6 +4,7 @@ using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
 using ISPH.Infrastructure.Repositories;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +15,8 @@ namespace ISPH.API.Controllers
     [ApiController]
     public class ArticlesController : ControllerBase
     {
-        private readonly IEntityRepository<Article> _repos;
-        public ArticlesController(IEntityRepository<Article> repos)
+        private readonly IArticlesRepository _repos;
+        public ArticlesController(IArticlesRepository repos)
         {
             _repos = repos;
         }

@@ -7,20 +7,20 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-   abstract class EntityRepository<T> : IEntityRepository<T> where T : class
+   public abstract class EntityRepository<T> : IEntityRepository<T> where T : class
     {
-        private readonly EntityContext _context;
+        protected readonly EntityContext _context;
         public EntityRepository(EntityContext context)
         {
             _context = context;
         }
-        public async Task<bool> Create(T entity)
+        public virtual async Task<bool> Create(T entity)
         {
             _context.Set<T>().Add(entity);
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Delete(T entity)
+        public virtual async Task<bool> Delete(T entity)
         {
             _context.Set<T>().Remove(entity);
             return await _context.SaveChangesAsync() > 0;

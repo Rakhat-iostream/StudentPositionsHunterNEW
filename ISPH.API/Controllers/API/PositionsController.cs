@@ -3,6 +3,7 @@ using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -12,8 +13,8 @@ namespace ISPH.API.Controllers.API
     [ApiController]
     public class PositionsController : ControllerBase
     {
-        private readonly IEntityRepository<Position> _repos;
-        public PositionsController(IEntityRepository<Position> repos)
+        private readonly IPositionsRepository _repos;
+        public PositionsController(IPositionsRepository repos)
         {
             _repos = repos;
         }
@@ -37,7 +38,7 @@ namespace ISPH.API.Controllers.API
             Position position = new Position()
             {
                 Name = pos.Name,
-                Amount = 0,
+                Amount = 1,
             };
             if (await _repos.HasEntity(position)) return BadRequest("Position is already in database");
             if (await _repos.Create(position)) return Ok("Added new position");

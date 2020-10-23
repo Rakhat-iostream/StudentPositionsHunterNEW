@@ -20,8 +20,8 @@ $(document).ready(function () {
         ).done(function (data) {
             let news = data;
             for (let i = 0; i < news.length; i++) {
-                $('div.news').append('<article>' +
-                    '<img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" style="display: block; max-width: 100%;">' +
+                $('div.news').append('<article style="padding: 0;">' +
+                    '<img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" style="display: block; max-width: 100%; border: none; border-bottom: 2px solid black;">' +
                     '<h2 class="news-title">' + news[i].title + '</h2>' +
                     '<p style="display: block; text-align:center;"><a class="signout" style="color: white; text-decoration: none; margin-top: 20px; background: mediumspringgreen; padding: 10px 20px" href="/home/news/id=' + news[i].newsId + '">Learn more...</a></p>' + '</article>');
                 

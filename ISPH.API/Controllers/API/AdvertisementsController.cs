@@ -16,13 +16,11 @@ namespace ISPH.API.Controllers
     [ApiController]
     public class AdvertisementsController : ControllerBase
     {
-        private readonly IEntityRepository<Advertisement> _repos;
-        private readonly IAdvertisementsRepository _advRepos;
+        private readonly IAdvertisementsRepository _repos;
         private readonly IPositionsRepository _positionRepos;
-        public AdvertisementsController(IEntityRepository<Advertisement> repos, IAdvertisementsRepository advRepos, IPositionsRepository positionRepos)
+        public AdvertisementsController(IAdvertisementsRepository advRepos, IPositionsRepository positionRepos)
         {
-            _repos = repos;
-            _advRepos = advRepos;
+            _repos = advRepos;
             _positionRepos = positionRepos;
         }
         [HttpGet]
@@ -36,19 +34,19 @@ namespace ISPH.API.Controllers
         [AllowAnonymous]
         public async Task<IList<Advertisement>> GetAdvertisementsForPosition(int id)
         {
-            return await _advRepos.GetAdvertisementsForPosition(id);
+            return await _repos.GetAdvertisementsForPosition(id);
         }
         [HttpGet("emp={id}")]
         [AllowAnonymous]
         public async Task<IList<Advertisement>> GetAdvertisementsByEmployer(int id)
         {
-            return await _advRepos.GetAdvertisementsForEmployer(id);
+            return await _repos.GetAdvertisementsForEmployer(id);
         }
         [HttpGet("com={id}")]
         [AllowAnonymous]
         public async Task<IList<Advertisement>> GetAllAdvertisementsForCompany(int id)
         {
-            return await _advRepos.GetAdvertisementsForCompany(id);
+            return await _repos.GetAdvertisementsForCompany(id);
         }
        
         [HttpPost("emp={id}/add")]

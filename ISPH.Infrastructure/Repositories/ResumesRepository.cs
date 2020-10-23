@@ -1,19 +1,18 @@
 ﻿using ISPH.Core.Data;
 using ISPH.Core.Models;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class ResumesRepository : IEntityRepository<Resume>
+    public class ResumesRepository : EntityRepository<Resume>, IResumesRepository
     {
-        private readonly EntityContext _context;
-        public ResumesRepository(EntityContext context)
+        public ResumesRepository(EntityContext context) : base(context)
         {
-            _context = context;
         }
-        public async Task<Resume> GetById(int StudentId)
+        /*public async Task<Resume> GetById(int StudentId)
         {
             return await _context.Resumes.FindAsync(StudentId);
         }
@@ -34,14 +33,14 @@ namespace ISPH.Infrastructure.Repositories
         {
             _context.Resumes.Remove(resume);
             return await _context.SaveChangesAsync() > 0;
-        }
+        }*/
 
-        public async Task<bool> HasEntity(Resume resume)
+        public override async Task<bool> HasEntity(Resume resume)
         {
             return await _context.Resumes.AnyAsync(res => res.StudentId == resume.StudentId);
         }
 
-        public async Task<IList<Resume>> GetAll()
+        public override async Task<IList<Resume>> GetAll()
         {
             return await _context.Resumes.AsQueryable().Include(res => res.Student).ToListAsync();
         }

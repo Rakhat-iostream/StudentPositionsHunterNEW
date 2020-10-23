@@ -3,10 +3,9 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories.Interfaces
 {
-    public interface IPositionsRepository
+    public interface IPositionsRepository : IEntityRepository<Position>
     {
          Task<Position> GetPositionByName(string name);
-         Task<Position> GetPositionById(int id);
     }
     
 }

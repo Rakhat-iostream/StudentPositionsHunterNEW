@@ -5,9 +5,9 @@ VisualStudioVersion = 16.0.30503.244
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISPH.API", "ISPH.API.csproj", "{ABFA2E89-3549-434F-8CB4-18E307FCE15E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISPH.Core", "..\ISPH.Core\ISPH.Core.csproj", "{12202159-28EB-4828-BD13-EE2D4DAA829D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISPH.Core", "..\ISPH.Core\ISPH.Core.csproj", "{12202159-28EB-4828-BD13-EE2D4DAA829D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISPH.Infrastructure", "..\ISPH.Infrastructure\ISPH.Infrastructure.csproj", "{4E2F8D14-C5C5-41F8-80A9-9B1887A9AAD7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISPH.Infrastructure", "..\ISPH.Infrastructure\ISPH.Infrastructure.csproj", "{4E2F8D14-C5C5-41F8-80A9-9B1887A9AAD7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

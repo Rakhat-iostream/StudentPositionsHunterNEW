@@ -9,40 +9,22 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class PositionsRepository : IEntityRepository<Position>, IPositionsRepository
+    public class PositionsRepository : EntityRepository<Position>, IPositionsRepository
     {
-        private readonly EntityContext _context;
-        public PositionsRepository(EntityContext context)
+        public PositionsRepository(EntityContext context) : base(context)
         {
-            _context = context;
-        }
-        public async Task<bool> Create(Position entity)
-        {
-            _context.Positions.Add(entity);
-            return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Delete(Position entity)
-        {
-            _context.Positions.Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }
-
-        public async Task<IList<Position>> GetAll()
+        public override async Task<IList<Position>> GetAll()
         {
            return await _context.Positions.AsQueryable().Include(pos => pos.Advertisements).ToListAsync();
         }
 
-        public async Task<Position> GetById(int id)
+        public override async Task<Position> GetById(int id)
         {
             var position = await _context.Positions.FindAsync(id);
             position.Advertisements = await _context.Advertisements.Where(ads => ads.PositionId == position.PositionId).ToListAsync();
             return position;
-        }
-
-        public Task<Position> GetPositionById(int id)
-        {
-            return GetById(id);
         }
 
         public async Task<Position> GetPositionByName(string name)
@@ -52,15 +34,10 @@ namespace ISPH.Infrastructure.Repositories
             return position;
         }
 
-        public async Task<bool> HasEntity(Position entity)
+        public override async Task<bool> HasEntity(Position entity)
         {
             return await _context.Positions.AnyAsync(pos => pos.Name == entity.Name);
         }
-
-        public bool Update(Position entity)
-        {
-            _context.Positions.Update(entity);
-            return _context.SaveChanges() > 0;
-        }
+        
     }
 }

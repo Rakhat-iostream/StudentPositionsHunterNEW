@@ -45,7 +45,7 @@
             $('.newsblock p').html(data.description);
             $('#deletenews-form').submit(function (e) {
                 e.preventDefault();
-                 $.ajax({
+                    $.ajax({
                             type: "DELETE",
                             headers:
                             {
@@ -67,7 +67,7 @@
 <div class="newsblock">
     @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
     {
-        <form id="deletenews-form"><button type="submit"><i class="fas fa-trash-alt"></i></button></form>
+        <form id="deletenews-form"><button type="submit" style="border: none; background: none; cursor: pointer; font-size: 2em;">Удалить новость <i class="fas fa-trash-alt"></i></button></form>
     }
     <div class="newsimgblock"><img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" class="newsimg"></div>
     <div class="newsdate"></div>

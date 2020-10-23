@@ -10,14 +10,12 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class CompaniesRepository : IEntityRepository<Company>, ICompanyRepository
+    public class CompaniesRepository : EntityRepository<Company>, ICompanyRepository
     {
-        private readonly EntityContext _context;
-        public CompaniesRepository(EntityContext context)
+        public CompaniesRepository(EntityContext context) : base(context)
         {
-            _context = context;
         }
-        public async Task<bool> Create(Company entity)
+       /* public async Task<bool> Create(Company entity)
         {
             _context.Companies.Add(entity);
             return await _context.SaveChangesAsync() > 0;
@@ -27,33 +25,33 @@ namespace ISPH.Infrastructure.Repositories
         {
             _context.Companies.Remove(entity);
             return await _context.SaveChangesAsync() > 0;
-        }
+        }*/
 
-        public async Task<IList<Company>> GetAll()
+        public override async Task<IList<Company>> GetAll()
         {
             var companies = await _context.Companies.AsQueryable().Include(company => company.Employers).
                OrderBy(company => company.CompanyId).ToListAsync();
             return companies;
         }
 
-        public async Task<Company> GetById(int id)
+        public override async Task<Company> GetById(int id)
         {
             var company = await _context.Companies.FindAsync(id);
             company.Employers = await _context.Employers.AsQueryable().Where(emp => emp.CompanyName == company.Name).ToListAsync();
             return company;
         }
        
-        public async Task<bool> HasEntity(Company entity)
+        public override async Task<bool> HasEntity(Company entity)
         {
             return await _context.Companies.AnyAsync(company => company.Name == entity.Name);
         }
 
-        public bool Update(Company entity)
+        /*public bool Update(Company entity)
         {
             _context.Companies.Update(entity);
             return _context.SaveChanges() > 0;
         }
-        
+        */
         public async Task<Company> GetCompanyByName(string name)
         {
             return await _context.Companies.FirstOrDefaultAsync(company => company.Name == name);

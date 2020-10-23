@@ -3,10 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ISPH.API.Controllers
 {
@@ -15,8 +14,8 @@ namespace ISPH.API.Controllers
     [ApiController]
     public class EmployersController : ControllerBase
     {
-        private readonly IEntityRepository<Employer> _repos;
-        public EmployersController(IEntityRepository<Employer> repos)
+        private readonly IEmployersRepository _repos;
+        public EmployersController(IEmployersRepository repos)
         {
             _repos = repos;
         }
@@ -33,6 +32,7 @@ namespace ISPH.API.Controllers
             }).ToList();
         }
         [HttpGet("id={id}")]
+        [AllowAnonymous]
         public async Task<Employer> GetEmployerAsync(int id)
         {
             return await _repos.GetById(id);
@@ -50,7 +50,7 @@ namespace ISPH.API.Controllers
                     if ( _repos.Update(employer)) return Ok("Updated employer");
                     return BadRequest("Failed to update employer");
                 }
-         return BadRequest("This employer is not in database");
+            return BadRequest("This employer is not in database");
         }
 
         [HttpPut("id={id}/update/company")]
@@ -60,8 +60,7 @@ namespace ISPH.API.Controllers
             Employer employer = await _repos.GetById(id);
             if (await _repos.HasEntity(employer))
             {
-                employer.CompanyName = em.CompanyName;
-                if (_repos.Update(employer))
+                if (await _repos.UpdateCompany(employer, em.CompanyName))
                 {
                     return Ok("Updated employer");
                 }
@@ -77,7 +76,7 @@ namespace ISPH.API.Controllers
             Employer employer = await _repos.GetById(id);
             if (await _repos.HasEntity(employer))
             {
-                if (await (_repos as EmployersRepository).UpdatePassword(employer, st.Password)) return Ok(new { message = "Updated"});
+                if (await _repos.UpdatePassword(employer, st.Password)) return Ok(new { message = "Updated"});
                 return BadRequest("Failed to update employer");
             }
             return BadRequest("This employer is not in database");

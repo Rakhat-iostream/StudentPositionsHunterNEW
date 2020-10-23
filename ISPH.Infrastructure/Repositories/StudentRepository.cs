@@ -9,58 +9,40 @@ using Microsoft.EntityFrameworkCore;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class StudentRepository : IEntityRepository<Student>, IUserAuthRepository<Student>
+    public class StudentRepository : EntityRepository<Student>, IUserAuthRepository<Student>, IStudentsRepository
     {
-        private readonly EntityContext _context;
         private readonly DataHashService<Student> hashService = new StudentsHashService();
-        public StudentRepository(EntityContext context)
+        public StudentRepository(EntityContext context) : base(context)
         {
-            _context = context;
-        }
-        public async Task<bool> Create(Student entity)
-        {
-            _context.Students.Add(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }
-
-        public async Task<bool> Delete(Student entity)
-        {
-            _context.Students.Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
         }
         public async Task<Student> GetByEmail(string email)
         {
             return await _context.Students.FirstOrDefaultAsync(student => student.Email == email);
         }
-        public async Task<bool> HasEntity(Student entity)
+        public override async Task<bool> HasEntity(Student entity)
         {
             return await _context.Students.AnyAsync(Student => Student.Email == entity.Email);
         }
-        public async Task<IList<Student>> GetAll()
+        public override async Task<IList<Student>> GetAll()
         {
            return await _context.Students.AsQueryable().Include(student => student.Resume).
                 OrderBy(st => st.StudentId).ToListAsync();
         }
 
-        public async Task<Student> GetById(int id)
+        public override async Task<Student> GetById(int id)
         {
             var student = await _context.Students.FindAsync(id);
             student.Resume = await _context.Resumes.FirstOrDefaultAsync(res => res.StudentId == student.StudentId);
             return student;
         }
 
-        public bool Update(Student entity)
-        {
-            _context.Students.Update(entity);
-            return _context.SaveChanges() > 0;
-        }
-
-        public bool UpdatePassword(Student student, string password)
+        public async Task<bool> UpdatePassword(Student student, string password)
         {
             hashService.CreateHashedPassword(password, out byte[] hashedPass, out byte[] saltPass);
             student.HashedPassword = hashedPass;
             student.SaltPassword = saltPass;
-            return Update(student);
+            _context.Students.Update(student);
+            return await _context.SaveChangesAsync() > 0;
         }
         //Auth
 

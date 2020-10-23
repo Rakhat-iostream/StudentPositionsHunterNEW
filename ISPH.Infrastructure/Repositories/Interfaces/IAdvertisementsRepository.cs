@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories.Interfaces
 {
-    public interface IAdvertisementsRepository
+    public interface IAdvertisementsRepository : IEntityRepository<Advertisement>
     {
         Task<IList<Advertisement>> GetAdvertisementsForPosition(int positionId);
         Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerId);

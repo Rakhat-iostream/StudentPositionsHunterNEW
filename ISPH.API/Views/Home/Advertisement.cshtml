@@ -16,7 +16,96 @@
         $('.contact-name').html(emp.firstName + " " + emp.lastName);
         $('.contact-email').html('Почта: ' + emp.email);
         let userName = '@HttpContextAccessor.HttpContext.Session.GetString("Name")';
-        let isStudent = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
+        let role = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
+        let id = '@HttpContextAccessor.HttpContext.Session.GetInt32("Id")';
+        if (id > 0) {
+            $.get(
+                '/users/employers/id=' + id
+            ).done(function (employer) {
+                if (employer.email == emp.email) {
+                    $('.adsblock').append('<ul style="margin-top: 20px;">' +
+                        '<li style="margin-bottom: 15px; list-style-type: none;" class="changeadstitleli"><button type="button" id="changeadstitlebtn" class="signout hoverbtn">Изменить заголовок</button></li>' +
+
+                        '<li style="margin-bottom: 15px; list-style-type: none;" class="changeadssalaryli"><button type="button" id="changeadssalarybtn" class="signout hoverbtn">Изменить зарплату</button></li>' +
+
+                        '<li style="margin-bottom: 15px; list-style-type: none;" class="changeadsdescli"><button type="button" id="changeadsdescbtn" class="signout hoverbtn">Изменить описание</button></li></ul>');
+
+                    $('#changeadstitlebtn').click(function () {
+                        $('.changeadstitleli').append('<h5 id="changeadstitleinfo"></h5><form id="changeadstitle-form"><input type="text" id="newadstitle" style="font-size: 17px; padding: 3px 0;"><br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changeadstitle-form').submit(function (e) {
+                            e.preventDefault();
+                            ad.title = $('#newadstitle').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/advertisements/id=" + ad.advertisementId + "/update",
+                                data: JSON.stringify(ad),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changeadstitleinfo').html("<span style='color: crimson;'>Failed to update password</span>");
+                                }
+                            });
+                        });
+                    });
+
+
+
+                    $('#changeadssalarybtn').click(function () {
+                        $('.changeadssalaryli').append('<h5 id="changeadssalaryinfo"></h5><form id="changeadssalary-form"><input type="number" id="newadssalary" style="font-size: 17px; padding: 3px 0;"><br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changeadssalary-form').submit(function (e) {
+                            e.preventDefault();
+                            ad.salary = $('#newadssalary').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/advertisements/id=" + ad.advertisementId + "/update",
+                                data: JSON.stringify(ad),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changeadssalaryinfo').html("<span style='color: crimson;'>Failed to update password</span>");
+                                }
+                            });
+                        });
+                    });
+
+                    $('#changeadsdescbtn').click(function () {
+                        $('.changeadsdescli').append('<h5 id="changeadsdescinfo"></h5><form id="changeadsdesc-form"><textarea id="newadsdesc" style="font-size: 15px;"></textarea><br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changeadsdesc-form').submit(function (e) {
+                            e.preventDefault();
+                            ad.description = $('#newadsdesc').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/advertisements/id=" + ad.advertisementId + "/update",
+                                data: JSON.stringify(ad),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changeadsdescinfo').html("<span style='color: crimson;'>Failed to update password</span>");
+                                }
+                            });
+                        });
+                    });
+                }
+            });
+        }
         if (userName !== '') {
             const hubConnection = new signalR.HubConnectionBuilder()
                 .withUrl("/chat")
@@ -25,32 +114,31 @@
             hubConnection.on('Send', function (message, userName) {
                 console.log(message + " " + userName);
                 $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
-                // создаем элемент <b> для имени пользователя
-                @*let userNameElem = document.createElement("b");
-                userNameElem.appendChild(document.createTextNode(userName + ': '));
-                
-                // создает элемент <p> для сообщения пользователя
-                let elem = document.createElement("p");
-                elem.appendChild(userNameElem);
-                elem.appendChild(document.createTextNode(message));
-
-                var firstElem = document.getElementById("chatroom").firstChild;
-                document.getElementById("chatroom").insertBefore(elem, firstElem);*@
             });
             document.getElementById("sendBtn").addEventListener("click", function (e) {
                 let message = document.getElementById("message").value;
-                hubConnection.invoke("Send", message, userName, emp.firstName, isStudent);
+                hubConnection.invoke("Send", message, userName, emp.firstName, role);
             });
             hubConnection.start();
         }
     });
 </script>
 <style>
+    .hoverbtn {
+        border: none;
+        color: white;
+        padding: 5px 20px;
+        font-size: 22px;
+        background-color: darkorange;
+        font-family: Bahnschrift, Arial, serif;
+        cursor: pointer;
+    }
     .adsblock {
         font-family: Bahnschrift, Arial, serif;
         padding: 20px;
         border: 2px solid black;
-        background: white;
+        background: rgba(0,0,0,0.8);
+        color: white;
     }
 
     .adstitle {
@@ -89,7 +177,7 @@
     <h1 class="adstitle" style="margin: 20px 0;"></h1>
     <div class="adssalary" style="margin: 20px 0;"></div>
     <div class="adscompany" style="margin: 20px 0;"></div>
-    <div class="adsinfo" style="margin: 20px 0;">
+    <div class="adsinfo" style="margin: 20px 0; color: white;">
     </div>
     <ul class="contact-list" style="margin: 20px 0;">
         <h2 class="contact-title">Контакты:</h2>
@@ -97,10 +185,10 @@
         <li class="contact-email"></li>
     </ul>
     <div class="chat">
-        <h4>Написать </h4>
-        <div id="chatroom" style="border: 2px solid black; padding: 20px; max-width: 50%; margin: 20px"></div>
+        <h4>Написать</h4>
+        <div id="chatroom" style="border: 2px solid black; padding: 20px; max-width: 50%; margin: 20px; background: white; color: black;"></div>
         <div id="inputForm">
-            <textarea type="text" id="message"></textarea>
+            <textarea placeholder="Введите здесь сообщение..." type="text" id="message" style="background: black; border: none; color: white; padding: 15px; font-size: 18px;"></textarea>
             <button type="button" id="sendBtn" style="border: none; background: dodgerblue; color: white; padding: 10px 20px; margin-left: 20px;">Отправить</button>
         </div>
     </div>

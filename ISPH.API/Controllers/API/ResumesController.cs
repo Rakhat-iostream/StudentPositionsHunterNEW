@@ -2,6 +2,7 @@
 using System.Threading.Tasks;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -14,9 +15,9 @@ namespace ISPH.API.Controllers
     [ApiController]
     public class ResumesController : ControllerBase
     {
-        private readonly IEntityRepository<Resume> _repos;
+        private readonly IResumesRepository _repos;
         private readonly IWebHostEnvironment _env;
-        public ResumesController(IEntityRepository<Resume> repos, IWebHostEnvironment environment)
+        public ResumesController(IResumesRepository repos, IWebHostEnvironment environment)
         {
             _repos = repos;
             _env = environment;

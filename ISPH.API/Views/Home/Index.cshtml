@@ -24,6 +24,9 @@
             .signout:hover {
                 opacity: 1;
             }
+        i.fa-trash-alt:hover {
+            color: crimson;
+        }
     </style>
     </head>
 <body style="background-image: url(https://i1.photo.2gis.com/images/branch/0/30258560048080038_12ae.jpg); background-attachment: fixed; background-size: 100%">
@@ -105,7 +108,8 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                 }
                 else
                 {
-                    <div class="row content" style="flex: 0 0 70%; max-width: 70%;">
+                    <div class="row content" style="flex: 0 0 70%; max-width: 70%; background-color: white; padding: 30px; border-radius: 70px">
+                        <h1 style="text-align: center; font-size: 2.5em; font-family: Dosis, Calibri, Bahnschrift, Arial, serif; color: dodgerblue">Попробуй себя на практике!</h1>
                         @{
                             if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("profile"))
                             {
@@ -118,12 +122,13 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                                     @await Html.PartialAsync("ArticleForm");
                                     @await Html.PartialAsync("NewsForm");
                                 }
-                                <h3 style="margin: 50px 0; color: white; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Компании: </h3>
+                                <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Компании: </h3>
                                 <ul class="companies">
                                 </ul>
+                                <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Вакансии по позициям: </h3>
                                 <div id="positions">
                                 </div>
-                                <h1 style="margin: 50px 0; color: white; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Статьи: </h1>
+                                <h1 style="margin: 50px 0; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Статьи: </h1>
                                 <div class="articles">
                                 </div>
                             }
@@ -158,7 +163,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
         </div>
 
         <!-- FOOTER START -->
-        <div class="footer">
+        <div class="footer" style="position: relative; bottom: 0 !important;">
             <div class="contain">
                 <div class="col">
                     <h1>О нас</h1>
@@ -179,7 +184,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                 <div class="col social">
                     <h1>Social</h1>
                     <ul>
-                        <li><img src="https://svgshare.com/i/5fq.svg" width="32" style="width: 32px;"></li>
+                        <li><i class="fab fa-telegram"></i></li>
                         <li><img src="https://svgshare.com/i/5eA.svg" width="32" style="width: 32px;"></li>
                         <li><img src="https://svgshare.com/i/5f_.svg" width="32" style="width: 32px;"></li>
                     </ul>

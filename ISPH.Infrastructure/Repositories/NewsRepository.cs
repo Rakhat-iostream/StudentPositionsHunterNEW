@@ -1,5 +1,6 @@
 ﻿using ISPH.Core.Data;
 using ISPH.Core.Models;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,34 +9,32 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class NewsRepository : IEntityRepository<News>
+    public class NewsRepository : EntityRepository<News>, INewsRepository
     {
-        private readonly EntityContext _context;
-        public NewsRepository(EntityContext context)
+        public NewsRepository(EntityContext context) : base(context)
         {
-            _context = context;
         }
-        public async Task<bool> Create(News entity)
+        /*public async Task<bool> Create(News entity)
         {
             _context.News.Add(entity);
             return await _context.SaveChangesAsync() > 0;
-        }
-        public async Task<bool> HasEntity(News entity)
+        }*/
+        public override async Task<bool> HasEntity(News entity)
         {
             return await _context.News.AnyAsync(News => News.Title == entity.Title);
         }
-        public async Task<bool> Delete(News entity)
+        /*public async Task<bool> Delete(News entity)
         {
             _context.News.Remove(entity);
             return await _context.SaveChangesAsync() > 0;
-        }
+        }*/
 
-        public async Task<IList<News>> GetAll()
+        public override async Task<IList<News>> GetAll()
         {
           return await _context.News.AsQueryable().OrderBy(news => news.PublishDate).ToListAsync();
         }
 
-        public async Task<News> GetById(int id)
+        /*public async Task<News> GetById(int id)
         {
             return await _context.News.FindAsync(id);
         }
@@ -44,6 +43,6 @@ namespace ISPH.Infrastructure.Repositories
         {
             _context.News.Update(entity);
             return _context.SaveChanges() > 0;
-        }
+        }*/
     }
 }

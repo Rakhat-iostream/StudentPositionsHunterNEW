@@ -124,7 +124,7 @@
                         $('#addadsbtn').html('Добавить обьявление');
                         let ads = user.advertisements;
                         for (let i = 0; i < ads.length; i++) {
-                            $('.employerads').append('<div class="ads"><div class="signs"><form class="deleteads"><button type="submit"><i class="fas fa-trash-alt"></i></button></form>' +
+                            $('.employerads').append('<div class="ads"><div class="signs"><form class="deleteads"><button style="border: none; background: none; cursor: pointer; font-size: 1.5em;" type="submit"><i class="fas fa-trash-alt"></i></button></form>' +
                                 '</div><h2 class="ads-title">' + ads[i].title + '</h2><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>'
                                 + '<div class="empty"></div>');
                         }
@@ -225,8 +225,9 @@
                             Password: "Password",
                             CompanyName: user.companyName
                         };
-                        $('#company-field').append('<h5 id="changecompanyinfo" style="margin-top: 20px"></h5><form id="changecompany-form"><select class="custom-select" id="CompanyName">'
-                            + '<option>Выберите вашу компанию...</option></select><br><button type="submit">Отправить</button></form>');
+                        $('#company-field').append('<h5 id="changecompanyinfo" style="margin-top: 20px"></h5><form id="changecompany-form" style="font-size: 15px"><select style="padding: 5px" class="custom-select" id="CompanyName">'
+                            + '<option>Выберите вашу компанию...</option></select><br><br><button type="submit" class="signout" style="border:none; color: white; padding: 5px 20px;' +
+                        'font-size: 22px; background-color: dodgerblue; font-family: Bahnschrift, Arial, serif; cursor: pointer;">Отправить</button></form>');
                         $.get(
                             '/companies'
                         ).done(function (data) {
@@ -236,8 +237,6 @@
                             $('#changecompany-form').submit(function (e) {
                                 e.preventDefault();
                                 employerdto.CompanyName = $('select#CompanyName').val();
-
-                                alert(JSON.stringify(employerdto));
                                 $.ajax({
                                 method: "PUT",
                                 headers: {
@@ -248,8 +247,7 @@
                                 data: JSON.stringify(employerdto),
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {
-                                    $('#changecompany-form').hide();
-                                    $('#changecompanyinfo').html("<span style='color: mediumspringgreen;'>Company updated successfully</span>");
+                                   window.location.reload();
                                 },
                                 error: function (data) {
                                     alert(JSON.stringify(data));

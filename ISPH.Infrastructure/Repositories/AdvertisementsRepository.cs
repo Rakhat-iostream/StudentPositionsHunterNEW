@@ -9,12 +9,10 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class AdvertisementsRepository : IEntityRepository<Advertisement>, IAdvertisementsRepository
+    public class AdvertisementsRepository : EntityRepository<Advertisement>, IAdvertisementsRepository
     {
-        private readonly EntityContext _context;
-        public AdvertisementsRepository(EntityContext context)
+        public AdvertisementsRepository(EntityContext context) : base(context)
         {
-            _context = context;
         }
         public async Task<bool> Create(Advertisement entity)
         {
@@ -24,11 +22,11 @@ namespace ISPH.Infrastructure.Repositories
             _context.Positions.Update(position);
             return await _context.SaveChangesAsync() > 0;
         }
-        public async Task<bool> HasEntity(Advertisement entity)
+        public override async Task<bool> HasEntity(Advertisement entity)
         {
             return await _context.Advertisements.AnyAsync(Advertisement => Advertisement.Title == entity.Title);
         }
-        public async Task<bool> Delete(Advertisement entity)
+        public override async Task<bool> Delete(Advertisement entity)
         {
             _context.Advertisements.Remove(entity);
             var position = await _context.Positions.FirstOrDefaultAsync(pos => pos.Name == entity.PositionName);
@@ -37,26 +35,26 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<IList<Advertisement>> GetAll()
+        public override async Task<IList<Advertisement>> GetAll()
         {
           return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).
                 OrderBy(adv => adv.AdvertisementId).ToListAsync();
         }
 
-        public async Task<Advertisement> GetById(int id)
+        public override async Task<Advertisement> GetById(int id)
         {
             var ad = await _context.Advertisements.FindAsync(id);
             ad.Employer = await _context.Employers.FirstOrDefaultAsync(emp => emp.EmployerId == ad.EmployerId);
             return ad;
         }
 
-        public bool Update(Advertisement entity)
+        /*public bool Update(Advertisement entity)
         {
             _context.Advertisements.Update(entity);
             return _context.SaveChanges() > 0;
         }
 
-
+*/
 
 
         public async Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerid)

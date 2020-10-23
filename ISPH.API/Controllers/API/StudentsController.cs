@@ -4,11 +4,9 @@ using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
-using ISPH.Infrastructure.Repositories;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NLog;
 
 namespace ISPH.API.Controllers
 {
@@ -17,8 +15,8 @@ namespace ISPH.API.Controllers
     [ApiController]
     public class StudentsController : ControllerBase
     {
-        private readonly IEntityRepository<Student> _repos;
-        public StudentsController(IEntityRepository<Student> repos)
+        private readonly IStudentsRepository _repos;
+        public StudentsController(IStudentsRepository repos)
         {
             _repos = repos;
         }
@@ -57,7 +55,7 @@ namespace ISPH.API.Controllers
             Student student = await _repos.GetById(id);
             if (await _repos.HasEntity(student))
             {
-                if ((_repos as StudentRepository).UpdatePassword(student, st.Password)) return Ok("Updated");
+                if (await _repos.UpdatePassword(student, st.Password)) return Ok("Updated");
                 return BadRequest("Failed to update employer");
             }
             return BadRequest("This employer is not in database");
