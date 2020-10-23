@@ -24,10 +24,10 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Update(Resume resume)
+        public bool Update(Resume resume)
         {
             _context.Resumes.Update(resume);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
         }
 
         public async Task<bool> Delete(Resume resume)

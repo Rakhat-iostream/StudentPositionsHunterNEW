@@ -157,3 +157,4 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\staticwebassets
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.pdb
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.genruntimeconfig.cache
+C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdvertisementsForCom.cshtml.g.cs

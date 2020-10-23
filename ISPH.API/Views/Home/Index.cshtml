@@ -16,23 +16,18 @@
             background: rgba(0, 0, 0, 0.5);
             color: aqua;
         }
-        .signout{
+
+        .signout {
             opacity: 0.8;
         }
-        .signout:hover{
-            opacity: 1;
-        }
+
+            .signout:hover {
+                opacity: 1;
+            }
     </style>
-</head>
+    </head>
 <body style="background-image: url(https://i1.photo.2gis.com/images/branch/0/30258560048080038_12ae.jpg); background-attachment: fixed; background-size: 100%">
     <main style="background-color: rgba(0, 0, 0, 0.7);">
-        <!--
-        <div class="imgblock" style="background-color: rgba(0, 0, 0, 0.7); background-image: url(https://i1.photo.2gis.com/images/branch/0/30258560048080038_12ae.jpg);
-    background-size: 100%; position: absolute; top: 0; width: 100%; z-index: -999; height: 1000px">
-        </div>
-        <div class="imgblock" style="background-color: rgba(0, 0, 0, 0.7); background-image:
-        url(https://storage.finance.kz/images/2020/05/29/8763950b58c09e995f022889204b1c3b.jpg); position: absolute; top: 1000px; width: 100%; z-index: -999;"></div>
-        -->
         <header>
             <div class="header">
                 <h1><a href="/home/index"><img style="display: inline; max-width: 170px; position: absolute; bottom: -50%; margin-left: 20px;" src="https://astanait.edu.kz/wp-content/uploads/2020/05/aitu-logo-white-2-300x154.png"></a></h1>
@@ -139,6 +134,10 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                             else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/id"))
                             {
                                 @await Html.PartialAsync("Advertisement");
+                            }
+                            else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/com"))
+                            {
+                                @await Html.PartialAsync("AdvertisementsForCom");
                             }
                             else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/articles/id"))
                             {

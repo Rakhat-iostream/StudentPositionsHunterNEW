@@ -63,7 +63,7 @@ namespace ISPH.API.Controllers
              article.Title = art.Title;
              article.PublishDate = art.PublishDate;
              article.Description = art.Description;
-            if (await _repos.Update(article)) return Ok("Updated article");
+            if (_repos.Update(article)) return Ok("Updated article");
 
                 return BadRequest("Failed to update article");
         }

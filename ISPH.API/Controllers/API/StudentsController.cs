@@ -18,7 +18,6 @@ namespace ISPH.API.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IEntityRepository<Student> _repos;
-        public static Logger logger = LogManager.GetCurrentClassLogger();
         public StudentsController(IEntityRepository<Student> repos)
         {
             _repos = repos;
@@ -26,7 +25,6 @@ namespace ISPH.API.Controllers
         [HttpGet]
         public async Task<IList<StudentDTO>> GetAllStudents()
         {
-            logger.Info("Getting all students from database");
             return (await _repos.GetAll()).Select(st => new StudentDTO() { FirstName = st.FirstName, Email = st.Email,
                 LastName = st.LastName, ID = st.StudentId }).ToList();
         }
@@ -45,11 +43,8 @@ namespace ISPH.API.Controllers
                 if (student != null)
                 {
                     student.Email = st.Email;
-                        if (await _repos.Update(student))
-                        {
-                            return Ok("Updated student");
-                        }
-
+                        if ( _repos.Update(student)) return Ok("Updated student");
+                        
                     return BadRequest("Failed to update student");
                 }
                 return BadRequest("This student doesn't exist");
@@ -62,7 +57,7 @@ namespace ISPH.API.Controllers
             Student student = await _repos.GetById(id);
             if (await _repos.HasEntity(student))
             {
-                if (await (_repos as StudentRepository).UpdatePassword(student, st.Password)) return Ok("Updated");
+                if ((_repos as StudentRepository).UpdatePassword(student, st.Password)) return Ok("Updated");
                 return BadRequest("Failed to update employer");
             }
             return BadRequest("This employer is not in database");

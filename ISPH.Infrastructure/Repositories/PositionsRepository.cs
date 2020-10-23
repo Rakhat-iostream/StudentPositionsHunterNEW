@@ -57,10 +57,10 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.Positions.AnyAsync(pos => pos.Name == entity.Name);
         }
 
-        public async Task<bool> Update(Position entity)
+        public bool Update(Position entity)
         {
             _context.Positions.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
         }
     }
 }

@@ -48,10 +48,10 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.Companies.AnyAsync(company => company.Name == entity.Name);
         }
 
-        public async Task<bool> Update(Company entity)
+        public bool Update(Company entity)
         {
             _context.Companies.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
         }
         
         public async Task<Company> GetCompanyByName(string name)

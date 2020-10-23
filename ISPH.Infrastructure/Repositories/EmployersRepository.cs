@@ -45,17 +45,20 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.SaveChangesAsync() > 0;
         }
 
-        public async Task<bool> Update(Employer entity)
+        public bool Update(Employer entity)
         {
-            Employer employer = await GetById(entity.EmployerId);
+            Employer employer = _context.Employers.FirstOrDefault(emp => emp.EmployerId == entity.EmployerId);
             if(employer.CompanyName != entity.CompanyName)
             {
-                Company company = await _context.Companies.FirstOrDefaultAsync(comp => comp.Name == entity.CompanyName);
-                entity.CompanyId = company.CompanyId;
-                entity.Company = company;
+                Company company = _context.Companies.FirstOrDefault(comp => comp.Name == entity.CompanyName);
+                employer.CompanyName = entity.CompanyName;
+                employer.CompanyId = company.CompanyId;
+                employer.Company = company;
+                var ads = _context.Advertisements.Where(adv => adv.EmployerId == employer.EmployerId).ToList();
+                _context.Advertisements.RemoveRange(ads);
             }
-            _context.Employers.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            _context.Employers.Update(employer);
+            return _context.SaveChanges() > 0;
         }
         public async Task<bool> UpdatePassword(Employer entity, string password)
         {

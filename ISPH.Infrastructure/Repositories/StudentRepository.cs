@@ -49,18 +49,18 @@ namespace ISPH.Infrastructure.Repositories
             return student;
         }
 
-        public async Task<bool> Update(Student entity)
+        public bool Update(Student entity)
         {
             _context.Students.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
         }
 
-        public async Task<bool> UpdatePassword(Student student, string password)
+        public bool UpdatePassword(Student student, string password)
         {
             hashService.CreateHashedPassword(password, out byte[] hashedPass, out byte[] saltPass);
             student.HashedPassword = hashedPass;
             student.SaltPassword = saltPass;
-            return await Update(student);
+            return Update(student);
         }
         //Auth
 

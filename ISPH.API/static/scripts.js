@@ -24,6 +24,7 @@ $(document).ready(function () {
                     '<img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" style="display: block; max-width: 100%;">' +
                     '<h2 class="news-title">' + news[i].title + '</h2>' +
                     '<p style="display: block; text-align:center;"><a class="signout" style="color: white; text-decoration: none; margin-top: 20px; background: mediumspringgreen; padding: 10px 20px" href="/home/news/id=' + news[i].newsId + '">Learn more...</a></p>' + '</article>');
+                
             }
         });
     }
@@ -34,7 +35,7 @@ $(document).ready(function () {
         ).done(function (data) {
             let companies = data;
             for (let i = 0; i < companies.length; i++) {
-                $('ul.companies').append('<li><a href="/companies/id=' + companies[i].companyId + '">' + companies[i].name + '</a></li>');
+                $('ul.companies').append('<li><a href="/home/advertisements/com=' + companies[i].companyId + '">' + companies[i].name + '</a></li>');
             }
         });
     }

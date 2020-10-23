@@ -46,25 +46,6 @@ namespace ISPH.API.Controllers
             return BadRequest("You didn't upload file");
         }
 
-        [HttpPut("update")]
-        public async Task<IActionResult> UpdateResume(IFormFile file, int id)
-        {
-            if(file != null)
-            {
-                Resume resume = await GetResumeByStudentIdAsync(id);
-                if (await _repos.HasEntity(resume))
-                {
-                    if (await _repos.Delete(resume))
-                    {
-                        return await AddResume(file);
-                    }
-                }
-                return BadRequest("Nothing to update");
-            }
-
-            return BadRequest("You didnt' upload file");
-        }
-
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteResumeAsync(int id)
         {

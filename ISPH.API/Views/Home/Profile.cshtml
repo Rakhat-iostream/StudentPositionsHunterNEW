@@ -114,9 +114,11 @@
                 url: "@url",
                 success: function (data) {
                     user = data;
-                    $('.names').append(user.firstName + " " + user.lastName);
-                    $('.email').append(user.email);
+                    $('.names').html(user.firstName + " " + user.lastName);
+                    $('.email').html(user.email);
+                    
                     if (user.hasOwnProperty('companyName')) {
+                        $('.companyName').html("Компания: " + user.companyName);
                         $('.changedataul').append('<li class="change-data" id="company-field"><button type="button" id="changecompany" class="changedata">'
                             + "Изменить компанию" + '</button></li>');
                         $('#addadsbtn').html('Добавить обьявление');
@@ -188,7 +190,7 @@
                             LastName: user.lastName,
                             Email: "",
                             CompanyName: user.companyName,
-                            Password: "Roflan"
+                            Password: "Password"
                         };
                         $('#changeemail-form').show();
                         $('#changeemail-form').submit(function (e) {
@@ -214,6 +216,49 @@
                             });
                         });
                     });
+
+                    $('button#changecompany').click(function(){
+                        let employerdto = {
+                            FirstName: user.firstName,
+                            LastName: user.lastName,
+                            Email: user.email,
+                            Password: "Password",
+                            CompanyName: user.companyName
+                        };
+                        $('#company-field').append('<h5 id="changecompanyinfo" style="margin-top: 20px"></h5><form id="changecompany-form"><select class="custom-select" id="CompanyName">'
+                            + '<option>Выберите вашу компанию...</option></select><br><button type="submit">Отправить</button></form>');
+                        $.get(
+                            '/companies'
+                        ).done(function (data) {
+                            for (let i = 0; i < data.length; i++) {
+                                $('select#CompanyName').append('<option value="' + data[i].name + '">' + data[i].name + '</option>');
+                            };
+                            $('#changecompany-form').submit(function (e) {
+                                e.preventDefault();
+                                employerdto.CompanyName = $('select#CompanyName').val();
+
+                                alert(JSON.stringify(employerdto));
+                                $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "@url/update/company",
+                                data: JSON.stringify(employerdto),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    $('#changecompany-form').hide();
+                                    $('#changecompanyinfo').html("<span style='color: mediumspringgreen;'>Company updated successfully</span>");
+                                },
+                                error: function (data) {
+                                    alert(JSON.stringify(data));
+                                    $('#changecompanyinfo').html("<span style='color: crimson;'>Failed to update company</span>");
+                                }
+                            });
+                            });
+                        })
+                    });
                 }
             });
         });
@@ -224,6 +269,7 @@
         <div class="user-data names">
         </div>
         <div class="user-data email"></div>
+        <div class="user-data companyName"></div>
     </div>
     <h4 id="changeerror" style="color: crimson;"></h4>
     <ul class="changedataul">

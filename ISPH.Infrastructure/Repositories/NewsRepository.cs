@@ -40,10 +40,10 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.News.FindAsync(id);
         }
 
-        public async Task<bool> Update(News entity)
+        public bool Update(News entity)
         {
             _context.News.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
         }
     }
 }

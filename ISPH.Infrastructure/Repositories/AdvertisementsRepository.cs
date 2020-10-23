@@ -1,5 +1,6 @@
 ﻿using ISPH.Core.Data;
 using ISPH.Core.Models;
+using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public class AdvertisementsRepository : IEntityRepository<Advertisement>
+    public class AdvertisementsRepository : IEntityRepository<Advertisement>, IAdvertisementsRepository
     {
         private readonly EntityContext _context;
         public AdvertisementsRepository(EntityContext context)
@@ -42,17 +43,6 @@ namespace ISPH.Infrastructure.Repositories
                 OrderBy(adv => adv.AdvertisementId).ToListAsync();
         }
 
-        public async Task<IList<Advertisement>> GetAdvertisementsByEmployerId(int id)
-        {
-           return await _context.Advertisements.AsQueryable().
-                Where(adv => adv.EmployerId == id).Include(adv => adv.Employer).ToListAsync();
-        }
-
-        public async Task<IList<Advertisement>> GetAdvertisementsForPosition(string pos)
-        {
-            return await _context.Advertisements.AsQueryable().Where(adv => adv.PositionName == pos).ToListAsync();
-        }
-
         public async Task<Advertisement> GetById(int id)
         {
             var ad = await _context.Advertisements.FindAsync(id);
@@ -60,10 +50,29 @@ namespace ISPH.Infrastructure.Repositories
             return ad;
         }
 
-        public async Task<bool> Update(Advertisement entity)
+        public bool Update(Advertisement entity)
         {
             _context.Advertisements.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
+        }
+
+
+
+
+        public async Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerid)
+        {
+            return await _context.Advertisements.AsQueryable().
+                 Where(adv => adv.EmployerId == employerid).Include(adv => adv.Employer).ToListAsync();
+        }
+
+        public async Task<IList<Advertisement>> GetAdvertisementsForPosition(int positionId)
+        {
+            return await _context.Advertisements.AsQueryable().Where(adv => adv.PositionId == positionId).ToListAsync();
+        }
+
+        public async Task<IList<Advertisement>> GetAdvertisementsForCompany(int companyId)
+        {
+            return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).Where(adv => adv.Employer.CompanyId == companyId).ToListAsync();
         }
     }
 }

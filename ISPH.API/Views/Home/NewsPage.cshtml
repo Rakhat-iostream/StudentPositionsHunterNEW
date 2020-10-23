@@ -1,4 +1,8 @@
-﻿<style>
+﻿@using Microsoft.AspNetCore.Http
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
+<style>
     div.newsblock {
         font-family: Bahnschrift, Arial, serif;
         padding: 40px;
@@ -39,10 +43,32 @@
             $('.newsblock h1').html(data.title);
             $('.newsdate').html("Дата публикации: " + data.publishDateString);
             $('.newsblock p').html(data.description);
+            $('#deletenews-form').submit(function (e) {
+                e.preventDefault();
+                 $.ajax({
+                            type: "DELETE",
+                            headers:
+                            {
+                            'Authorization': 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")'
+                            },
+                            async: false,
+                            url: '/news/id=' + data.newsId + '/delete',
+                            success: function (response) {
+                                window.location.replace("/home/index");
+                             },
+                            error: function(response) {
+                                alert(JSON.stringify(response));
+                            }
+                    });
+            });
         });
     });
 </script>
 <div class="newsblock">
+    @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
+    {
+        <form id="deletenews-form"><button type="submit"><i class="fas fa-trash-alt"></i></button></form>
+    }
     <div class="newsimgblock"><img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" class="newsimg"></div>
     <div class="newsdate"></div>
     <h1></h1>

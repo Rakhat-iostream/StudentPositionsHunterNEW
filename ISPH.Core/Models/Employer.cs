@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -19,5 +20,10 @@ namespace ISPH.Core.Models
         public string CompanyName { get; set; }
         public Company Company { get; set; }
         public IList<Advertisement> Advertisements { get; set; }
+
+        public override string ToString()
+        {
+            return $"ID: {EmployerId}, Name: {FirstName}, Company: {CompanyName}";
+        }
     }
 }

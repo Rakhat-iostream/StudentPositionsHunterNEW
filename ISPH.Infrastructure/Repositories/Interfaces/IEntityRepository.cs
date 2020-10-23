@@ -3,10 +3,10 @@ using System.Threading.Tasks;
 
 namespace ISPH.Infrastructure.Repositories
 {
-    public interface IEntityRepository<T>
+    public interface IEntityRepository<T> where T : class
     {
          Task<bool> Create(T entity);
-         Task<bool> Update(T entity);
+         bool Update(T entity);
          Task<bool> Delete(T entity);
          Task<bool> HasEntity(T entity);
          Task<T> GetById(int id);

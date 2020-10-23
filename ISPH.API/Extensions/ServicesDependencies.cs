@@ -10,17 +10,21 @@ namespace ISPH.API
         public static void AddRepositories(this IServiceCollection services)
         {
             services.AddScoped<IEntityRepository<Student>, StudentRepository>();
+            services.AddScoped<IUserAuthRepository<Student>, StudentRepository>();
+
             services.AddScoped<IEntityRepository<News>, NewsRepository>();
             services.AddScoped<IEntityRepository<Advertisement>, AdvertisementsRepository>();
+            services.AddScoped<IAdvertisementsRepository, AdvertisementsRepository>();
             services.AddScoped<ICompanyRepository, CompaniesRepository>();
+
             services.AddScoped<IEntityRepository<Employer>, EmployersRepository>();
+            services.AddScoped<IUserAuthRepository<Employer>, EmployersRepository>();
+
             services.AddScoped<IEntityRepository<Article>, ArticlesRepository>();
             services.AddScoped<IEntityRepository<Company>, CompaniesRepository>();
             services.AddScoped<IEntityRepository<Position>, PositionsRepository>();
             services.AddScoped<IPositionsRepository, PositionsRepository>();
             services.AddScoped<IEntityRepository<Resume>, ResumesRepository>();
-            services.AddScoped<IUserAuthRepository<Student>, StudentRepository>();
-            services.AddScoped<IUserAuthRepository<Employer>, EmployersRepository>();
         }
     }
 }

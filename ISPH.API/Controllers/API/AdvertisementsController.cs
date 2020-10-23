@@ -17,11 +17,12 @@ namespace ISPH.API.Controllers
     public class AdvertisementsController : ControllerBase
     {
         private readonly IEntityRepository<Advertisement> _repos;
+        private readonly IAdvertisementsRepository _advRepos;
         private readonly IPositionsRepository _positionRepos;
-        private static readonly Logger logger = LogManager.GetCurrentClassLogger();
-        public AdvertisementsController(IEntityRepository<Advertisement> repos, IPositionsRepository positionRepos)
+        public AdvertisementsController(IEntityRepository<Advertisement> repos, IAdvertisementsRepository advRepos, IPositionsRepository positionRepos)
         {
             _repos = repos;
+            _advRepos = advRepos;
             _positionRepos = positionRepos;
         }
         [HttpGet]
@@ -35,16 +36,19 @@ namespace ISPH.API.Controllers
         [AllowAnonymous]
         public async Task<IList<Advertisement>> GetAdvertisementsForPosition(int id)
         {
-            var position = await _positionRepos.GetPositionById(id);
-            return await (_repos as AdvertisementsRepository).GetAdvertisementsForPosition(position.Name);
+            return await _advRepos.GetAdvertisementsForPosition(id);
         }
         [HttpGet("emp={id}")]
         [AllowAnonymous]
-        public async Task<IList<Advertisement>> GetAllAdvertisementsByEmployer(int id)
+        public async Task<IList<Advertisement>> GetAdvertisementsByEmployer(int id)
         {
-            logger.Info($"Getting all advertisements of employer with id = {id}");
-            var ads = await (_repos as AdvertisementsRepository).GetAdvertisementsByEmployerId(id);
-            return ads;
+            return await _advRepos.GetAdvertisementsForEmployer(id);
+        }
+        [HttpGet("com={id}")]
+        [AllowAnonymous]
+        public async Task<IList<Advertisement>> GetAllAdvertisementsForCompany(int id)
+        {
+            return await _advRepos.GetAdvertisementsForCompany(id);
         }
        
         [HttpPost("emp={id}/add")]
@@ -63,7 +67,6 @@ namespace ISPH.API.Controllers
                 EmployerId = id
             };
             if (await _repos.HasEntity(advertisement)) return BadRequest("Ads with this title already exists");
-            logger.Info($"Adding new advertisement for employer with id = {id}");
             if (await _repos.Create(advertisement)) return Ok("Added new ads");
             return BadRequest("Failed to add ads");
         }
@@ -73,7 +76,6 @@ namespace ISPH.API.Controllers
         [AllowAnonymous]
         public async Task<Advertisement> GetAdvertisementById(int id)
         {
-            logger.Info($"Getting advertisement with id = {id}");
             return await _repos.GetById(id);
         }
         [HttpPut("id={id}/update")]
@@ -88,8 +90,7 @@ namespace ISPH.API.Controllers
                 ad.Description = advertisement.Description;
                 ad.Salary = advertisement.Salary.GetValueOrDefault();
                 ad.PositionName = advertisement.PositionName;
-                logger.Info($"Updating advertisement with id = {id}");
-                if (await _repos.Update(ad)) return Ok("Updated ads");
+                if (_repos.Update(ad)) return Ok("Updated ads");
             }
             return BadRequest("This ads is not in database");
         }
@@ -99,7 +100,6 @@ namespace ISPH.API.Controllers
         {
             Advertisement ad = await _repos.GetById(id);
             if (ad == null) return BadRequest("This ads already deleted");
-            logger.Info($"Deleting advertisement with id = {id}");
             if (await _repos.Delete(ad)) return Ok("Deleted ads");
             return BadRequest("Failed to delete ads");
         }

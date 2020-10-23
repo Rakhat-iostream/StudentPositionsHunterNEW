@@ -41,10 +41,10 @@ namespace ISPH.Infrastructure.Repositories
             return await _context.Articles.FindAsync(id);
         }
 
-        public async Task<bool> Update(Article entity)
+        public bool Update(Article entity)
         {
             _context.Articles.Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            return _context.SaveChanges() > 0;
         }
     }
 }

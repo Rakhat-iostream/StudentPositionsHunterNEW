@@ -51,7 +51,7 @@ namespace ISPH.API.Controllers.API
             Position position = await _repos.GetById(id);
             if (!(await _repos.HasEntity(position))) return BadRequest("Position doesn't exist");
             position.Name = pos.Name;
-            if (await _repos.Update(position)) return Ok("Updated Position");
+            if (_repos.Update(position)) return Ok("Updated Position");
             return BadRequest("Failed to add Position");
         }
 
