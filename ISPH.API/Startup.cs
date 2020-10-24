@@ -13,6 +13,8 @@ using System;
 using ISPH.Core.Data;
 using ISPH.Infrastructure;
 using ISPH.Infrastructure.Hubs;
+using System.IO;
+using Microsoft.Extensions.FileProviders;
 
 namespace ISPH.API
 {

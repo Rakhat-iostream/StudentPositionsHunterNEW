@@ -12,28 +12,10 @@ namespace ISPH.Infrastructure.Repositories
         public ResumesRepository(EntityContext context) : base(context)
         {
         }
-        /*public async Task<Resume> GetById(int StudentId)
+        public async override Task<Resume> GetById(int id)
         {
-            return await _context.Resumes.FindAsync(StudentId);
+            return await _context.Resumes.FirstOrDefaultAsync(res => res.StudentId == id);
         }
-
-        public async Task<bool> Create(Resume resume)
-        {
-            _context.Resumes.Add(resume);
-            return await _context.SaveChangesAsync() > 0;
-        }
-
-        public bool Update(Resume resume)
-        {
-            _context.Resumes.Update(resume);
-            return _context.SaveChanges() > 0;
-        }
-
-        public async Task<bool> Delete(Resume resume)
-        {
-            _context.Resumes.Remove(resume);
-            return await _context.SaveChangesAsync() > 0;
-        }*/
 
         public override async Task<bool> HasEntity(Resume resume)
         {

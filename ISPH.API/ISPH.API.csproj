@@ -18,4 +18,8 @@
     <ProjectReference Include="..\ISPH.Infrastructure\ISPH.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="static\Resumes\" />
+  </ItemGroup>
+
 </Project>

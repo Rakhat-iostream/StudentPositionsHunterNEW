@@ -11,7 +11,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace ISPH.API.Controllers
 {
     [Route("users/students/id={id}/resume/")]
-    [Authorize]
     [ApiController]
     public class ResumesController : ControllerBase
     {
@@ -23,34 +22,58 @@ namespace ISPH.API.Controllers
             _env = environment;
         }
 
-        [HttpGet]
-        public async Task<Resume> GetResumeByStudentIdAsync(int id)
-        {
-            return await _repos.GetById(id);
-        }
+        
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddResume(IFormFile file)
+        public async Task<IActionResult> AddResume(IFormFile file, int id)
         {
             if(file != null)
             {
+                if (file.ContentType != "application/pdf") return BadRequest(new { message = "Wrong format of resume" });
                 string path = "/Resumes/" + file.FileName;
                 using(var fileStream = new FileStream(_env.WebRootPath + path, FileMode.Create))
                 {
                     await file.CopyToAsync(fileStream);
                 }
-                Resume resume = new Resume() { Name = file.FileName, Path = path };
-                if (await _repos.Create(resume)) return Ok("Uploaded new file");
-                return BadRequest("Failed to upload file");
+                Resume resume = new Resume() { Name = file.FileName, Path = path, StudentId = id };
+                if (await _repos.HasEntity(resume)) return BadRequest(new { message = "Your resume already exists" });
+                if (await _repos.Create(resume)) return LocalRedirect("/home/profile");
+                return BadRequest(new { message = "Failed to upload file" });
             }
 
-            return BadRequest("You didn't upload file");
+            return BadRequest(new { message = "You didn't upload file" });
         }
+
+        [HttpGet]
+        public async Task<Resume> GetResumeByStudentId(int id)
+        {
+            return await _repos.GetById(id);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> DownloadResume(int id)
+        {
+            var resume = await _repos.GetById(id);
+            var path = resume.Path;
+            var memory = new MemoryStream();
+            using(var stream = new FileStream(_env.WebRootPath + path, FileMode.Open))
+            {
+                await stream.CopyToAsync(memory);
+            }
+            memory.Position = 0;
+            return File(memory, "application/pdf", Path.GetFileName(path));
+        }
+
+
 
         [HttpDelete("delete")]
         public async Task<IActionResult> DeleteResumeAsync(int id)
         {
-            if (await _repos.Delete(await _repos.GetById(id))) return Ok("Deleted resume");
+            var file = await _repos.GetById(id);
+            if (file == null) return BadRequest("This file doesn't exist");
+            string fullPath = Path.GetFullPath("static" + file.Path);
+            System.IO.File.Delete(fullPath);
+            if (await _repos.Delete(file)) return LocalRedirect("/home/profile");
             return BadRequest("Failed to delete resume");
         }
     }

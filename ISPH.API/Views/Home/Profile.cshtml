@@ -116,7 +116,7 @@
                     user = data;
                     $('.names').html(user.firstName + " " + user.lastName);
                     $('.email').html(user.email);
-                    
+
                     if (user.hasOwnProperty('companyName')) {
                         $('.companyName').html("Компания: " + user.companyName);
                         $('.changedataul').append('<li class="change-data" id="company-field"><button type="button" id="changecompany" class="changedata">'
@@ -146,8 +146,34 @@
 
                     } else {
                         $('#addadsbtn').hide();
-                        $('.changedataul').append('<li class="change-data"><button type="button" id="addresume" class="changedata">'
+                        $('.changedataul').append('<li class="change-data addresume-field"><button type="button" id="addresumebtn" class="changedata">'
                             + "Добавить резюме" + '</button></li>');
+                        $('#addresumebtn').click(function () {
+                            $('.resume').append('<form method="post" action="@url/resume/add" enctype="multipart/form-data" id="addresume-form"><input type="file" name="file" id="resume">' +
+                                '<br><br><button class="signout hoverbtn" type="submit" style="background-color: dodgerblue;">Отправить</button></form>');
+                        });
+                        $.get(
+                            '@url/resume'
+                        ).done(function (data) {
+                            $('.resume').append('Резюме: <form style="margin: 20px 0;" action="@url/resume" method="post" enctype="multipart/form-data"><button type="submit" class="signout hoverbtn" style="background-color: mediumspringgreen;">' + data.name + '</button></form>' +
+                                '<form style="display: inline; margin-left: 15px;" method="delete" id="deleteresume-form"><button style="border: none; background: none; cursor: pointer; font-size: 1.5em;" type="submit"><i class="fas fa-trash-alt"></i></button></form>');
+                            $('#deleteresume-form').submit(function () {
+                                $.ajax({
+                                     type: "DELETE",
+                                    headers: {
+                                        'Authorization': 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")'
+                                    },
+                                    async: false,
+                                    url: '@url/resume/delete',
+                                    success: function (response) {
+                                        window.location.reload();
+                                    },
+                                    error: function (response) {
+                                        alert(JSON.stringify(response));
+                                    }
+                                });
+                            });
+                        });
                     }
                     $('#changepass-form').hide();
                     $('#changeemail-form').hide();
@@ -268,6 +294,7 @@
         </div>
         <div class="user-data email"></div>
         <div class="user-data companyName"></div>
+        <div class="user-data resume"></div>
     </div>
     <h4 id="changeerror" style="color: crimson;"></h4>
     <ul class="changedataul">

@@ -27,6 +27,15 @@
         i.fa-trash-alt:hover {
             color: crimson;
         }
+        .hoverbtn {
+            border: none;
+            color: white;
+            padding: 5px 20px;
+            font-size: 22px;
+            background-color: darkorange;
+            font-family: Bahnschrift, Arial, serif;
+            cursor: pointer;
+        }
     </style>
     </head>
 <body style="background-image: url(https://i1.photo.2gis.com/images/branch/0/30258560048080038_12ae.jpg); background-attachment: fixed; background-size: 100%">
@@ -108,8 +117,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                 }
                 else
                 {
-                    <div class="row content" style="flex: 0 0 70%; max-width: 70%; background-color: white; padding: 30px; border-radius: 70px">
-                        <h1 style="text-align: center; font-size: 2.5em; font-family: Dosis, Calibri, Bahnschrift, Arial, serif; color: dodgerblue">Попробуй себя на практике!</h1>
+                    <div class="row content" style="flex: 0 0 70%; max-width: 70%; background-color: white; padding: 40px;">
                         @{
                             if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("profile"))
                             {
