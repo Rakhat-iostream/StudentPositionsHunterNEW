@@ -1,7 +1,7 @@
 ﻿using ISPH.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace ISPH.Core.Data
+namespace ISPH.Infrastructure.Data
 {
     public class EntityContext : DbContext
     {

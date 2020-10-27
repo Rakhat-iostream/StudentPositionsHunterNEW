@@ -26,5 +26,7 @@ namespace ISPH.Core.Models
             }
         }
         public string Description { get; set; }
+
+        public string ImagePath { get; set; }
     }
 }

@@ -91,14 +91,14 @@
 </script>
 <div id="addarticleblock" class="addarticle">
     <h1>Новая статья</h1>
-    <form method="post" id="addarticleform">
+    <form method="post" action="/articles/add" id="addarticleform" enctype="multipart/form-data">
         <h4 id="adserror" style="color: crimson; font-weight: normal;"></h4>
         <div class="row">
             <div class="col-25">
                 <label for="title">Заголовок</label>
             </div>
             <div class="col-75">
-                <input type="text" id="title" name="title" placeholder="Ваш заголовок..." class="adsfield">
+                <input type="text" id="title" name="Title" placeholder="Ваш заголовок..." class="adsfield">
             </div>
         </div>
         <div class="row">
@@ -106,7 +106,7 @@
                 <label for="salary">Дата публикации</label>
             </div>
             <div class="col-75">
-                <input type="date" id="publishDate" name="publishDate" placeholder="Ваша дата публикации..." class="adsfield">
+                <input type="date" id="publishDate" name="PublishDate" placeholder="Ваша дата публикации..." class="adsfield">
             </div>
         </div>
         <div class="row">
@@ -114,7 +114,15 @@
                 <label for="description">Описание</label>
             </div>
             <div class="col-75">
-                <textarea id="description" class="adsfield" name="description" placeholder="Разместите здесь описание статьи..." style="height:200px"></textarea>
+                <textarea id="description" class="adsfield" name="Description" placeholder="Разместите здесь описание статьи..." style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="description">Картинка</label>
+            </div>
+            <div class="col-75">
+                <input type="file" name="File" />
             </div>
         </div>
         <div class="row">
@@ -124,7 +132,7 @@
 </div>
 <script>
 
-    $('#addarticleform').submit(function (e) {
+    @*$('#addarticleform').submit(function (e) {
         e.preventDefault();
         let art = {
             Title: $('#title').val(),
@@ -156,5 +164,5 @@
                 }
             });
         }
-    });
+    });*@
 </script>

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
@@ -6,6 +7,7 @@ using ISPH.Infrastructure;
 using ISPH.Infrastructure.Repositories;
 using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -16,9 +18,11 @@ namespace ISPH.API.Controllers
     public class ArticlesController : ControllerBase
     {
         private readonly IArticlesRepository _repos;
-        public ArticlesController(IArticlesRepository repos)
+        private readonly IWebHostEnvironment _env;
+        public ArticlesController(IArticlesRepository repos, IWebHostEnvironment env)
         {
             _repos = repos;
+            _env = env;
         }
 
         [HttpGet]
@@ -34,19 +38,24 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPost("add")]
-        [Authorize(Roles = RoleType.Admin)]
-        public async Task<IActionResult> AddArticle(ArticleDTO art)
+       // [Authorize(Roles = RoleType.Admin)]
+        public async Task<IActionResult> AddArticle([FromForm] ArticleDTO art)
         {
             if(!ModelState.IsValid) return BadRequest("Fill all fields");
+            string path = "/images/" + art.File.FileName;
             Article article = new Article()
             {
                 Title = art.Title,
                 PublishDate = art.PublishDate,
                 Description = art.Description,
+                ImagePath = path
             };
             if (await _repos.HasEntity(article)) return BadRequest("This article already exists");
-
-            if (await _repos.Create(article)) return Ok("Added new article");
+            using (var stream = new FileStream(_env.WebRootPath + path, FileMode.Create))
+            {
+                await art.File.CopyToAsync(stream);
+            }
+            if (await _repos.Create(article)) return LocalRedirect("/home/index");
 
             return BadRequest("Failed to add article");
         }
@@ -64,9 +73,9 @@ namespace ISPH.API.Controllers
              article.Title = art.Title;
              article.PublishDate = art.PublishDate;
              article.Description = art.Description;
-            if (_repos.Update(article)) return Ok("Updated article");
+            if (_repos.Update(article)) return LocalRedirect("/home/index");
 
-                return BadRequest("Failed to update article");
+            return BadRequest("Failed to update article");
         }
 
         [HttpDelete("id={id}/delete")]
@@ -75,7 +84,9 @@ namespace ISPH.API.Controllers
         {
             Article article = await _repos.GetById(id);
             if (article == null) return BadRequest("This article is already deleted");
-            if (await _repos.Delete(article)) return Ok("Deleted article");
+            string fullPath = Path.GetFullPath("static" + article.ImagePath);
+            System.IO.File.Delete(fullPath);
+            if (await _repos.Delete(article)) return LocalRedirect("/home/index");
             return BadRequest("Failed to delete article");
         }
     }

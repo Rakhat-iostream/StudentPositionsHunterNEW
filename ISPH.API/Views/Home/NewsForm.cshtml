@@ -91,14 +91,14 @@
 </script>
 <div id="addnewsblock" class="addnews">
     <h1>Новые новости</h1>
-    <form method="post" id="addnewsform">
+    <form method="post" action="/news/add" id="addnewsform" enctype="multipart/form-data">
         <h4 id="adserror" style="color: crimson; font-weight: normal;"></h4>
         <div class="row">
             <div class="col-25">
                 <label for="title">Заголовок</label>
             </div>
             <div class="col-75">
-                <input type="text" id="newstitle" name="title" placeholder="Ваш заголовок..." class="adsfield">
+                <input type="text" id="newstitle" name="Title" placeholder="Ваш заголовок..." class="adsfield">
             </div>
         </div>
         <div class="row">
@@ -106,7 +106,7 @@
                 <label for="salary">Дата публикации</label>
             </div>
             <div class="col-75">
-                <input type="date" id="newspublishDate" name="publishDate" placeholder="Ваша дата публикации..." class="adsfield">
+                <input type="date" id="newspublishDate" name="PublishDate" placeholder="Ваша дата публикации..." class="adsfield">
             </div>
         </div>
         <div class="row">
@@ -114,7 +114,15 @@
                 <label for="description">Описание</label>
             </div>
             <div class="col-75">
-                <textarea id="newsdescription" class="adsfield" name="description" placeholder="Разместите здесь описание новостей..." style="height:200px"></textarea>
+                <textarea id="newsdescription" class="adsfield" name="Description" placeholder="Разместите здесь описание новостей..." style="height:200px"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+                <label for="description">Картинка</label>
+            </div>
+            <div class="col-75">
+                <input type="file" name="File"/>
             </div>
         </div>
         <div class="row">
@@ -123,7 +131,7 @@
     </form>
 </div>
 <script>
-
+@*
     $('#addnewsform').submit(function (e) {
         e.preventDefault();
         let art = {
@@ -156,5 +164,5 @@
                 }
             });
         }
-    });
+    });*@
 </script>

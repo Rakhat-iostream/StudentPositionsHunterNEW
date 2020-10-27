@@ -41,6 +41,7 @@
             $('.article h1').html(data.title);
             $('.articledate').html("Дата публикации: " + data.publishDateString);
             $('.article p').html(data.description);
+            $('.articleimgblock').append('<img src="' + data.imagePath + '" class="articleimg">');
             $('#deletearticle-form').submit(function (e) {
                 e.preventDefault();
                     $.ajax({
@@ -67,7 +68,7 @@
     {
         <form id="deletearticle-form"><button type="submit" style="border: none; background: none; cursor: pointer; font-size: 2em; color: white;">Удалить статью <i class="fas fa-trash-alt"></i></button></form>
     }
-    <div class="articleimgblock"><img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" class="articleimg"></div>
+    <div class="articleimgblock"></div>
     <div class="articledate"></div>
     <h1></h1>
     <p>

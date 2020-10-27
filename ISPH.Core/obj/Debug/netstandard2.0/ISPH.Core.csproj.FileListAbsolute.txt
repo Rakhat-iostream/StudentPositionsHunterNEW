@@ -3,7 +3,7 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.Core\bin\Debug\netstandard2.0\ISPH.Core.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.AssemblyInfoInputs.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.AssemblyInfo.cs
 C:\Users\ASUS\source\repos\ISPH\ISPH.Core\bin\Debug\netstandard2.0\ISPH.Core.pdb
-C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.csprojAssemblyReference.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.pdb
+C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.csprojAssemblyReference.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.Core\obj\Debug\netstandard2.0\ISPH.Core.csproj.CoreCompileInputs.cache

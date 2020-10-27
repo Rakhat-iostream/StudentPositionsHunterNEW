@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
@@ -6,8 +7,8 @@ using ISPH.Infrastructure;
 using ISPH.Infrastructure.Repositories;
 using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace ISPH.API.Controllers
 {
@@ -16,9 +17,11 @@ namespace ISPH.API.Controllers
     public class NewsController : ControllerBase
     {
         private readonly INewsRepository _repos;
-        public NewsController(INewsRepository repos)
+        private readonly IWebHostEnvironment _env;
+        public NewsController(INewsRepository repos, IWebHostEnvironment env)
         {
             _repos = repos;
+            _env = env;
         }
 
         [HttpGet]
@@ -34,19 +37,24 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPost("add")]
-        [Authorize(Roles = RoleType.Admin)]
-        public async Task<IActionResult> AddNewsAsync(NewsDTO newsDTO)
+       // [Authorize(Roles = RoleType.Admin)]
+        public async Task<IActionResult> AddNewsAsync([FromForm] NewsDTO newsDTO)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
+            string path = "/images/" + newsDTO.File.FileName;
             News news = new News()
             {
                 Title = newsDTO.Title,
                 PublishDate = newsDTO.PublishDate.GetValueOrDefault(),
-                Description = newsDTO.Description
+                Description = newsDTO.Description,
+                ImagePath = path
             };
-
             if (await _repos.HasEntity(news)) return BadRequest("These news already exist");
-            if (await _repos.Create(news)) return Ok("Added new news");
+            using (var stream = new FileStream(_env.WebRootPath + path, FileMode.Create))
+            {
+               await newsDTO.File.CopyToAsync(stream);
+            }
+            if (await _repos.Create(news)) return LocalRedirect("/home/index");
 
             return BadRequest("Failed to add news");
         }
@@ -63,7 +71,7 @@ namespace ISPH.API.Controllers
             news.PublishDate = newsDTO.PublishDate.GetValueOrDefault();
             news.Description = newsDTO.Description;
 
-            if (_repos.Update(news)) return Ok("Updated news");
+            if (_repos.Update(news)) return Ok("/home/index");
             return BadRequest("Failed to update news");
         }
 
@@ -73,7 +81,9 @@ namespace ISPH.API.Controllers
         {
             News news = await _repos.GetById(id);
             if (news == null) return BadRequest("These news are already deleted");
-            if (await _repos.Delete(news)) return Ok("Deleted news");
+            string fullPath = Path.GetFullPath("static" + news.ImagePath);
+            System.IO.File.Delete(fullPath);
+            if (await _repos.Delete(news)) return LocalRedirect("/home/index");
             return BadRequest("Failed to delete news");
         }
     }

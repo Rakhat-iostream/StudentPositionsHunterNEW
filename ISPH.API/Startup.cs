@@ -10,11 +10,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using System;
-using ISPH.Core.Data;
 using ISPH.Infrastructure;
 using ISPH.Infrastructure.Hubs;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
+using ISPH.Infrastructure.Data;
 
 namespace ISPH.API
 {

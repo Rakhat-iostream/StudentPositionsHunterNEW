@@ -6,7 +6,7 @@ $(document).ready(function () {
             let art = data;
             for (let i = 0; i < art.length; i++) {
                 $('div.articles').append('<article style="margin-bottom: 30px;">' +
-                    '<img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" style="display: block; max-width: 100%;">' +
+                    '<img src="' + art[i].imagePath + '" style="display: block; max-width: 100%;">' +
                     '<h2 class="article-title">' + art[i].title + '</h2>' + '<h3 style="color: orange; margin-bottom: 40px">' + art[i].publishDateString + '</h3>' +
                     '<p><a class="signout" style="color: white; text-decoration: none; margin-top: 20px; background: dodgerblue; padding: 10px 20px" href="/home/articles/id=' + art[i].articleId + '">Learn more...</a></p>' +
                     '</article>');
@@ -21,7 +21,7 @@ $(document).ready(function () {
             let news = data;
             for (let i = 0; i < news.length; i++) {
                 $('div.news').append('<article style="padding: 0;">' +
-                    '<img src="https://mobile-review.com/news/wp-content/uploads/Microsoft-Logo-2012.jpg" style="display: block; max-width: 100%; border: none; border-bottom: 2px solid black;">' +
+                    '<img src="' + news[i].imagePath + '" style="display: block; max-width: 100%; border: none; border-bottom: 2px solid black;">' +
                     '<h2 class="news-title">' + news[i].title + '</h2>' +
                     '<p style="display: block; text-align:center;"><a class="signout" style="color: white; text-decoration: none; margin-top: 20px; background: mediumspringgreen; padding: 10px 20px" href="/home/news/id=' + news[i].newsId + '">Learn more...</a></p>' + '</article>');
                 

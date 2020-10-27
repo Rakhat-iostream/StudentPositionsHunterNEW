@@ -1,5 +1,6 @@
-﻿using ISPH.Core.Data;
+﻿
 using ISPH.Core.Models;
+using ISPH.Infrastructure.Data;
 using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,7 +15,7 @@ namespace ISPH.Infrastructure.Repositories
         public AdvertisementsRepository(EntityContext context) : base(context)
         {
         }
-        public async Task<bool> Create(Advertisement entity)
+        public override async Task<bool> Create(Advertisement entity)
         {
             _context.Advertisements.Add(entity);
             var position = await _context.Positions.FirstOrDefaultAsync(pos => pos.Name == entity.PositionName);

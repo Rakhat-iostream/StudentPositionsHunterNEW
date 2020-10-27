@@ -1,4 +1,4 @@
-﻿using ISPH.Core.Data;
+﻿using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories;
 using ISPH.Infrastructure.Repositories.Interfaces;

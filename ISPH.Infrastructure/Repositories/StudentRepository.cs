@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ISPH.Core.Data;
+using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories.Interfaces;
 using ISPH.Infrastructure.Repositories.Services;

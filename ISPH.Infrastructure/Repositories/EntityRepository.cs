@@ -1,4 +1,4 @@
-﻿using ISPH.Core.Data;
+﻿using ISPH.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -14,5 +15,6 @@ namespace ISPH.Core.DTO
         public DateTime PublishDate { get; set; }
         [Required]
         public string Description { get; set; }
+        public IFormFile File { get; set; }
     }
 }

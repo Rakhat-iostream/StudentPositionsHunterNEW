@@ -1,5 +1,6 @@
-﻿using ISPH.Core.Data;
+﻿
 using ISPH.Core.Models;
+using ISPH.Infrastructure.Data;
 using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -14,17 +15,6 @@ namespace ISPH.Infrastructure.Repositories
         public ArticlesRepository(EntityContext context) : base(context)
         {
         }
-        /*public async Task<bool> Create(Article entity)
-        {
-            _context.Articles.Add(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }
-
-        public async Task<bool> Delete(Article entity)
-        {
-            _context.Articles.Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
-        }*/
 
         public override async Task<bool> HasEntity(Article entity)
         {
@@ -39,11 +29,5 @@ namespace ISPH.Infrastructure.Repositories
         {
             return await _context.Articles.FindAsync(id);
         }
-
-        /*public bool Update(Article entity)
-        {
-            _context.Articles.Update(entity);
-            return _context.SaveChanges() > 0;
-        }*/
     }
 }
