@@ -36,9 +36,17 @@
 <script>
     $(document).ready(function () {
         let newsUrl = substr(5, location.pathname);
+        let news = {};
         $.get(
             newsUrl
         ).done(function (data) {
+            news = {
+                Id: data.newsId,
+                ImagePath: data.imagePath,
+                Title: data.title,
+                PublishDate: data.publishDate,
+                Description: data.description
+            };
             $('.newsblock').append(data);
             $('.newsblock h1').html(data.title);
             $('.newsdate').html("Дата публикации: " + data.publishDateString);
@@ -63,13 +71,96 @@
                     });
             });
         });
+
+
+                    $('#changenewstitlebtn').click(function () {
+                        $('.changenewstitleli').append('<h5 id="changenewstitleinfo"></h5><form id="changenewstitle-form"><input type="text" id="newnewstitle" style="font-size: 17px; padding: 3px 0;">' +
+                        '<br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changenewstitle-form').submit(function (e) {
+                            e.preventDefault();
+                            news.Title = $('#newnewstitle').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/news/id=" + news.Id + "/update",
+                                data: JSON.stringify(news),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changenewstitleinfo').html("<span style='color: crimson;'>Failed to update title</span>");
+                                }
+                            });
+                        });
+                    });
+
+
+
+                    $('#changenewsdatebtn').click(function () {
+                        $('.changenewsdateli').append('<h5 id="changenewsdateinfo"></h5><form id="changenewsdate-form"><input type="date" id="newnewsdate" style="font-size: 17px; padding: 3px 0;">' +
+                            '<br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changenewsdate-form').submit(function (e) {
+                            e.preventDefault();
+                            news.PublishDate = $('#newnewsdate').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/news/id=" + news.Id + "/update",
+                                data: JSON.stringify(news),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changenewsdateinfo').html("<span style='color: crimson;'>Failed to update date</span>");
+                                }
+                            });
+                        });
+                    });
+
+                    $('#changenewsdescbtn').click(function () {
+                        $('.changenewsdescli').append('<h5 id="changenewsdescinfo"></h5><form id="changenewsdesc-form"><textarea id="newnewsdesc" style="font-size: 15px;"></textarea>' +
+                            '<br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changenewsdesc-form').submit(function (e) {
+                            e.preventDefault();
+                            news.Description = $('#newnewsdesc').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/news/id=" + news.Id + "/update",
+                                data: JSON.stringify(news),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changenewsdescinfo').html("<span style='color: crimson;'>Failed to update description</span>");
+                                }
+                            });
+                        });
+                    });
     });
 </script>
 <div class="newsblock">
     @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
     {
-        <form id="deletenews-form"><button type="submit" style="border: none; background: none; cursor: pointer; font-size: 2em;">Удалить новость <i class="fas fa-trash-alt"></i></button></form>
-    }
+        <form id="deletenews-form"><button type="submit" style="border: none; background: none; cursor: pointer; font-size: 2em;"><i class="fas fa-trash-alt"></i></button></form>
+        <ul style="margin-top: 20px;">
+            <li style="margin-bottom: 15px; list-style-type: none;" class="changenewstitleli"><button type="button" id="changenewstitlebtn" class="signout hoverbtn">Изменить заголовок</button></li>
+            <li style="margin-bottom: 15px; list-style-type: none;" class="changenewsdateli"><button type="button" id="changenewsdatebtn" class="signout hoverbtn">Изменить дату</button></li>
+            <li style="margin-bottom: 15px; list-style-type: none;" class="changenewsdescli"><button type="button" id="changenewsdescbtn" class="signout hoverbtn">Изменить описание</button></li>
+        </ul>
+   }
     <div class="newsimgblock"></div>
     <div class="newsdate"></div>
     <h1></h1>

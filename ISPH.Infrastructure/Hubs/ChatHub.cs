@@ -22,6 +22,11 @@ namespace ISPH.Infrastructure.Hubs
             }
             await Clients.Group(groupname).SendAsync("Send", message, userName);
         }
+
+        public async Task SendResume(string url)
+        {
+            await Clients.Group(groupname).SendAsync("SendResume", url);
+        }
         public override Task OnDisconnectedAsync(Exception exception)
         {
             foreach (var id in users)

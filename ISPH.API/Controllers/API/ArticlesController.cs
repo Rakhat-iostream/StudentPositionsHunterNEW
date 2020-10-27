@@ -38,7 +38,6 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPost("add")]
-       // [Authorize(Roles = RoleType.Admin)]
         public async Task<IActionResult> AddArticle([FromForm] ArticleDTO art)
         {
             if(!ModelState.IsValid) return BadRequest("Fill all fields");

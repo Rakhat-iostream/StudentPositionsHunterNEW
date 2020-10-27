@@ -38,7 +38,7 @@ namespace ISPH.API.Controllers.API
             Position position = new Position()
             {
                 Name = pos.Name,
-                Amount = 1,
+                Amount = 0,
             };
             if (await _repos.HasEntity(position)) return BadRequest("Position is already in database");
             if (await _repos.Create(position)) return Ok("Added new position");

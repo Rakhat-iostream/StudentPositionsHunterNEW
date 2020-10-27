@@ -34,9 +34,17 @@
 <script>
     $(document).ready(function () {
         let articleUrl = substr(5, location.pathname);
+        let art = {};
         $.get(
             articleUrl
         ).done(function (data) {
+            art = {
+                Id: data.articleId,
+                ImagePath: data.imagePath,
+                Title: data.title,
+                PublishDate: data.publishDate,
+                Description: data.description
+            };
             $('.article').append(data);
             $('.article h1').html(data.title);
             $('.articledate').html("Дата публикации: " + data.publishDateString);
@@ -61,12 +69,92 @@
                     });
             });
         });
+
+                    $('#changearttitlebtn').click(function () {
+                        $('.changearttitleli').append('<h5 id="changearttitleinfo"></h5><form id="changearttitle-form"><input type="text" id="newarttitle" style="font-size: 17px; padding: 3px 0;">' +
+                        '<br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changearttitle-form').submit(function (e) {
+                            e.preventDefault();
+                            art.Title = $('#newarttitle').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/articles/id=" + art.Id + "/update",
+                                data: JSON.stringify(art),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changearttitleinfo').html("<span style='color: crimson;'>Failed to update title</span>");
+                                }
+                            });
+                        });
+                    });
+
+                    $('#changeartdatebtn').click(function () {
+                        $('.changeartdateli').append('<h5 id="changeartdateinfo"></h5><form id="changeartdate-form"><input type="date" id="newartdate" style="font-size: 17px; padding: 3px 0;">' +
+                            '<br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changeartdate-form').submit(function (e) {
+                            e.preventDefault();
+                            art.PublishDate = $('#newartdate').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/articles/id=" + art.Id + "/update",
+                                data: JSON.stringify(art),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changeartdateinfo').html("<span style='color: crimson;'>Failed to update date</span>");
+                                }
+                            });
+                        });
+                    });
+
+                    $('#changeartdescbtn').click(function () {
+                        $('.changeartdescli').append('<h5 id="changeartdescinfo"></h5><form id="changeartdesc-form"><textarea id="newartdesc" style="font-size: 15px;"></textarea>' +
+                            '<br><br><button type="submit" class="signout hoverbtn" style="background-color: dodgerblue">Отправить</button></form>');
+                        $('#changeartdesc-form').submit(function (e) {
+                            e.preventDefault();
+                            art.Description = $('#newartdesc').val();
+                            $.ajax({
+                                method: "PUT",
+                                headers: {
+                                    'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
+                                },
+                                async: false,
+                                url: "/articles/id=" + art.Id + "/update",
+                                data: JSON.stringify(art),
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    window.location.reload();
+                                },
+                                error: function (data) {
+                                    $('#changenewsdescinfo').html("<span style='color: crimson;'>Failed to update description</span>");
+                                }
+                            });
+                        });
+                    });
     });
 </script>
 <div class="article">
     @if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
     {
-        <form id="deletearticle-form"><button type="submit" style="border: none; background: none; cursor: pointer; font-size: 2em; color: white;">Удалить статью <i class="fas fa-trash-alt"></i></button></form>
+        <form id="deletearticle-form"><button type="submit" style="border: none; background: none; cursor: pointer; font-size: 2em; color: white;"><i class="fas fa-trash-alt"></i></button></form>
+        <ul style="margin-top: 20px;">
+            <li style="margin-bottom: 15px; list-style-type: none;" class="changearttitleli"><button type="button" id="changearttitlebtn" class="signout hoverbtn">Изменить заголовок</button></li>
+            <li style="margin-bottom: 15px; list-style-type: none;" class="changeartdateli"><button type="button" id="changeartdatebtn" class="signout hoverbtn">Изменить дату</button></li>
+            <li style="margin-bottom: 15px; list-style-type: none;" class="changeartdescli"><button type="button" id="changeartdescbtn" class="signout hoverbtn">Изменить описание</button></li>
+        </ul>
     }
     <div class="articleimgblock"></div>
     <div class="articledate"></div>

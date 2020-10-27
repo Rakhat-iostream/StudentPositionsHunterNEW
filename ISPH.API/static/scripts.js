@@ -81,7 +81,7 @@ function findInfo(url, target) {
         ).done(function (data) {
             let ads = data;
             $('.advertisements-fromform').empty();
-            if (ads.length == 0) $('.advertisements-fromform').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, we could not find any advertisements related to "' + target + '"</h1>')
+            if (ads.length == 0) $('.advertisements-fromform').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, we could not find any advertisements related to "' + target + '"</h1>');
             
             for (let i = 0; i < data.length; i++) {
                 $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +

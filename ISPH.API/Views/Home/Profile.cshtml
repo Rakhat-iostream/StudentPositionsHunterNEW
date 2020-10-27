@@ -155,6 +155,8 @@
                         $.get(
                             '@url/resume'
                         ).done(function (data) {
+                            $('.addresume-field').show();
+                            if (data.name !== null) $('#addresumebtn').hide();
                             $('.resume').append('Резюме: <form style="margin: 20px 0;" action="@url/resume" method="post" enctype="multipart/form-data"><button type="submit" class="signout hoverbtn" style="background-color: mediumspringgreen;">' + data.name + '</button></form>' +
                                 '<form style="display: inline; margin-left: 15px;" method="delete" id="deleteresume-form"><button style="border: none; background: none; cursor: pointer; font-size: 1.5em;" type="submit"><i class="fas fa-trash-alt"></i></button></form>');
                             $('#deleteresume-form').submit(function () {

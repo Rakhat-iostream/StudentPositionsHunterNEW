@@ -107,6 +107,16 @@
             });
         }
         if (userName !== '') {
+            let role = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
+            let resume = null;
+            if (role !== '') {
+                $.get(
+                    '/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/resume'
+                ).done(function (data) {
+                    alert(JSON.stringify(data));
+                    resume = data;
+                });
+            }
             const hubConnection = new signalR.HubConnectionBuilder()
                 .withUrl("/chat")
                 .build();
@@ -115,9 +125,26 @@
                 console.log(message + " " + userName);
                 $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
             });
-            document.getElementById("sendBtn").addEventListener("click", function (e) {
+            hubConnection.on('SendResume', function (url) {
+                $.get(
+                    url
+                ).done(function (data) {
+                    $('#chatroom').append('<form style="margin: 20px 0;" action="' + url + '" method="post" enctype="multipart/form-data">' +
+                        '<button type="submit" class="signout hoverbtn" style="background-color: mediumspringgreen; pad"> ' + data.name + '</button></form>');
+                });
+            });
+            $("#sendBtn").click(function (e) {
                 let message = document.getElementById("message").value;
                 hubConnection.invoke("Send", message, userName, emp.firstName, role);
+            });
+            $("#sendResumeBtn").click(function (e) {
+                if (resume === null) {
+                    $('#resumeerror').html("Sorry, but you don't have your resume uploaded in profile");
+                }
+                else {
+                    let url = "/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/resume";
+                    hubConnection.invoke("SendResume", url);
+                }
             });
             hubConnection.start();
         }
@@ -178,9 +205,14 @@
     <div class="chat">
         <h4>Написать</h4>
         <div id="chatroom" style="border: 2px solid black; padding: 20px; max-width: 50%; margin: 20px; background: white; color: black;"></div>
-        <div id="inputForm">
+        <div id="inputForm" style="margin-bottom: 30px">
             <textarea placeholder="Введите здесь сообщение..." type="text" id="message" style="background: black; border: none; color: white; padding: 15px; font-size: 18px;"></textarea>
-            <button type="button" id="sendBtn" style="border: none; background: dodgerblue; color: white; padding: 10px 20px; margin-left: 20px;">Отправить</button>
+            <button type="button" id="sendBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить</button>
+            @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
+            {
+                <button type="button" id="sendResumeBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить резюме</button>
+                <h3 id="resumeerror" style="color: crimson; margin-left: 20px; margin-top: 20px"></h3>
+            }
         </div>
     </div>
 </div>

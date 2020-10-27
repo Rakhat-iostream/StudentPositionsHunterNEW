@@ -122,7 +122,7 @@
                 <label for="description">Картинка</label>
             </div>
             <div class="col-75">
-                <input type="file" name="File" />
+                <input type="file" id="artimg" name="File" />
             </div>
         </div>
         <div class="row">
@@ -132,14 +132,23 @@
 </div>
 <script>
 
-    @*$('#addarticleform').submit(function (e) {
+   @* $('#addarticleform').submit(function (e) {
         e.preventDefault();
-        let art = {
+        let art = {}; {
             Title: $('#title').val(),
             PublishDate: $('#publishDate').val(),
-            Description: $('#description').val()
+            Description: $('#description').val(),
+            File: $('input[name="File"]').prop('files')[0]
         };
-        alert(JSON.stringify(art));
+        let file = $('#artimg')[0].files[0];
+        var form = new FormData();
+        form.append("Title", $('#title').val());
+        form.append("PublishDate", $('#publishDate').val());
+        form.append("Description", $('#description').val());
+        form.append("File", file);
+        form.forEach(function (value, key) {
+            art[key] = value;
+        });
         var isValid = false;
         for (var key in art) {
             if (art[key] === '') isValid = true;

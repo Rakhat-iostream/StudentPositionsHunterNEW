@@ -4,6 +4,7 @@
         $.get(
             url
         ).done(function (data) {
+            if (data.length === 0) $('.advertisementscom').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, there are no advertisements for this company at the moment.</h1>')
             let ads = data;
             for (let i = 0; i < data.length; i++) {
                 $('.advertisementscom').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +

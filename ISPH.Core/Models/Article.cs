@@ -15,13 +15,7 @@ namespace ISPH.Core.Models
         public  string PublishDateString
         {
             get {
-                var formatProvider = new DateTimeFormatInfo
-                {
-                    ShortDatePattern = "dd MMM yyyy",
-                    AbbreviatedMonthNames = "Январь,Февраль,Март,Апрель,Май,Июнь,Июль,Август,Сентябрь,Октябрь,Ноябрь,Декабрь,"
-                    .Split(',')
-                };
-                return PublishDate.ToString("D", formatProvider);
+                return PublishDate.ToString("D", CultureInfo.CreateSpecificCulture("ru-Ru"));
             }
         }
         public string Description { get; set; }
