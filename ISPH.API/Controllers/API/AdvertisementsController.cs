@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
@@ -48,7 +49,17 @@ namespace ISPH.API.Controllers
         {
             return await _repos.GetAdvertisementsForCompany(id);
         }
-       
+        [HttpGet("search={name}")]
+        [AllowAnonymous]
+        public async Task<IList<Advertisement>> GetAdvertisementsForSearchValue(string name)
+        {
+            var ads = await _repos.GetAll();
+            var adsForPos = ads.Where(ad => ad.PositionName.Contains(name));
+            var adsForCom = ads.Where(ad => ad.Employer.CompanyName.Contains(name));
+            return adsForPos.Union(adsForCom).ToList();
+        }
+
+
         [HttpPost("emp={id}/add")]
         public async Task<IActionResult> AddAdvertisement(AdvertisementDTO adv, int id)
         {

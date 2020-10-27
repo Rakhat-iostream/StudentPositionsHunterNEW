@@ -52,18 +52,40 @@ $(document).ready(function () {
             }
         });
     }
+    //$('.inside-content').show();
     getPositions();
-
+    $('#findinfo-form').submit(function (e) {
+        e.preventDefault();
+        let target = $('input[name="search"]').val();
+        $('.inside-content').hide();
+        findInfo('/advertisements/search=' + target, target);
+    });
     $('div.articles article a').hover(function () {
         $('div.articles article a').css('color', 'skyblue');
     });
     $('div.news article a').hover(function () {
         $('div.news article a').css('color', 'skyblue');
     });
-    
+
+
 });
 function substr(index, str) {
         var s = "";
         for (let i = index; i < str.length; i++) s += str[i];
         return s;
-    }
+}
+
+function findInfo(url, target) {
+        $.get(
+            url
+        ).done(function (data) {
+            let ads = data;
+            $('.advertisements-fromform').empty();
+            if (ads.length == 0) $('.advertisements-fromform').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, we could not find any advertisements related to "' + target + '"</h1>')
+            
+            for (let i = 0; i < data.length; i++) {
+                $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
+                    '<h3>Salary: ' + ads[i].salary + ' KZT</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+            }
+        });
+}

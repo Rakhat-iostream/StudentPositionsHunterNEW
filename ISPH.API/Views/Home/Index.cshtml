@@ -36,6 +36,46 @@
             font-family: Bahnschrift, Arial, serif;
             cursor: pointer;
         }
+
+
+
+        .advertisements-fromform {
+            font-family: Bahnschrift, Arial, Helvetica, sans-serif;
+        }
+
+            .advertisements-fromform .advertisement {
+                margin: 40px 0;
+                background: rgba(0,0,0,0.8);
+                border: 2px solid black;
+                padding: 20px;
+                color: white;
+            }
+
+            .advertisements-fromform h1 {
+                border-bottom: 2px solid crimson;
+                padding-bottom: 10px;
+                margin: 20px 0;
+                font-size: 2em;
+            }
+
+            .advertisements-fromform h3 {
+                color: dodgerblue;
+                margin: 20px 0;
+            }
+
+            .advertisements-fromform a {
+                background-color: dodgerblue;
+                border: 2px solid white;
+                padding: 10px 20px;
+                text-decoration: none;
+                color: white;
+                border: 2px solid black;
+            }
+
+                .advertisements-fromform a:hover {
+                    color: black;
+                    background-color: mediumspringgreen;
+                }
     </style>
     </head>
 <body style="background-image: url(https://i1.photo.2gis.com/images/branch/0/30258560048080038_12ae.jpg); background-attachment: fixed; background-size: 100%">
@@ -99,9 +139,10 @@
                         }
                     }
                     <li>
-                        <form action="">
+                        <form method="get" id="findinfo-form">
                             <input id="search" type="search" name="search" style="font-size:0.9em; color: white; width: 250px;
 padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="Найти компанию, вакансию...">
+                            <button style="border: none; background: none; cursor: pointer;" type="submit"><i style="font-size: 24px; color: white;" class="fa fa-search"></i></button>
                         </form>
                     </li>
                 </ul>
@@ -118,6 +159,11 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                 else
                 {
                     <div class="row content" style="flex: 0 0 70%; max-width: 70%; background-color: white; padding: 40px;">
+                     
+                        <div class="advertisements-fromform">
+
+                        </div>
+                        <div class="inside-content">
                         @{
                             if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("profile"))
                             {
@@ -157,6 +203,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                                 @await Html.PartialAsync("ArticlePage");
                             }
                         }
+                            </div>
                     </div>
                     <div style="flex: 0 0 5%; max-width: 5%;"></div>
                     <div class="row" style="flex: 0 0 25%; max-width: 25%;">
