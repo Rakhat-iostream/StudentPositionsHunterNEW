@@ -15,6 +15,8 @@ using ISPH.Infrastructure.Hubs;
 using System.IO;
 using Microsoft.Extensions.FileProviders;
 using ISPH.Infrastructure.Data;
+using AutoMapper;
+using ISPH.Core.Helpers;
 
 namespace ISPH.API
 {
@@ -61,6 +63,7 @@ namespace ISPH.API
             });
             services.AddSignalR();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            services.AddAutoMapper(typeof(AutoMapperProfiles));
             services.AddControllersWithViews();
         }
 

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
@@ -16,15 +17,17 @@ namespace ISPH.API.Controllers
     public class StudentsController : ControllerBase
     {
         private readonly IStudentsRepository _repos;
-        public StudentsController(IStudentsRepository repos)
+        private readonly IMapper _mapper;
+        public StudentsController(IStudentsRepository repos, IMapper mapper)
         {
             _repos = repos;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IList<StudentDTO>> GetAllStudents()
         {
-            return (await _repos.GetAll()).Select(st => new StudentDTO() { FirstName = st.FirstName, Email = st.Email,
-                LastName = st.LastName, ID = st.StudentId }).ToList();
+            var sts = await _repos.GetAll();
+            return _mapper.Map<IList<StudentDTO>>(sts);
         }
         [HttpGet("id={id}")]
         public async Task<Student> GetStudentAsync(int id)

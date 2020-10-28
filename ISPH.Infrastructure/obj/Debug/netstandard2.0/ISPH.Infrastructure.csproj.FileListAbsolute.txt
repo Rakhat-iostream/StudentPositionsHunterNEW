@@ -10,3 +10,15 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISP
 C:\Users\ASUS\source\repos\ISPH\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.pdb
 C:\Users\ASUS\source\repos\ISPH\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\bin\Debug\netstandard2.0\ISPH.Infrastructure.deps.json
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\bin\Debug\netstandard2.0\ISPH.Infrastructure.dll
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\bin\Debug\netstandard2.0\ISPH.Infrastructure.pdb
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\bin\Debug\netstandard2.0\ISPH.Core.dll
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\bin\Debug\netstandard2.0\ISPH.Core.pdb
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.csprojAssemblyReference.cache
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.AssemblyInfoInputs.cache
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.AssemblyInfo.cs
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.csproj.CoreCompileInputs.cache
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.csproj.CopyComplete
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.dll
+C:\Users\Rakhat\source\repos\StudentPositionsHunterNEW\ISPH.Infrastructure\obj\Debug\netstandard2.0\ISPH.Infrastructure.pdb

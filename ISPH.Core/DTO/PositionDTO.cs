@@ -8,6 +8,7 @@ namespace ISPH.Core.DTO
 {
     public class PositionDTO
     {
+        public int PositionId { get; set; }
         [Required]
         public string Name { get; set; }
         public int Amount { get; set; }

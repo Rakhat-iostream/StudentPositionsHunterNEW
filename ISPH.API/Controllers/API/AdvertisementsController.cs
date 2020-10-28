@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories;
@@ -19,35 +20,41 @@ namespace ISPH.API.Controllers
     {
         private readonly IAdvertisementsRepository _repos;
         private readonly IPositionsRepository _positionRepos;
-        public AdvertisementsController(IAdvertisementsRepository advRepos, IPositionsRepository positionRepos)
+        private readonly IMapper _mapper;
+        public AdvertisementsController(IAdvertisementsRepository advRepos, IPositionsRepository positionRepos, IMapper mapper)
         {
             _repos = advRepos;
             _positionRepos = positionRepos;
+            _mapper = mapper;
         }
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IList<Advertisement>> GetAllAdvertisements()
+        public async Task<IList<AdvertisementDTO>> GetAllAdvertisements()
         {
-            return await _repos.GetAll();
+            var ads = await _repos.GetAll();
+            return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
 
         [HttpGet("pos={id}")]
         [AllowAnonymous]
-        public async Task<IList<Advertisement>> GetAdvertisementsForPosition(int id)
+        public async Task<IList<AdvertisementDTO>> GetAdvertisementsForPosition(int id)
         {
-            return await _repos.GetAdvertisementsForPosition(id);
+            var pos = await _repos.GetAdvertisementsForPosition(id);
+            return _mapper.Map<IList<AdvertisementDTO>>(pos);
         }
         [HttpGet("emp={id}")]
         [AllowAnonymous]
-        public async Task<IList<Advertisement>> GetAdvertisementsByEmployer(int id)
-        {
-            return await _repos.GetAdvertisementsForEmployer(id);
+        public async Task<IList<AdvertisementDTO>> GetAdvertisementsByEmployer(int id)
+        {   
+            var emp = await _repos.GetAdvertisementsForEmployer(id);
+            return _mapper.Map<IList<AdvertisementDTO>>(emp);
         }
         [HttpGet("com={id}")]
         [AllowAnonymous]
-        public async Task<IList<Advertisement>> GetAllAdvertisementsForCompany(int id)
+        public async Task<IList<AdvertisementDTO>> GetAllAdvertisementsForCompany(int id)
         {
-            return await _repos.GetAdvertisementsForCompany(id);
+            var com = await _repos.GetAdvertisementsForCompany(id);
+            return _mapper.Map <IList<AdvertisementDTO>>(com);
         }
         [HttpGet("search={name}")]
         [AllowAnonymous]
@@ -84,8 +91,9 @@ namespace ISPH.API.Controllers
         [HttpGet("id={id}")]
         [AllowAnonymous]
         public async Task<Advertisement> GetAdvertisementById(int id)
-        {
-            return await _repos.GetById(id);
+        {   
+            var ads = await _repos.GetById(id);
+            return _mapper.Map<Advertisement>(ads);
         }
         [HttpPut("id={id}/update")]
         public async Task<IActionResult> UpdateAdvertisement(AdvertisementDTO advertisement, int id)

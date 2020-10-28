@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
@@ -18,16 +19,19 @@ namespace ISPH.API.Controllers
     {
         private readonly INewsRepository _repos;
         private readonly IWebHostEnvironment _env;
-        public NewsController(INewsRepository repos, IWebHostEnvironment env)
+        private readonly IMapper _mapper;   
+        public NewsController(INewsRepository repos, IWebHostEnvironment env, IMapper mapper)
         {
             _repos = repos;
             _env = env;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<News>> GetAllNewsAsync()
+        public async Task<IList<NewsDTO>> GetAllNewsAsync()
         {
-            return await _repos.GetAll();
+            var news = await _repos.GetAll();
+            return _mapper.Map<IList<NewsDTO>>(news);
         }
 
         [HttpGet("id={id}")]

@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.IO;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
@@ -19,16 +20,19 @@ namespace ISPH.API.Controllers
     {
         private readonly IArticlesRepository _repos;
         private readonly IWebHostEnvironment _env;
-        public ArticlesController(IArticlesRepository repos, IWebHostEnvironment env)
+        private readonly IMapper _mapper;
+        public ArticlesController(IArticlesRepository repos, IWebHostEnvironment env, IMapper mapper)
         {
             _repos = repos;
             _env = env;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<Article>> GetAllArticles()
+        public async Task<IList<ArticleDTO>> GetAllArticles()
         {
-            return await _repos.GetAll();
+            var art = await _repos.GetAll();
+            return _mapper.Map<IList<ArticleDTO>>(art);
         }
 
         [HttpGet("id={id}")]

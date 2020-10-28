@@ -9,6 +9,7 @@ namespace ISPH.Core.DTO
 {
     public class ArticleDTO
     {
+        public int ArticleId { get; set; }
         [Required]
         public string Title { get; set; }
         [Required]

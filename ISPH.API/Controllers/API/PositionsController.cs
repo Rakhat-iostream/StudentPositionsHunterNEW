@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories;
@@ -14,15 +15,18 @@ namespace ISPH.API.Controllers.API
     public class PositionsController : ControllerBase
     {
         private readonly IPositionsRepository _repos;
-        public PositionsController(IPositionsRepository repos)
+        private readonly IMapper _mapper;
+        public PositionsController(IPositionsRepository repos, IMapper mapper)
         {
             _repos = repos;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<Position>> GetAllPositionsAsync()
+        public async Task<IList<PositionDTO>> GetAllPositionsAsync()
         {
-            return await _repos.GetAll();
+            var pos = await _repos.GetAll();
+            return _mapper.Map<IList<PositionDTO>>(pos);
         }
 
         [HttpGet("id={id}")]

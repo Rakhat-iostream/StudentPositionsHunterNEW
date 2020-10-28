@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories.Interfaces;
@@ -15,21 +16,17 @@ namespace ISPH.API.Controllers
     public class EmployersController : ControllerBase
     {
         private readonly IEmployersRepository _repos;
-        public EmployersController(IEmployersRepository repos)
+        private readonly IMapper _mapper;
+        public EmployersController(IEmployersRepository repos, IMapper mapper)
         {
             _repos = repos;
+            _mapper = mapper;
         }
         [HttpGet]
         public async Task<IList<EmployerDTO>> GetAllEmployersAsync()
         {
-            return (await _repos.GetAll()).Select(emp => new EmployerDTO()
-            {
-                FirstName = emp.FirstName,
-                LastName = emp.LastName,
-                Email = emp.Email,
-                CompanyName = emp.CompanyName,
-                ID = emp.EmployerId
-            }).ToList();
+            var emp = await _repos.GetAll();
+            return _mapper.Map<IList<EmployerDTO>>(emp);
         }
         [HttpGet("id={id}")]
         [AllowAnonymous]

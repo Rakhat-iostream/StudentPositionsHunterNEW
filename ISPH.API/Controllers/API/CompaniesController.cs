@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
@@ -16,15 +17,18 @@ namespace ISPH.API.Controllers
     public class CompaniesController : ControllerBase
     {
         private readonly ICompanyRepository _repos;
-        public CompaniesController(ICompanyRepository repos)
+        private readonly IMapper _mapper;
+        public CompaniesController(ICompanyRepository repos, IMapper mapper)
         {
             _repos = repos;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<Company>> GetAllCompanies()
+        public async Task<IList<CompanyDTO>> GetAllCompanies()
         {
-            return await _repos.GetAll();
+            var comp = await _repos.GetAll();
+            return _mapper.Map<IList<CompanyDTO>>(comp);
         }
 
         [HttpGet("id={id}")]
