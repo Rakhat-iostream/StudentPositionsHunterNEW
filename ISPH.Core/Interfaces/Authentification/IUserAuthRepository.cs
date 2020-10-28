@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace ISPH.Infrastructure.Repositories.Interfaces
+namespace ISPH.Core.Interfaces.Authentification
 {
     public interface IUserAuthRepository<T>
     {

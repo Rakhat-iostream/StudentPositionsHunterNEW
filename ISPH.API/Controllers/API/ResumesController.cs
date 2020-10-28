@@ -1,9 +1,7 @@
 ﻿using System.IO;
 using System.Threading.Tasks;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories;
-using ISPH.Infrastructure.Repositories.Interfaces;
-using Microsoft.AspNetCore.Authorization;
+using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

@@ -1,10 +1,7 @@
 ﻿using ISPH.Core.Models;
-using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
-namespace ISPH.Infrastructure.Repositories.Interfaces
+using ISPH.Core.Interfaces.Repositories;
+namespace ISPH.Core.Interfaces.Repositories
 {
    public interface IStudentsRepository : IEntityRepository<Student>
     {

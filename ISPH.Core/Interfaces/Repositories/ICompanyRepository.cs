@@ -1,7 +1,7 @@
 ﻿using ISPH.Core.Models;
 using System.Threading.Tasks;
 
-namespace ISPH.Infrastructure.Repositories.Interfaces
+namespace ISPH.Core.Interfaces.Repositories
 {
     public interface ICompanyRepository : IEntityRepository<Company>
     {

@@ -1,7 +1,6 @@
 ﻿using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories;
-using ISPH.Infrastructure.Repositories.Interfaces;
+using ISPH.Core.Interfaces.Repositories;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;

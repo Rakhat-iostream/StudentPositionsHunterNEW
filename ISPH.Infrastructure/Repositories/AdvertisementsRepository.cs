@@ -1,7 +1,7 @@
 ﻿
+using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Data;
-using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -48,14 +48,6 @@ namespace ISPH.Infrastructure.Repositories
             ad.Employer = await _context.Employers.FirstOrDefaultAsync(emp => emp.EmployerId == ad.EmployerId);
             return ad;
         }
-
-        /*public bool Update(Advertisement entity)
-        {
-            _context.Advertisements.Update(entity);
-            return _context.SaveChanges() > 0;
-        }
-
-*/
 
 
         public async Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerid)

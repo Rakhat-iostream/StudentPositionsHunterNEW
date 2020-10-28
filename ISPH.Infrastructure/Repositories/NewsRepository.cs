@@ -1,12 +1,10 @@
 ﻿using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
+using ISPH.Core.Interfaces.Repositories;
 namespace ISPH.Infrastructure.Repositories
 {
     public class NewsRepository : EntityRepository<News>, INewsRepository

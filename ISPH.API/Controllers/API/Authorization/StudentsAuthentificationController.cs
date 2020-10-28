@@ -1,7 +1,7 @@
 ﻿using ISPH.API.DTO.Authorization;
 using ISPH.Core.DTO;
+using ISPH.Core.Interfaces.Authentification;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories.Interfaces;
 using ISPH.Infrastructure.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;

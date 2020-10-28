@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ISPH.Infrastructure.Repositories.Interfaces
+namespace ISPH.Core.Interfaces.Repositories
 {
     public interface IArticlesRepository : IEntityRepository<Article>
     {

@@ -1,12 +1,12 @@
 ﻿using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories.Interfaces;
 using ISPH.Infrastructure.Repositories.Services;
 using Microsoft.EntityFrameworkCore;
-using System;
+using ISPH.Core.Interfaces.Repositories;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ISPH.Core.Interfaces.Authentification;
 
 namespace ISPH.Infrastructure.Repositories
 {

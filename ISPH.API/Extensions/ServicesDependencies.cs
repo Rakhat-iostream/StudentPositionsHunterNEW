@@ -1,7 +1,8 @@
 ﻿using ISPH.Core.Models;
 using ISPH.Infrastructure.Repositories;
-using ISPH.Infrastructure.Repositories.Interfaces;
+using ISPH.Core.Interfaces.Repositories;
 using Microsoft.Extensions.DependencyInjection;
+using ISPH.Core.Interfaces.Authentification;
 
 namespace ISPH.API
 {

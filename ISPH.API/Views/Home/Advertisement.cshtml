@@ -113,8 +113,8 @@
                 $.get(
                     '/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/resume'
                 ).done(function (data) {
-                    alert(JSON.stringify(data));
-                    resume = data;
+                    if (data === undefined) resume = null;
+                    else resume = data;
                 });
             }
             const hubConnection = new signalR.HubConnectionBuilder()
@@ -122,8 +122,8 @@
                 .build();
             // получение сообщения от сервера
             hubConnection.on('Send', function (message, userName) {
-                console.log(message + " " + userName);
-                $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
+                    console.log(message + " " + userName);
+                    $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
             });
             hubConnection.on('SendResume', function (url) {
                 $.get(

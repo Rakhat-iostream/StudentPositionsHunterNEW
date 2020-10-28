@@ -189,7 +189,6 @@
                         };
                         $('#changepass-form').show();
                         $('#changepass-form').submit(function (e) {
-                            e.preventDefault();
                             userdto.Password = $('input[name="changepass"]').val();
                             $.ajax({
                                 method: "PUT",
@@ -201,8 +200,7 @@
                                 data: JSON.stringify(userdto),
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {
-                                    $('#changepass-form').hide();
-                                    $('#changepassinfo').html("<span style='color: mediumspringgreen;'>Password updated successfully</span>");
+                                    location.reload();
                                 },
                                 error: function (data) {
                                     $('#changepassinfo').html("<span style='color: crimson;'>Failed to update password</span>");
@@ -222,7 +220,6 @@
                         };
                         $('#changeemail-form').show();
                         $('#changeemail-form').submit(function (e) {
-                            e.preventDefault();
                             userdto.Email = $('input[name="changeemail"]').val();
                             $.ajax({
                                 method: "PUT",
@@ -234,8 +231,7 @@
                                 data: JSON.stringify(userdto),
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {
-                                    $('#changeemail-form').hide();
-                                    $('#changeemailinfo').html("<span style='color: mediumspringgreen;'>Email updated successfully</span>");
+                                    location.reload();
                                 },
                                 error: function (data) {
                                     alert(JSON.stringify(data));
@@ -275,7 +271,7 @@
                                 data: JSON.stringify(employerdto),
                                 contentType: "application/json; charset=utf-8",
                                 success: function (data) {
-                                   window.location.reload();
+                                   location.reload();
                                 },
                                 error: function (data) {
                                     alert(JSON.stringify(data));

@@ -12,8 +12,6 @@ using Microsoft.AspNetCore.Http;
 using System;
 using ISPH.Infrastructure;
 using ISPH.Infrastructure.Hubs;
-using System.IO;
-using Microsoft.Extensions.FileProviders;
 using ISPH.Infrastructure.Data;
 
 namespace ISPH.API
@@ -37,6 +35,13 @@ namespace ISPH.API
             );
             services.AddDbContext<EntityContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRepositories();
+            services.AddSession(options =>
+            {
+                options.Cookie.Name = "ISPH.Session";
+                options.IdleTimeout = TimeSpan.FromMinutes(60);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.SaveToken = true;
@@ -52,13 +57,6 @@ namespace ISPH.API
                 };
             }); 
             services.AddDistributedMemoryCache();
-            services.AddSession(options =>
-            {
-                options.Cookie.Name = "ISPH.Session";
-                options.IdleTimeout = TimeSpan.FromMinutes(60);
-                options.Cookie.HttpOnly = true;
-                options.Cookie.IsEssential = true;
-            });
             services.AddSignalR();
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
@@ -79,8 +77,8 @@ namespace ISPH.API
             app.UseSession();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllers();
+                endpoints.MapHub<ChatHub>("/chat");
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");

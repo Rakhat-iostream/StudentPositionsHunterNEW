@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
 using ISPH.Infrastructure;
-using ISPH.Infrastructure.Repositories.Interfaces;
+using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 

@@ -3,9 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories.Interfaces;
+using ISPH.Core.Interfaces.Repositories;
 using ISPH.Infrastructure.Repositories.Services;
 using Microsoft.EntityFrameworkCore;
+using ISPH.Core.Interfaces.Authentification;
 
 namespace ISPH.Infrastructure.Repositories
 {

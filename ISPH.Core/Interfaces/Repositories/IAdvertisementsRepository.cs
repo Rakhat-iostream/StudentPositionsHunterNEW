@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ISPH.Infrastructure.Repositories.Interfaces
+namespace ISPH.Core.Interfaces.Repositories
 {
     public interface IAdvertisementsRepository : IEntityRepository<Advertisement>
     {

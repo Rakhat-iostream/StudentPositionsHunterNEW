@@ -2,8 +2,7 @@
 using System.Threading.Tasks;
 using ISPH.Core.DTO;
 using ISPH.Core.Models;
-using ISPH.Infrastructure.Repositories;
-using ISPH.Infrastructure.Repositories.Interfaces;
+using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 

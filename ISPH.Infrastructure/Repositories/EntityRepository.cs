@@ -1,10 +1,8 @@
 ﻿using ISPH.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
+using ISPH.Core.Interfaces.Repositories;
 namespace ISPH.Infrastructure.Repositories
 {
    public abstract class EntityRepository<T> : IEntityRepository<T> where T : class
