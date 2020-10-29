@@ -122,8 +122,8 @@
                 .build();
             // получение сообщения от сервера
             hubConnection.on('Send', function (message, userName) {
-                    console.log(message + " " + userName);
-                    $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
+                console.log(message + " " + userName);
+                $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
             });
             hubConnection.on('SendResume', function (url) {
                 $.get(
@@ -139,7 +139,7 @@
             });
             $("#sendResumeBtn").click(function (e) {
                 if (resume === null) {
-                    $('#resumeerror').html("Sorry, but you don't have your resume uploaded in profile");
+                    $('.chaterror').html("Sorry, but you don't have your resume uploaded in profile");
                 }
                 else {
                     let url = "/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/resume";
@@ -147,6 +147,10 @@
                 }
             });
             hubConnection.start();
+        } else {
+            $("#sendBtn").click(function() {
+                $('.chaterror').html("Вы должны войти в систему");
+            });
         }
     });
 </script>
@@ -211,8 +215,9 @@
             @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
             {
                 <button type="button" id="sendResumeBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить резюме</button>
-                <h3 id="resumeerror" style="color: crimson; margin-left: 20px; margin-top: 20px"></h3>
+
             }
+            <h3 class="chaterror" style="color: crimson; margin-left: 20px; margin-top: 20px"></h3>
         </div>
     </div>
 </div>

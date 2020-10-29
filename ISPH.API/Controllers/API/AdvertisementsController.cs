@@ -59,6 +59,8 @@ namespace ISPH.API.Controllers
         [AllowAnonymous]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsForSearchValue(string name)
         {
+            name = name.ToLower();
+            name = char.ToUpper(name[0]) + name.Substring(1);
             var ads = await _repos.GetAll();
             var filtered = ads.Where(ad => ad.PositionName.Contains(name) || ad.Employer.CompanyName.Contains(name));
             return _mapper.Map<IList<AdvertisementDTO>>(filtered);

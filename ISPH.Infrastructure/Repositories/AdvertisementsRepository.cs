@@ -52,13 +52,13 @@ namespace ISPH.Infrastructure.Repositories
 
         public async Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerid)
         {
-            return await _context.Advertisements.AsQueryable().
-                 Where(adv => adv.EmployerId == employerid).Include(adv => adv.Employer).ToListAsync();
+            return await _context.Advertisements.AsQueryable()
+                 .Include(adv => adv.Employer).Where(adv => adv.EmployerId == employerid).ToListAsync();
         }
 
         public async Task<IList<Advertisement>> GetAdvertisementsForPosition(int positionId)
         {
-            return await _context.Advertisements.AsQueryable().Where(adv => adv.PositionId == positionId).ToListAsync();
+            return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).Where(adv => adv.PositionId == positionId).ToListAsync();
         }
 
         public async Task<IList<Advertisement>> GetAdvertisementsForCompany(int companyId)

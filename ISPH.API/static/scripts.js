@@ -82,10 +82,12 @@ function findInfo(url, target) {
             let ads = data;
             $('.advertisements-fromform').empty();
             if (ads.length == 0) $('.advertisements-fromform').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, we could not find any advertisements related to "' + target + '"</h1>');
-            
-            for (let i = 0; i < data.length; i++) {
-                $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
-                    '<h3>Salary: ' + ads[i].salary + ' KZT</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+            else {
+                $('.advertisements-fromform').append('<h3 style="color: black;">You entered: <span style="color: crimson !important; font-weight: bold;">' + target + '</span></h3>');
+                for (let i = 0; i < data.length; i++) {
+                    $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
+                        '<h3>Salary: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+                }
             }
         });
 }

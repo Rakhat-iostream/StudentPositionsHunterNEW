@@ -8,7 +8,7 @@
             let ads = data;
             for (let i = 0; i < data.length; i++) {
                 $('.advertisementscom').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
-                    '<h3>Зарплата: ' + ads[i].salary + ' KZT</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Узнать больше...</a></div>');
+                    '<h3>Зарплата: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Компания: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Узнать больше...</a></div>');
             }
         });
     });
