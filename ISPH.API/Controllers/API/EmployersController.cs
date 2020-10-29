@@ -6,6 +6,7 @@ using ISPH.Core.Models;
 using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ISPH.Infrastructure;
 
 namespace ISPH.API.Controllers
 {
@@ -20,16 +21,10 @@ namespace ISPH.API.Controllers
             _repos = repos;
         }
         [HttpGet]
-        public async Task<IList<EmployerDTO>> GetAllEmployersAsync()
+        [Authorize(Roles =RoleType.Admin)]
+        public async Task<IList<Employer>> GetAllEmployersAsync()
         {
-            return (await _repos.GetAll()).Select(emp => new EmployerDTO()
-            {
-                FirstName = emp.FirstName,
-                LastName = emp.LastName,
-                Email = emp.Email,
-                CompanyName = emp.CompanyName,
-                ID = emp.EmployerId
-            }).ToList();
+            return await _repos.GetAll();
         }
         [HttpGet("id={id}")]
         [AllowAnonymous]

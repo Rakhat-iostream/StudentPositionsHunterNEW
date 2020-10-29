@@ -21,9 +21,5 @@ namespace ISPH.Core.Models
         public Company Company { get; set; }
         public IList<Advertisement> Advertisements { get; set; }
 
-        public override string ToString()
-        {
-            return $"ID: {EmployerId}, Name: {FirstName}, Company: {CompanyName}";
-        }
     }
 }

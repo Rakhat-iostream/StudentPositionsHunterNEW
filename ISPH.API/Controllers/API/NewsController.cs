@@ -8,6 +8,7 @@ using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
 
 namespace ISPH.API.Controllers
 {
@@ -17,26 +18,29 @@ namespace ISPH.API.Controllers
     {
         private readonly INewsRepository _repos;
         private readonly IWebHostEnvironment _env;
-        public NewsController(INewsRepository repos, IWebHostEnvironment env)
+        private readonly IMapper _mapper;
+        public NewsController(INewsRepository repos, IWebHostEnvironment env, IMapper mapper)
         {
             _repos = repos;
             _env = env;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<News>> GetAllNewsAsync()
+        public async Task<IList<NewsDTO>> GetAllNewsAsync()
         {
-            return await _repos.GetAll();
+            var news = await _repos.GetAll();
+            return _mapper.Map<IList<NewsDTO>>(news);
         }
 
         [HttpGet("id={id}")]
-        public async Task<News> GetNewsByIdAsync(int id)
+        public async Task<NewsDTO> GetNewsByIdAsync(int id)
         {
-            return await _repos.GetById(id);
+            var news = await _repos.GetById(id);
+            return _mapper.Map<NewsDTO>(news);
         }
 
         [HttpPost("add")]
-       // [Authorize(Roles = RoleType.Admin)]
         public async Task<IActionResult> AddNewsAsync([FromForm] NewsDTO newsDTO)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");

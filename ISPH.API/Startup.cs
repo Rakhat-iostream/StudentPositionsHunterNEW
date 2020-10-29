@@ -10,9 +10,11 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using System;
+using AutoMapper;
 using ISPH.Infrastructure;
 using ISPH.Infrastructure.Hubs;
 using ISPH.Infrastructure.Data;
+using ISPH.Core.Helpers;
 
 namespace ISPH.API
 {
@@ -58,6 +60,7 @@ namespace ISPH.API
             }); 
             services.AddDistributedMemoryCache();
             services.AddSignalR();
+            services.AddAutoMapper(typeof(AutoMapperProfiles));
             services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
             services.AddControllersWithViews();
         }

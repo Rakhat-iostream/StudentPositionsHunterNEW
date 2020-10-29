@@ -5,6 +5,7 @@ using ISPH.Core.Models;
 using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace ISPH.API.Controllers.API
 {
@@ -13,21 +14,25 @@ namespace ISPH.API.Controllers.API
     public class PositionsController : ControllerBase
     {
         private readonly IPositionsRepository _repos;
-        public PositionsController(IPositionsRepository repos)
+        private readonly IMapper _mapper;
+        public PositionsController(IPositionsRepository repos, IMapper mapper)
         {
             _repos = repos;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<Position>> GetAllPositionsAsync()
+        public async Task<IList<PositionDTO>> GetAllPositionsAsync()
         {
-            return await _repos.GetAll();
+            var positions = await _repos.GetAll();
+            return _mapper.Map<IList<PositionDTO>>(positions);
         }
 
         [HttpGet("id={id}")]
-        public async Task<Position> GetPositionByIdAsync(int id)
+        public async Task<PositionDTO> GetPositionByIdAsync(int id)
         {
-            return await _repos.GetById(id);
+            var pos = await _repos.GetById(id);
+            return _mapper.Map<PositionDTO>(pos);
         }
 
         [HttpPost("add")]
@@ -58,7 +63,7 @@ namespace ISPH.API.Controllers.API
         [HttpDelete("id={id}/delete")]
         public async Task<IActionResult> DeletePositionAsync(int id)
         {
-            Position position = await GetPositionByIdAsync(id);
+            Position position = await _repos.GetById(id);
             if (position == null) return BadRequest("This position is already deleted");
             if (await _repos.Delete(position)) return Ok("Deleted position");
             return BadRequest("Failed to delete position");

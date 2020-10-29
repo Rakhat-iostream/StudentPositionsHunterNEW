@@ -5,6 +5,8 @@ using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using AutoMapper;
+using ISPH.Core.DTO;
 
 namespace ISPH.API.Controllers
 {
@@ -14,10 +16,12 @@ namespace ISPH.API.Controllers
     {
         private readonly IResumesRepository _repos;
         private readonly IWebHostEnvironment _env;
-        public ResumesController(IResumesRepository repos, IWebHostEnvironment environment)
+        private readonly IMapper _mapper;
+        public ResumesController(IResumesRepository repos, IWebHostEnvironment environment, IMapper mapper)
         {
             _repos = repos;
             _env = environment;
+            _mapper = mapper;
         }
 
         
@@ -43,9 +47,10 @@ namespace ISPH.API.Controllers
         }
 
         [HttpGet]
-        public async Task<Resume> GetResumeByStudentId(int id)
+        public async Task<ResumeDTO> GetResumeByStudentId(int id)
         {
-            return await _repos.GetById(id);
+            var resume = await _repos.GetById(id);
+            return _mapper.Map<ResumeDTO>(resume);
         }
 
         [HttpPost]

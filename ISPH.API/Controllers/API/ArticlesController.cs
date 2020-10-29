@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using AutoMapper;
 
 namespace ISPH.API.Controllers
 {
@@ -18,22 +19,27 @@ namespace ISPH.API.Controllers
     {
         private readonly IArticlesRepository _repos;
         private readonly IWebHostEnvironment _env;
-        public ArticlesController(IArticlesRepository repos, IWebHostEnvironment env)
+        private readonly IMapper _mapper;
+        public ArticlesController(IArticlesRepository repos, IWebHostEnvironment env, IMapper mapper)
         {
             _repos = repos;
             _env = env;
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<IList<Article>> GetAllArticles()
+        public async Task<IList<ArticleDTO>> GetAllArticles()
         {
-            return await _repos.GetAll();
+            var arts = await _repos.GetAll();
+            return _mapper.Map<IList<ArticleDTO>>(arts);
         }
 
         [HttpGet("id={id}")]
-        public async Task<Article> GetArticleById(int id)
+        public async Task<ArticleDTO> GetArticleById(int id)
         {
-            return await _repos.GetById(id);
+            var art = await _repos.GetById(id);
+
+            return _mapper.Map<ArticleDTO>(art);
         }
 
         [HttpPost("add")]
