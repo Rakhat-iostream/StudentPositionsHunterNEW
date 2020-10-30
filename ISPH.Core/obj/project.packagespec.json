@@ -30,13 +30,15 @@
   "frameworks": {
     "netstandard2.0": {
       "dependencies": {
-        "Microsoft.EntityFrameworkCore": {
+        "AutoMapper": {
           "target": "Package",
-          "version": "[3.1.9, )"
+          "version": "[10.1.1, )"
         },
-        "Microsoft.EntityFrameworkCore.Tools": {
-          "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
-          "suppressParent": "All",
+        "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+          "target": "Package",
+          "version": "[8.1.0, )"
+        },
+        "Microsoft.AspNetCore.Http.Features": {
           "target": "Package",
           "version": "[3.1.9, )"
         },
@@ -45,6 +47,10 @@
           "target": "Package",
           "version": "[2.0.3, )",
           "autoReferenced": true
+        },
+        "System.ComponentModel.Annotations": {
+          "target": "Package",
+          "version": "[4.7.0, )"
         }
       },
       "imports": [

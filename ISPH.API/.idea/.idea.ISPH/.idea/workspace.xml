@@ -28,8 +28,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="39f3324b-c5fd-49d7-b422-641b1ee68d94" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/contentModel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.vs/ISPH/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ISPH/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ISPH/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ISPH/v16/.suo" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/project.packagespec.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,6 +51,7 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/Startup.cs" />
+        <option value="$PROJECT_DIR$/Controllers/API/AdvertisementsController.cs" />
       </list>
     </option>
   </component>
@@ -99,6 +108,7 @@
       <option name="presentableId" value="Default" />
       <updated>1603554443373</updated>
       <workItem from="1603554448929" duration="333000" />
+      <workItem from="1604028544504" duration="126000" />
     </task>
     <servers />
   </component>
@@ -115,6 +125,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />

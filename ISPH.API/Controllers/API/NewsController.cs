@@ -74,7 +74,7 @@ namespace ISPH.API.Controllers
             news.PublishDate = newsDTO.PublishDate.GetValueOrDefault();
             news.Description = newsDTO.Description;
 
-            if (_repos.Update(news)) return Ok("/home/index");
+            if (await _repos.Update(news)) return Ok("/home/index");
             return BadRequest("Failed to update news");
         }
 

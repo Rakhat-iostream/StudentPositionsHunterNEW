@@ -82,7 +82,6 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\appsettings.Dev
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\appsettings.json
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\libman.json
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Properties\launchSettings.json
-C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\NLog.config
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\ISPH.API.exe
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\ISPH.API.deps.json
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\ISPH.API.runtimeconfig.json
@@ -117,7 +116,6 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.Ident
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.IdentityModel.Tokens.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Newtonsoft.Json.Bson.dll
-C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\NLog.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Npgsql.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Npgsql.EntityFrameworkCore.PostgreSQL.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\System.Collections.Immutable.dll
@@ -156,7 +154,6 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.pdb
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.genruntimeconfig.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdvertisementsForCom.cshtml.g.cs
-C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll

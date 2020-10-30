@@ -42,7 +42,7 @@ namespace ISPH.API.Controllers
                 if (await _repos.HasEntity(employer))
                 {
                     employer.Email = em.Email;
-                    if ( _repos.Update(employer)) return Ok("Updated employer");
+                    if (await _repos.Update(employer)) return Ok("Updated employer");
                     return BadRequest("Failed to update employer");
                 }
             return BadRequest("This employer is not in database");

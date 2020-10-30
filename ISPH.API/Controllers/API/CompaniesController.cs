@@ -57,7 +57,7 @@ namespace ISPH.API.Controllers
             Company company = await _repos.GetById(id);
             if (!(await _repos.HasEntity(company))) return BadRequest("Company is not in in database");
             company.Name = com.Name;
-            if (_repos.Update(company)) return Ok("Updated company");
+            if (await _repos.Update(company)) return Ok("Updated company");
             return BadRequest("Failed to add company");
         }
 

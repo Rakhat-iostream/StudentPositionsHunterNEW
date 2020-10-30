@@ -7,8 +7,6 @@ using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using NLog;
 
 namespace ISPH.API.Controllers
 {
@@ -107,7 +105,7 @@ namespace ISPH.API.Controllers
                 ad.Description = advertisement.Description;
                 ad.Salary = advertisement.Salary.GetValueOrDefault();
                 ad.PositionName = advertisement.PositionName;
-                if (_repos.Update(ad)) return Ok("Updated ads");
+                if (await _repos.Update(ad)) return Ok("Updated ads");
             }
             return BadRequest("This ads is not in database");
         }

@@ -77,7 +77,7 @@ namespace ISPH.API.Controllers
              article.Title = art.Title;
              article.PublishDate = art.PublishDate;
              article.Description = art.Description;
-            if (_repos.Update(article)) return LocalRedirect("/home/index");
+            if (await _repos.Update(article)) return LocalRedirect("/home/index");
 
             return BadRequest("Failed to update article");
         }

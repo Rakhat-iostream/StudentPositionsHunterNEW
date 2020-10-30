@@ -41,7 +41,7 @@ namespace ISPH.API.Controllers
                 if (student != null)
                 {
                     student.Email = st.Email;
-                        if ( _repos.Update(student)) return Ok("Updated student");
+                        if (await _repos.Update(student)) return Ok("Updated student");
                         
                     return BadRequest("Failed to update student");
                 }

@@ -36,10 +36,10 @@ namespace ISPH.Infrastructure.Repositories
 
         public abstract Task<bool> HasEntity(T entity);
 
-        public virtual bool Update(T entity)
+        public virtual async Task<bool> Update(T entity)
         {
             _context.Set<T>().Update(entity);
-            return _context.SaveChanges() > 0;
+            return await _context.SaveChangesAsync() > 0;
         }
     }
 }
