@@ -21,6 +21,7 @@ namespace ISPH.API
             services.AddScoped<ICompanyRepository, CompaniesRepository>();
             services.AddScoped<IPositionsRepository, PositionsRepository>();
             services.AddScoped<IResumesRepository, ResumesRepository>();
+            services.AddScoped<IFavouritesRepository, FavouritesRepository>();
         }
     }
 }

@@ -18,6 +18,20 @@
         let userName = '@HttpContextAccessor.HttpContext.Session.GetString("Name")';
         let role = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
         let id = '@HttpContextAccessor.HttpContext.Session.GetInt32("Id")';
+        if (role !== null) {
+            let fav = '/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/favourites/ad=' + ad.advertisementId;
+            $.get(
+                fav
+            ).done(function (data) {
+                if (data === undefined) {
+                    $('.favourites').append('<form action="' + fav + '/add" method="post">' +
+                        '<button type="submit" class="hoverbtn signout" style="background-color: mediumspringgreen">Добавить в избранное</button></form>');
+                } else {
+                    $('.favourites').append('<form action="' + fav + '/delete" method="post">' +
+                '<button type="submit" class="hoverbtn signout" style="background-color: crimson">Удалить из избранного</button></form>');
+                }
+            });
+        }
         if (id > 0) {
             $.get(
                 '/users/employers/id=' + id
@@ -196,28 +210,32 @@
     }
 </style>
 <div class="adsblock">
-    <h1 class="adstitle" style="margin: 20px 0;"></h1>
-    <div class="adssalary" style="margin: 20px 0;"></div>
-    <div class="adscompany" style="margin: 20px 0;"></div>
-    <div class="adsinfo" style="margin: 20px 0; color: white;">
-    </div>
-    <ul class="contact-list" style="margin: 20px 0;">
-        <h2 class="contact-title">Контакты:</h2>
-        <li class="contact-name"></li>
-        <li class="contact-email"></li>
-    </ul>
-    <div class="chat">
-        <h4>Написать</h4>
-        <div id="chatroom" style="border: 2px solid black; padding: 20px; max-width: 50%; margin: 20px; background: white; color: black;"></div>
-        <div id="inputForm" style="margin-bottom: 30px">
-            <textarea placeholder="Введите здесь сообщение..." type="text" id="message" style="background: black; border: none; color: white; padding: 15px; font-size: 18px;"></textarea>
-            <button type="button" id="sendBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить</button>
-            @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
-            {
-                <button type="button" id="sendResumeBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить резюме</button>
+        @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
+        {
+            <h1 class="favourites"></h1>
+        }
+        <h1 class="adstitle" style="margin: 20px 0;"></h1>
+        <div class="adssalary" style="margin: 20px 0;"></div>
+        <div class="adscompany" style="margin: 20px 0;"></div>
+        <div class="adsinfo" style="margin: 20px 0; color: white;">
+        </div>
+        <ul class="contact-list" style="margin: 20px 0;">
+            <h2 class="contact-title">Контакты:</h2>
+            <li class="contact-name"></li>
+            <li class="contact-email"></li>
+        </ul>
+        <div class="chat">
+            <h4>Написать</h4>
+            <div id="chatroom" style="border: 2px solid black; padding: 20px; max-width: 50%; margin: 20px; background: white; color: black;"></div>
+            <div id="inputForm" style="margin-bottom: 30px">
+                <textarea placeholder="Введите здесь сообщение..." type="text" id="message" style="background: black; border: none; color: white; padding: 15px; font-size: 18px;"></textarea>
+                <button type="button" id="sendBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить</button>
+                @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
+                {
+                    <button type="button" id="sendResumeBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить резюме</button>
 
-            }
-            <h3 class="chaterror" style="color: crimson; margin-left: 20px; margin-top: 20px"></h3>
+                }
+                <h3 class="chaterror" style="color: crimson; margin-left: 20px; margin-top: 20px"></h3>
+            </div>
         </div>
     </div>
-</div>

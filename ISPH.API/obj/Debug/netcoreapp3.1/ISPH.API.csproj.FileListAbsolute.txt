@@ -154,9 +154,10 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.pdb
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.genruntimeconfig.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\Razor\Views\Home\AdvertisementsForCom.cshtml.g.cs
-C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.csproj.CoreCompileInputs.cache
-C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Http.Features.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\System.IO.Pipelines.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
+C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.csproj.CoreCompileInputs.cache
+C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.MvcApplicationPartsAssemblyInfo.cache

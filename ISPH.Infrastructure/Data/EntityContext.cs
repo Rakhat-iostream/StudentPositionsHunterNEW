@@ -15,6 +15,7 @@ namespace ISPH.Infrastructure.Data
         public DbSet<Article> Articles { get; set; }
         public DbSet<News> News { get; set; }
         public DbSet<Advertisement> Advertisements { get; set; }
+        public DbSet<FavouriteAdvertisement> Favourites { get; set; }
         public DbSet<Position> Positions { get; set; }
     }
 }

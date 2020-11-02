@@ -6,6 +6,7 @@ using ISPH.Core.DTO;
 using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISPH.API.Controllers

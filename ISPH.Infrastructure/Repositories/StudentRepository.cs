@@ -69,5 +69,6 @@ namespace ISPH.Infrastructure.Repositories
         {
             return await _context.Students.AnyAsync(st => st.Email == user.Email);
         }
+
     }
 }

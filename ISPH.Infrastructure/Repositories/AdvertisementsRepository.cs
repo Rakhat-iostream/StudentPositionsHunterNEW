@@ -65,5 +65,7 @@ namespace ISPH.Infrastructure.Repositories
         {
             return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).Where(adv => adv.Employer.CompanyId == companyId).ToListAsync();
         }
+
+        
     }
 }
