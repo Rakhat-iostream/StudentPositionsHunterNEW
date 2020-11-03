@@ -134,10 +134,11 @@
             const hubConnection = new signalR.HubConnectionBuilder()
                 .withUrl("/chat")
                 .build();
-            // получение сообщения от сервера
             hubConnection.on('Send', function (message, userName) {
-                console.log(message + " " + userName);
-                $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
+                if (message.length !== 0) {
+                    $('#chatroom').append("<p><span style='font-weight:bold;'>" + userName + "<span>: " + message + "</p><br>");
+                }
+                
             });
             hubConnection.on('SendResume', function (url) {
                 $.get(
@@ -160,7 +161,9 @@
                     hubConnection.invoke("SendResume", url);
                 }
             });
-            hubConnection.start();
+            hubConnection.start().then(function () {
+                hubConnection.invoke("Send", "", userName, emp.firstName, role);
+            });
         } else {
             $("#sendBtn").click(function() {
                 $('.chaterror').html("Вы должны войти в систему");

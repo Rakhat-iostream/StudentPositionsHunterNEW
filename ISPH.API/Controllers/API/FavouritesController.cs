@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
@@ -15,17 +16,19 @@ namespace ISPH.API.Controllers.API
     public class FavouritesController : ControllerBase
     {
         private readonly IFavouritesRepository _repos;
-        public FavouritesController(IFavouritesRepository repos)
+        private readonly IMapper _mapper;
+        public FavouritesController(IFavouritesRepository repos, IMapper mapper)
         {
             _repos = repos;
+            _mapper = mapper;
         }
 
 
         [HttpGet]
-        public async Task<IList<Advertisement>> GetFavourites(int id)
+        public async Task<IList<AdvertisementDTO>> GetFavourites(int id)
         {
             var favs = await _repos.GetFavourites(id);
-            return favs.Select(fav => fav.Advertisement).ToList();
+            return _mapper.Map<IList<AdvertisementDTO>>(favs.Select(fav => fav.Advertisement));
         }
 
 
