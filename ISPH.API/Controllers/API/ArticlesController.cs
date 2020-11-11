@@ -38,7 +38,6 @@ namespace ISPH.API.Controllers
         public async Task<ArticleDTO> GetArticleById(int id)
         {
             var art = await _repos.GetById(id);
-
             return _mapper.Map<ArticleDTO>(art);
         }
 
@@ -73,7 +72,6 @@ namespace ISPH.API.Controllers
 
             Article article = await _repos.GetById(id);
             if (article == null) return BadRequest("This article doesn't exist");
-
              article.Title = art.Title;
              article.PublishDate = art.PublishDate;
              article.Description = art.Description;

@@ -48,7 +48,7 @@ namespace ISPH.API.Controllers
             News news = new News()
             {
                 Title = newsDTO.Title,
-                PublishDate = newsDTO.PublishDate.GetValueOrDefault(),
+                PublishDate = newsDTO.PublishDate.Value,
                 Description = newsDTO.Description,
                 ImagePath = path
             };
@@ -71,7 +71,7 @@ namespace ISPH.API.Controllers
             News news = await _repos.GetById(id);
             if (news == null) return BadRequest("These news doesn't exist");
             news.Title = newsDTO.Title;
-            news.PublishDate = newsDTO.PublishDate.GetValueOrDefault();
+            news.PublishDate = newsDTO.PublishDate.Value;
             news.Description = newsDTO.Description;
 
             if (await _repos.Update(news)) return Ok("/home/index");

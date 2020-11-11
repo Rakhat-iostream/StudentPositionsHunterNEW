@@ -18,7 +18,7 @@ namespace ISPH.Infrastructure.Repositories
 
         public async Task<FavouriteAdvertisement> GetById(int studentId, int adId)
         {
-            return await _context.Favourites.FirstOrDefaultAsync(fav => fav.AdvertisementId == adId && fav.StudentId == studentId);
+            return await _context.Favourites.AsNoTracking().FirstOrDefaultAsync(fav => fav.AdvertisementId == adId && fav.StudentId == studentId);
         }
         public async Task<bool> AddToFavourites(FavouriteAdvertisement ad)
         {

@@ -21,12 +21,7 @@ namespace ISPH.Infrastructure.Repositories
         }
         public override async Task<IList<Article>> GetAll()
         {
-           return await _context.Articles.AsQueryable().OrderBy(article => article.PublishDate).ToListAsync();
-        }
-
-        public override async Task<Article> GetById(int id)
-        {
-            return await _context.Articles.FindAsync(id);
+           return await _context.Articles.AsQueryable().OrderByDescending(article => article.PublishDate).ToListAsync();
         }
     }
 }

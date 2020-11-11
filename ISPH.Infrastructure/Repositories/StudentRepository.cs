@@ -18,7 +18,7 @@ namespace ISPH.Infrastructure.Repositories
         }
         public async Task<Student> GetByEmail(string email)
         {
-            return await _context.Students.FirstOrDefaultAsync(student => student.Email == email);
+            return await _context.Students.AsNoTracking().FirstOrDefaultAsync(student => student.Email == email);
         }
         public override async Task<bool> HasEntity(Student entity)
         {
@@ -32,9 +32,7 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<Student> GetById(int id)
         {
-            var student = await _context.Students.FindAsync(id);
-            student.Resume = await _context.Resumes.FirstOrDefaultAsync(res => res.StudentId == student.StudentId);
-            return student;
+            return await _context.Students.AsNoTracking().Include(st => st.Resume).FirstOrDefaultAsync(st => st.StudentId == id);
         }
 
         public async Task<bool> UpdatePassword(Student student, string password)
@@ -52,13 +50,14 @@ namespace ISPH.Infrastructure.Repositories
             hashService.CreateHashedPassword(password, out byte[] hashedPass, out byte[] SaltPass);
             user.HashedPassword = hashedPass;
             user.SaltPassword = SaltPass;
-            if (await Create(user)) return await GetByEmail(user.Email);
-            return null;
+            _context.Students.Add(user);
+            await _context.SaveChangesAsync();
+            return user;
         }
 
         public async Task<Student> Login(string email, string password)
         {
-            var user = await GetByEmail(email);
+            var user = await _context.Students.FirstOrDefaultAsync(st => st.Email == email);
             if (user != null) {
                 if (hashService.CheckHashedPassword(user, password)) return user;
             }

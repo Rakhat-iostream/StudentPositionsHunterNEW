@@ -54,14 +54,13 @@ namespace ISPH.API.Controllers
             var ads = await _repos.GetAdvertisementsForCompany(id);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
-        [HttpGet("search={name}")]
+        [HttpGet("search={value}")]
         [AllowAnonymous]
-        public async Task<IList<AdvertisementDTO>> GetAdvertisementsForSearchValue(string name)
+        public async Task<IList<AdvertisementDTO>> GetAdvertisementsForSearchValue(string value)
         {
-            name = name.ToLower();
-            name = char.ToUpper(name[0]) + name.Substring(1);
-            var ads = await _repos.GetAll();
-            var filtered = ads.Where(ad => ad.PositionName.Contains(name) || ad.Employer.CompanyName.Contains(name));
+            value = value.ToLower();
+            value = char.ToUpper(value[0]) + value.Substring(1);
+            var filtered = await _repos.GetFilteredAdvertisements(value);
             return _mapper.Map<IList<AdvertisementDTO>>(filtered);
         }
 
@@ -75,7 +74,7 @@ namespace ISPH.API.Controllers
             var advertisement = new Advertisement()
             {
                 Title = adv.Title,
-                Salary = adv.Salary.GetValueOrDefault(),
+                Salary = adv.Salary.Value,
                 Description = adv.Description,
                 PositionName = adv.PositionName,
                 PositionId = pos.PositionId,

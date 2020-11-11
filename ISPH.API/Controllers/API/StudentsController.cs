@@ -23,7 +23,8 @@ namespace ISPH.API.Controllers
         [HttpGet]
         public async Task<IList<StudentDTO>> GetAllStudents()
         {
-            return (await _repos.GetAll()).Select(st => new StudentDTO() { FirstName = st.FirstName, Email = st.Email,
+            var students = await _repos.GetAll();
+            return students.Select(st => new StudentDTO() { FirstName = st.FirstName, Email = st.Email,
                 LastName = st.LastName, ID = st.StudentId }).ToList();
         }
         [HttpGet("id={id}")]
@@ -41,8 +42,7 @@ namespace ISPH.API.Controllers
                 if (student != null)
                 {
                     student.Email = st.Email;
-                        if (await _repos.Update(student)) return Ok("Updated student");
-                        
+                    if (await _repos.Update(student)) return Ok("Updated student");
                     return BadRequest("Failed to update student");
                 }
                 return BadRequest("This student doesn't exist");
@@ -74,5 +74,6 @@ namespace ISPH.API.Controllers
             }
             return BadRequest("Failed to delete student");
         }
+
     }
 }

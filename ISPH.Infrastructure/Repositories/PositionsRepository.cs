@@ -22,16 +22,12 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<Position> GetById(int id)
         {
-            var position = await _context.Positions.FindAsync(id);
-            position.Advertisements = await _context.Advertisements.Where(ads => ads.PositionId == position.PositionId).ToListAsync();
-            return position;
+            return await _context.Positions.AsNoTracking().Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.PositionId == id);
         }
 
         public async Task<Position> GetPositionByName(string name)
         {
-            var position = await _context.Positions.FirstOrDefaultAsync(pos => pos.Name == name);
-            position.Advertisements = await _context.Advertisements.Where(ads => ads.PositionId == position.PositionId).ToListAsync();
-            return position;
+            return await _context.Positions.AsNoTracking().Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.Name == name);
         }
 
         public override async Task<bool> HasEntity(Position entity)

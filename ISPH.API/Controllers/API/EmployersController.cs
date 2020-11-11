@@ -21,7 +21,7 @@ namespace ISPH.API.Controllers
             _repos = repos;
         }
         [HttpGet]
-        [Authorize(Roles =RoleType.Admin)]
+        [Authorize(Roles = RoleType.Admin)]
         public async Task<IList<Employer>> GetAllEmployersAsync()
         {
             return await _repos.GetAll();
@@ -83,8 +83,7 @@ namespace ISPH.API.Controllers
         {
             Employer employer = await _repos.GetById(id);
             if (employer == null) return BadRequest("This employer is already deleted");
-            if(await _repos.Delete(employer))
-            return Ok("Deleted employer");
+            if(await _repos.Delete(employer)) return Ok("Deleted employer");
             return BadRequest("Failed to delete employer");
         }
     }

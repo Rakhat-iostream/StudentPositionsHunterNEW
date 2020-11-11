@@ -41,8 +41,7 @@ namespace ISPH.API.Controllers.API
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Position position = new Position()
             {
-                Name = pos.Name,
-                Amount = 0,
+                Name = pos.Name
             };
             if (await _repos.HasEntity(position)) return BadRequest("Position is already in database");
             if (await _repos.Create(position)) return Ok("Added new position");

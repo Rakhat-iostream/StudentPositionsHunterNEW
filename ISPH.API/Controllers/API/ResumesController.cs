@@ -58,13 +58,17 @@ namespace ISPH.API.Controllers
         {
             var resume = await _repos.GetById(id);
             var path = resume.Path;
-            var memory = new MemoryStream();
-            using(var stream = new FileStream(_env.WebRootPath + path, FileMode.Open))
+            FileStreamResult result;
+            using(var memoryStream = new MemoryStream())
             {
-                await stream.CopyToAsync(memory);
+               using(var stream = new FileStream(_env.WebRootPath + path, FileMode.Open))
+               {
+                   await stream.CopyToAsync(memoryStream);
+               }
+                memoryStream.Position = 0;
+                result = File(memoryStream, "application/pdf", Path.GetFileName(path));
             }
-            memory.Position = 0;
-            return File(memory, "application/pdf", Path.GetFileName(path));
+            return result;
         }
 
 
