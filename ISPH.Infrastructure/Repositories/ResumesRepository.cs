@@ -14,7 +14,7 @@ namespace ISPH.Infrastructure.Repositories
         }
         public async override Task<Resume> GetById(int id)
         {
-            return await _context.Resumes.AsNoTracking().FirstOrDefaultAsync(res => res.StudentId == id);
+            return await _context.Resumes.FirstOrDefaultAsync(res => res.StudentId == id);
         }
 
         public override async Task<bool> HasEntity(Resume resume)

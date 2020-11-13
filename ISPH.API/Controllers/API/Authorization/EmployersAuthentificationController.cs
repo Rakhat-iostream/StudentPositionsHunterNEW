@@ -37,7 +37,7 @@ namespace ISPH.API.Controllers.API.Auth
                 FirstName = em.FirstName,
                 LastName = em.LastName,
                 Email = em.Email,
-                Role = "user",
+                Role = "employer",
                 CompanyName = em.CompanyName
             };
             var company = await _companyRepos.GetCompanyByName(em.CompanyName);
@@ -54,6 +54,7 @@ namespace ISPH.API.Controllers.API.Auth
             HttpContext.Session.SetInt32("Id", employer.EmployerId);
             HttpContext.Session.SetString("Name", employer.FirstName);
             HttpContext.Session.SetString("Company", employer.CompanyName);
+            HttpContext.Session.SetString("Role", employer.Role);
             return Ok(new { token = token, name = identityName });
         }
 
@@ -68,6 +69,7 @@ namespace ISPH.API.Controllers.API.Auth
             HttpContext.Session.SetInt32("Id", int.Parse(employer.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier).Value));
             HttpContext.Session.SetString("Name", employer.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Name).Value);
             HttpContext.Session.SetString("Company", employer.Claims.SingleOrDefault(c => c.Type == ClaimTypes.UserData).Value);
+            HttpContext.Session.SetString("Role", employer.Claims.SingleOrDefault(c => c.Type == ClaimTypes.Role).Value);
             return Ok(new { token = token, name = identityName });
         }
 

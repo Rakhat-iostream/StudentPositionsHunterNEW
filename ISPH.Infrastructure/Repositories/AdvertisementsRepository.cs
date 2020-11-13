@@ -41,9 +41,14 @@ namespace ISPH.Infrastructure.Repositories
                 OrderBy(adv => adv.AdvertisementId).ToListAsync();
         }
 
+        public async Task<IList<Advertisement>> GetAdvertisementsAmount(int amount)
+        {
+            return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).OrderBy(adv => adv.Title).Take(amount).ToListAsync();
+        }
+
         public override async Task<Advertisement> GetById(int id)
         {
-            return await _context.Advertisements.AsNoTracking().Include(adv => adv.Employer).FirstOrDefaultAsync(adv => adv.AdvertisementId == id);
+            return await _context.Advertisements.Include(adv => adv.Employer).FirstOrDefaultAsync(adv => adv.AdvertisementId == id);
         }
 
 
@@ -67,9 +72,16 @@ namespace ISPH.Infrastructure.Repositories
 
         public async Task<IList<Advertisement>> GetFilteredAdvertisements(string value)
         {
-            var adsPos = _context.Advertisements.Where(adv => adv.PositionName == value);
-            var adsCom = _context.Advertisements.Where(adv => adv.Employer.CompanyName == value);
-            return await adsPos.Union(adsCom).Include(adv => adv.Employer).Include(adv => adv.Position).ToListAsync();
+            /*var adsPos = _context.Advertisements.Where(adv => EF.Functions.Like(adv.PositionName, "%" + value + "%"));
+            var adsCom = _context.Advertisements.Where(adv => EF.Functions.Like(adv.Employer.CompanyName, "%" + value + "%"));
+            */
+            string sql = string.Format("SELECT a.\"AdvertisementId\", e.\"EmployerId\", a.\"Title\", a.\"PositionId\"," +
+                " a.\"Salary\", a.\"Description\", a.\"PositionName\", e.\"CompanyId\", e.\"CompanyName\"" +
+               " FROM \"Advertisements\" a INNER JOIN \"Employers\" e ON a.\"EmployerId\" = e.\"EmployerId\" WHERE " +
+                "a.\"PositionName\" LIKE '%{0}%' OR e.\"CompanyName\" LIKE '%{0}%' ORDER BY a.\"Title\"", value);
+           return await _context.Advertisements.
+                FromSqlRaw(sql).Include(adv => adv.Employer).ToListAsync();
+            //return await adsPos.Union(adsCom).Include(adv => adv.Employer).Include(adv => adv.Position).ToListAsync();
         }
     }
 }

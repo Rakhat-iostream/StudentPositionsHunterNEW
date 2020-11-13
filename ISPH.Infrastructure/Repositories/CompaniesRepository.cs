@@ -28,7 +28,7 @@ namespace ISPH.Infrastructure.Repositories
 
         public async Task<Company> GetCompanyByName(string name)
         {
-            return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(company => company.Name == name);
+            return await _context.Companies.FirstOrDefaultAsync(company => company.Name == name);
         }
     }
 }

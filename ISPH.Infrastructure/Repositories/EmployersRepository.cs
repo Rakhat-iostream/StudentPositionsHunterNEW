@@ -24,7 +24,7 @@ namespace ISPH.Infrastructure.Repositories
         }
         public override async Task<Employer> GetById(int id)
         {
-            return await _context.Employers.AsNoTracking().Include(emp => emp.Advertisements).FirstOrDefaultAsync(adv => adv.EmployerId == id);
+            return await _context.Employers.Include(emp => emp.Advertisements).FirstOrDefaultAsync(adv => adv.EmployerId == id);
         }
         public override async Task<bool> HasEntity(Employer entity)
         {

@@ -7,10 +7,10 @@ using ISPH.Infrastructure;
 using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ISPH.Infrastructure.Configuration;
 
 namespace ISPH.API.Controllers
 {
-    [Authorize]
     [Route("users/[controller]/")]
     [ApiController]
     public class StudentsController : ControllerBase
@@ -21,6 +21,7 @@ namespace ISPH.API.Controllers
             _repos = repos;
         }
         [HttpGet]
+        [Authorize(Roles = RoleType.Admin)]
         public async Task<IList<StudentDTO>> GetAllStudents()
         {
             var students = await _repos.GetAll();
@@ -35,6 +36,7 @@ namespace ISPH.API.Controllers
         
 
         [HttpPut("id={id}/update/email")]
+        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> UpdateStudentEmailAsync(StudentDTO st, int id)
         {
             if(!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -49,6 +51,7 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPut("id={id}/update/password")]
+        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> UpdateStudentPasswordAsync(StudentDTO st, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");

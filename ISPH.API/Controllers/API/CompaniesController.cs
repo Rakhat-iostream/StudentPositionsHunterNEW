@@ -9,10 +9,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using ISPH.Infrastructure.Configuration;
 
 namespace ISPH.API.Controllers
 {
     [Route("[controller]/")]
+    [Authorize(Roles = RoleType.Admin)]
     [ApiController]
     public class CompaniesController : ControllerBase
     {
@@ -25,6 +27,7 @@ namespace ISPH.API.Controllers
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IList<CompanyDTO>> GetAllCompanies()
         {
             var companies = await _repos.GetAll();
@@ -32,6 +35,7 @@ namespace ISPH.API.Controllers
         }
 
         [HttpGet("id={id}")]
+        [AllowAnonymous]
         public async Task<CompanyDTO> GetCompanyByIdAsync(int id)
         {
             var com = await _repos.GetById(id);
@@ -39,7 +43,6 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPost("add")]
-        [Authorize(Roles = RoleType.Admin)]
         public async Task<IActionResult> AddCompanyAsync(CompanyDTO com)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -50,7 +53,6 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPut("id={id}/update")]
-        [Authorize(Roles = RoleType.Admin)]
         public async Task<IActionResult> UpdateCompanyAsync(CompanyDTO com, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -62,7 +64,6 @@ namespace ISPH.API.Controllers
         }
 
         [HttpDelete("id={id}/delete")]
-        [Authorize(Roles = RoleType.Admin)]
         public async Task<IActionResult> DeleteCompanyAsync(int id)
         {
             Company company = await _repos.GetById(id);

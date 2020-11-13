@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
+using ISPH.Infrastructure.Configuration;
 
 namespace ISPH.API.Controllers
 {

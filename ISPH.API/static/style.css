@@ -787,3 +787,52 @@ select::-ms-expand {
         width: 100%;
     }
 }
+
+
+
+.advertisements {
+    font-family: Bahnschrift, Arial, Helvetica, sans-serif;
+}
+
+    .advertisements .advertisement {
+        margin: 40px 0;
+        background: rgba(0,0,0,0.8);
+        border: 2px solid black;
+        padding: 20px;
+        color: white;
+    }
+
+    .advertisements h1 {
+        border-bottom: 2px solid crimson;
+        padding-bottom: 10px;
+        margin: 20px 0;
+        font-size: 2em;
+    }
+
+    .advertisements h3 {
+        color: dodgerblue;
+        margin: 20px 0;
+    }
+
+    .advertisements a {
+        background-color: dodgerblue;
+        border: 2px solid white;
+        padding: 10px 20px;
+        text-decoration: none;
+        color: white;
+        border: 2px solid black;
+    }
+
+        .advertisements a:hover {
+            color: black;
+            background-color: mediumspringgreen;
+        }
+
+        .firstads{
+            background: rgba(0,0,0, 1);
+            padding: 0 30px;
+        }
+
+        .firstads .advertisement{
+            padding: 10px;
+        }

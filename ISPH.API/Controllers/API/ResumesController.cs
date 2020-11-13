@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using ISPH.Core.DTO;
+using ISPH.Infrastructure.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ISPH.API.Controllers
 {
@@ -27,6 +29,7 @@ namespace ISPH.API.Controllers
         
 
         [HttpPost("add")]
+        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> AddResume(IFormFile file, int id)
         {
             if(file != null)
@@ -58,22 +61,19 @@ namespace ISPH.API.Controllers
         {
             var resume = await _repos.GetById(id);
             var path = resume.Path;
-            FileStreamResult result;
-            using(var memoryStream = new MemoryStream())
+            var memoryStream = new MemoryStream();
+            using(var stream = new FileStream(_env.WebRootPath + path, FileMode.Open))
             {
-               using(var stream = new FileStream(_env.WebRootPath + path, FileMode.Open))
-               {
-                   await stream.CopyToAsync(memoryStream);
-               }
-                memoryStream.Position = 0;
-                result = File(memoryStream, "application/pdf", Path.GetFileName(path));
+              await stream.CopyToAsync(memoryStream);
             }
-            return result;
+            memoryStream.Position = 0;
+            return File(memoryStream, "application/pdf", Path.GetFileName(path));
         }
 
 
 
         [HttpDelete("delete")]
+        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> DeleteResumeAsync(int id)
         {
             var file = await _repos.GetById(id);

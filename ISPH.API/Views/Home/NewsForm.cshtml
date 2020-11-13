@@ -130,39 +130,3 @@
         </div>
     </form>
 </div>
-<script>
-@*
-    $('#addnewsform').submit(function (e) {
-        e.preventDefault();
-        let art = {
-            Title: $('#newstitle').val(),
-            PublishDate: $('#newspublishDate').val(),
-            Description: $('#newsdescription').val()
-        };
-        alert(JSON.stringify(art));
-        var isValid = false;
-        for (var key in art) {
-            if (art[key] === '') isValid = true;
-        };
-        if (isValid === true) $('#adserror').html("Fill all fields");
-        else {
-            $.ajax({
-                method: "POST",
-                headers: {
-               'Authorization': "Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")"
-                },
-                async: false,
-                url: "/news/add",
-                data: JSON.stringify(art),
-                contentType: "application/json; charset=utf-8",
-                success: function (response) {
-                    window.location.replace('/home/index');
-                },
-                error: function (response) {
-                    alert(JSON.stringify(response));
-                    $('#adserror').html("These news already exist");
-                }
-            });
-        }
-    });*@
-</script>

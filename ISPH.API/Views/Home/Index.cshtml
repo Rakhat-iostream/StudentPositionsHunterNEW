@@ -86,7 +86,7 @@
                 <ul>
                     @{ if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Token")))
                         {
-                            string signout = (string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Company"))) ? "/users/students/auth/signout" : "/users/employers/auth/signout";
+                            string signout = (HttpContextAccessor.HttpContext.Session.GetString("Role") != "employer") ? "/users/students/auth/signout" : "/users/employers/auth/signout";
 
                             if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
                             {
@@ -164,48 +164,53 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
 
                         </div>
                         <div class="inside-content">
-                        @{
-                            if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("profile"))
-                            {
-                                @await Html.PartialAsync("Profile");
-                            }
-                            else if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("index"))
-                            {
-                                if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
+                            @{
+                                if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("profile"))
                                 {
-                                    @await Html.PartialAsync("ArticleForm");
-                                    @await Html.PartialAsync("NewsForm");
+                                    @await Html.PartialAsync("Profile");
                                 }
-                                <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Компании: </h3>
-                                <ul class="companies">
-                                </ul>
-                                <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Вакансии по позициям: </h3>
-                                <div id="positions">
-                                </div>
-                                <div style="background: dodgerblue; padding: 0 30px">
-                                <h1 style="margin: 50px 0; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Статьи: </h1>
-                                <div class="articles">
-                                </div>
-                                </div>
+                                else if (HttpContextAccessor.HttpContext.Request.Path.Value.EndsWith("index"))
+                                {
+                                    if (HttpContextAccessor.HttpContext.Session.GetString("Role") == "admin")
+                                    {
+                                        @await Html.PartialAsync("ArticleForm");
+                                        @await Html.PartialAsync("NewsForm");
+                                    }
+                                    <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Компании: </h3>
+                                    <ul class="companies">
+                                    </ul>
+                                    <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Вакансии по позициям: </h3>
+                                    <div id="positions">
+                                    </div>
+                                    <div style="background: dodgerblue; padding: 0 30px">
+                                        <h1 style="margin: 50px 0; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Статьи: </h1>
+                                        <div class="articles">
+                                        </div>
+                                    </div>
+                                    <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Обьявления: </h3>
+                                    <script>
+                                        showFirstAdvertisements(3);
+                                    </script>
+                                    <div class="advertisements firstads" style="padding-bottom: 30px;"></div>
+                                }
+                                else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/pos"))
+                                {
+                                    @await Html.PartialAsync("AdvertisementsForPos");
+                                }
+                                else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/id"))
+                                {
+                                    @await Html.PartialAsync("Advertisement");
+                                }
+                                else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/com"))
+                                {
+                                    @await Html.PartialAsync("AdvertisementsForCom");
+                                }
+                                else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/articles/id"))
+                                {
+                                    @await Html.PartialAsync("ArticlePage");
+                                }
                             }
-                            else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/pos"))
-                            {
-                                @await Html.PartialAsync("AdvertisementsForPos");
-                            }
-                            else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/id"))
-                            {
-                                @await Html.PartialAsync("Advertisement");
-                            }
-                            else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/com"))
-                            {
-                                @await Html.PartialAsync("AdvertisementsForCom");
-                            }
-                            else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/articles/id"))
-                            {
-                                @await Html.PartialAsync("ArticlePage");
-                            }
-                        }
-                            </div>
+                        </div>
                     </div>
                     <div style="flex: 0 0 5%; max-width: 5%;"></div>
                     <div class="row" style="flex: 0 0 25%; max-width: 25%;">

@@ -22,7 +22,7 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<Position> GetById(int id)
         {
-            return await _context.Positions.AsNoTracking().Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.PositionId == id);
+            return await _context.Positions.Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.PositionId == id);
         }
 
         public async Task<Position> GetPositionByName(string name)

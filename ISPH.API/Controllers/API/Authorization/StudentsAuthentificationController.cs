@@ -34,14 +34,13 @@ namespace ISPH.API.Controllers.API.Auth
                 FirstName = st.FirstName,
                 LastName = st.LastName,
                 Email = st.Email,
-                Role = "user",
+                Role = "student",
             };
             if (await _authRepos.UserExists(student)) return BadRequest(new { message = "This user already exists" });
             student = await _authRepos.Register(student, st.Password);
             if (student == null) return BadRequest(new { message = "Oops, failed to register" });
             var identity = await CreateIdentity(st.Email, st.Password);
             string token = TokenCreatingService.CreateToken(identity, out string identityName, Configuration);
-
             HttpContext.Session.SetString("Token", token);
             HttpContext.Session.SetInt32("Id", student.StudentId);
             HttpContext.Session.SetString("Name", student.FirstName);

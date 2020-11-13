@@ -52,7 +52,6 @@ $(document).ready(function () {
             }
         });
     }
-    //$('.inside-content').show();
     getPositions();
     $('#findinfo-form').submit(function (e) {
         e.preventDefault();
@@ -90,4 +89,18 @@ function findInfo(url, target) {
                 }
             }
         });
+}
+
+
+function showFirstAdvertisements(amount) {
+    $.get(
+        '/advertisements/amount=' + amount
+    ).done(function (data) {
+        let ads = data;
+        for (let i = 0; i < data.length; i++) {
+            $('.firstads').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
+                '<h3>Salary: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+        }
+        $('.firstads').append('<div style="text-align: right;"><a class="signout hoverbtn" style="background: orange; font-size: 1.2em;"">Learn more...</a></div>');
+    });
 }

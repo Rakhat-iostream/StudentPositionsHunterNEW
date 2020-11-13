@@ -7,11 +7,11 @@ using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using ISPH.Infrastructure;
+using ISPH.Infrastructure.Configuration;
 
 namespace ISPH.API.Controllers
 {
     [Route("users/[controller]/")]
-    [Authorize]
     [ApiController]
     public class EmployersController : ControllerBase
     {
@@ -27,7 +27,6 @@ namespace ISPH.API.Controllers
             return await _repos.GetAll();
         }
         [HttpGet("id={id}")]
-        [AllowAnonymous]
         public async Task<Employer> GetEmployerAsync(int id)
         {
             return await _repos.GetById(id);
@@ -35,6 +34,7 @@ namespace ISPH.API.Controllers
 
 
         [HttpPut("id={id}/update/email")]
+        [Authorize(Roles = RoleType.Employer)]
         public async Task<IActionResult> UpdateEmployerEmailAsync(EmployerDTO em, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -49,6 +49,7 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPut("id={id}/update/company")]
+        [Authorize(Roles = RoleType.Employer)]
         public async Task<IActionResult> UpdateEmployerCompanyAsync(EmployerDTO em, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -65,6 +66,7 @@ namespace ISPH.API.Controllers
         }
 
         [HttpPut("id={id}/update/password")]
+        [Authorize(Roles = RoleType.Employer)]
         public async Task<IActionResult> UpdateEmployerPasswordAsync(EmployerDTO st, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -79,6 +81,7 @@ namespace ISPH.API.Controllers
 
 
         [HttpDelete("id={id}/delete")]
+        [Authorize(Roles = RoleType.Admin)]
         public async Task<IActionResult> DeleteEmployerAsync(int id)
         {
             Employer employer = await _repos.GetById(id);

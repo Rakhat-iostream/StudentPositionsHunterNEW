@@ -18,7 +18,7 @@
         let userName = '@HttpContextAccessor.HttpContext.Session.GetString("Name")';
         let role = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
         let id = '@HttpContextAccessor.HttpContext.Session.GetInt32("Id")';
-        if (role !== null) {
+        if (role !== "employer") {
             let fav = '/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/favourites/ad=' + ad.advertisementId;
             $.get(
                 fav
@@ -123,7 +123,7 @@
         if (userName !== '') {
             let role = '@HttpContextAccessor.HttpContext.Session.GetString("Role")';
             let resume = null;
-            if (role !== '') {
+            if (role !== "employer") {
                 $.get(
                     '/users/students/id=@HttpContextAccessor.HttpContext.Session.GetInt32("Id")/resume'
                 ).done(function (data) {
@@ -213,10 +213,12 @@
     }
 </style>
 <div class="adsblock">
-        @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
-        {
+        @{
+            string role = HttpContextAccessor.HttpContext.Session.GetString("Role");
+            if (role != "employer")
+            {
             <h1 class="favourites"></h1>
-        }
+            }
         <h1 class="adstitle" style="margin: 20px 0;"></h1>
         <div class="adssalary" style="margin: 20px 0;"></div>
         <div class="adscompany" style="margin: 20px 0;"></div>
@@ -233,12 +235,12 @@
             <div id="inputForm" style="margin-bottom: 30px">
                 <textarea placeholder="Введите здесь сообщение..." type="text" id="message" style="background: black; border: none; color: white; padding: 15px; font-size: 18px;"></textarea>
                 <button type="button" id="sendBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить</button>
-                @if (!string.IsNullOrEmpty(HttpContextAccessor.HttpContext.Session.GetString("Role")))
+                @if (role != "employer")
                 {
                     <button type="button" id="sendResumeBtn" class="signout hoverbtn" style="background: dodgerblue; padding: 10px 20px; margin-left: 20px;">Отправить резюме</button>
-
                 }
                 <h3 class="chaterror" style="color: crimson; margin-left: 20px; margin-top: 20px"></h3>
             </div>
         </div>
+            }
     </div>

@@ -6,10 +6,13 @@ using ISPH.Core.Interfaces.Repositories;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using AutoMapper;
+using ISPH.Infrastructure.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace ISPH.API.Controllers.API
 {
     [Route("[controller]/")]
+    [Authorize(Roles = RoleType.Admin)]
     [ApiController]
     public class PositionsController : ControllerBase
     {
@@ -22,6 +25,7 @@ namespace ISPH.API.Controllers.API
         }
 
         [HttpGet]
+        [AllowAnonymous]
         public async Task<IList<PositionDTO>> GetAllPositionsAsync()
         {
             var positions = await _repos.GetAll();
@@ -29,6 +33,7 @@ namespace ISPH.API.Controllers.API
         }
 
         [HttpGet("id={id}")]
+        [AllowAnonymous]
         public async Task<PositionDTO> GetPositionByIdAsync(int id)
         {
             var pos = await _repos.GetById(id);

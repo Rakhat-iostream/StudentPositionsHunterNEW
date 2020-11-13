@@ -4,54 +4,15 @@
         $.get(
             url
         ).done(function (data) {
-            if (data.length === 0) $('.advertisementscom').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, there are no advertisements for this company at the moment.</h1>')
+            if (data.length === 0) $('.advertisements').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, there are no advertisements for this company at the moment.</h1>')
             let ads = data;
             for (let i = 0; i < data.length; i++) {
-                $('.advertisementscom').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
+                $('.advertisements').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
                     '<h3>Зарплата: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Компания: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Узнать больше...</a></div>');
             }
         });
     });
 </script>
-<style>
-    .advertisementscom {
-        font-family: Bahnschrift, Arial, Helvetica, sans-serif;
-    }
-
-        .advertisementscom .advertisement {
-            margin: 40px 0;
-            background: rgba(0,0,0,0.8);
-            border: 2px solid black;
-            padding: 20px;
-            color: white;
-        }
-
-        .advertisementscom h1 {
-            border-bottom: 2px solid crimson;
-            padding-bottom: 10px;
-            margin: 20px 0;
-            font-size: 2em;
-        }
-
-        .advertisementscom h3 {
-            color: dodgerblue;
-            margin: 20px 0;
-        }
-
-        .advertisementscom a {
-            background-color: dodgerblue;
-            border: 2px solid white;
-            padding: 10px 20px;
-            text-decoration: none;
-            color: white;
-            border: 2px solid black;
-        }
-
-            .advertisementscom a:hover {
-                color: black;
-                background-color: mediumspringgreen;
-            }
-</style>
-<div class="advertisementscom">
+<div class="advertisements">
 
 </div>

@@ -15,7 +15,7 @@ namespace ISPH.Infrastructure.Hubs
         private readonly LinkedList<string> users = new LinkedList<string>();
         public async Task Send(string message, string userName, string employerName, string role)
         {
-            if (!string.IsNullOrEmpty(role)) groupname = userName + " " + employerName; 
+            if (!string.IsNullOrEmpty(role) && role != "employer") groupname = userName + " " + employerName; 
             if(number != 2)
             {
                 users.AddLast(Context.ConnectionId);

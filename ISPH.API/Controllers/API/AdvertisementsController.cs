@@ -5,6 +5,7 @@ using AutoMapper;
 using ISPH.Core.DTO;
 using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
+using ISPH.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -12,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 namespace ISPH.API.Controllers
 {
     [Route("{controller}/")]
-    [Authorize]
     [ApiController]
     public class AdvertisementsController : ControllerBase
     {
@@ -26,36 +26,38 @@ namespace ISPH.API.Controllers
             _mapper = mapper;
         }
         [HttpGet]
-        [AllowAnonymous]
         public async Task<IList<AdvertisementDTO>> GetAllAdvertisements()
         {
             var ads = await _repos.GetAll();
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
 
+        [HttpGet("amount={amount}")]
+        public async Task<IList<AdvertisementDTO>> GetAdvertisementsAmount(int amount)
+        {
+            var ads = await _repos.GetAdvertisementsAmount(amount);
+            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+        }
+
         [HttpGet("pos={id}")]
-        [AllowAnonymous]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsForPosition(int id)
         {
             var ads = await _repos.GetAdvertisementsForPosition(id);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
         [HttpGet("emp={id}")]
-        [AllowAnonymous]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsByEmployer(int id)
         {
             var ads = await _repos.GetAdvertisementsForEmployer(id);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
         [HttpGet("com={id}")]
-        [AllowAnonymous]
         public async Task<IList<AdvertisementDTO>> GetAllAdvertisementsForCompany(int id)
         {
             var ads = await _repos.GetAdvertisementsForCompany(id);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
         [HttpGet("search={value}")]
-        [AllowAnonymous]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsForSearchValue(string value)
         {
             value = value.ToLower();
@@ -66,6 +68,7 @@ namespace ISPH.API.Controllers
 
 
         [HttpPost("emp={id}/add")]
+        [Authorize(Roles = RoleType.Employer)]
         public async Task<IActionResult> AddAdvertisement(AdvertisementDTO adv, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -87,13 +90,13 @@ namespace ISPH.API.Controllers
 
 
         [HttpGet("id={id}")]
-        [AllowAnonymous]
         public async Task<AdvertisementDTO> GetAdvertisementById(int id)
         {
             var ad = await _repos.GetById(id);
             return _mapper.Map<AdvertisementDTO>(ad);
         }
         [HttpPut("id={id}/update")]
+        [Authorize(Roles = RoleType.Employer)]
         public async Task<IActionResult> UpdateAdvertisement(AdvertisementDTO advertisement, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
@@ -111,6 +114,7 @@ namespace ISPH.API.Controllers
         }
 
         [HttpDelete("id={id}/delete")]
+        [Authorize(Roles = RoleType.Employer)]
         public async Task<IActionResult> DeleteAdvertisement(int id)
         {
             Advertisement ad = await _repos.GetById(id);

@@ -18,7 +18,7 @@ namespace ISPH.Infrastructure.Repositories
         }
         public async Task<Student> GetByEmail(string email)
         {
-            return await _context.Students.AsNoTracking().FirstOrDefaultAsync(student => student.Email == email);
+            return await _context.Students.FirstOrDefaultAsync(student => student.Email == email);
         }
         public override async Task<bool> HasEntity(Student entity)
         {
@@ -32,7 +32,7 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<Student> GetById(int id)
         {
-            return await _context.Students.AsNoTracking().Include(st => st.Resume).FirstOrDefaultAsync(st => st.StudentId == id);
+            return await _context.Students.Include(st => st.Resume).FirstOrDefaultAsync(st => st.StudentId == id);
         }
 
         public async Task<bool> UpdatePassword(Student student, string password)
