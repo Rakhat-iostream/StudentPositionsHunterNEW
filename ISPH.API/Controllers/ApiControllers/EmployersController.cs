@@ -9,7 +9,7 @@ using Microsoft.AspNetCore.Mvc;
 using ISPH.Infrastructure;
 using ISPH.Infrastructure.Configuration;
 
-namespace ISPH.API.Controllers
+namespace ISPH.API.Controllers.ApiControllers
 {
     [Route("users/[controller]/")]
     [ApiController]

@@ -9,7 +9,7 @@ using AutoMapper;
 using ISPH.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ISPH.API.Controllers.API
+namespace ISPH.API.Controllers.ApiControllers
 {
     [Route("[controller]/")]
     [Authorize(Roles = RoleType.Admin)]

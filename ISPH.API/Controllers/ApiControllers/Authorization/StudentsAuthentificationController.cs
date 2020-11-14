@@ -1,5 +1,6 @@
-﻿using ISPH.API.DTO.Authorization;
+﻿
 using ISPH.Core.DTO;
+using ISPH.Core.DTO.Authorization;
 using ISPH.Core.Interfaces.Authentification;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Services;
@@ -11,7 +12,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace ISPH.API.Controllers.API.Auth
+namespace ISPH.API.Controllers.ApiControllers.Authorization
 {
     [Route("users/students/auth/")]
     [ApiController]
@@ -49,7 +50,7 @@ namespace ISPH.API.Controllers.API.Auth
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginStudent(StudentLoginDTO st)
+        public async Task<IActionResult> LoginStudent(LoginDTO st)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = "Fill all fields" });
             var student = await CreateIdentity(st.Email, st.Password);

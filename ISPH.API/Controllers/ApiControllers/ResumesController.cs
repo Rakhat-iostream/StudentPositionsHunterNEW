@@ -10,7 +10,7 @@ using ISPH.Core.DTO;
 using ISPH.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authorization;
 
-namespace ISPH.API.Controllers
+namespace ISPH.API.Controllers.ApiControllers
 {
     [Route("users/students/id={id}/resume/")]
     [ApiController]

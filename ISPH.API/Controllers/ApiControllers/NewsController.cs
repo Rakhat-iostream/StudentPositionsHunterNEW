@@ -11,7 +11,7 @@ using Microsoft.AspNetCore.Mvc;
 using AutoMapper;
 using ISPH.Infrastructure.Configuration;
 
-namespace ISPH.API.Controllers
+namespace ISPH.API.Controllers.ApiControllers
 {
     [Route("[controller]/")]
     [ApiController]

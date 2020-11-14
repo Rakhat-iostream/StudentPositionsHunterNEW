@@ -1,5 +1,5 @@
-﻿using ISPH.API.DTO.Authorization;
-using ISPH.Core.DTO;
+﻿using ISPH.Core.DTO;
+using ISPH.Core.DTO.Authorization;
 using ISPH.Core.Interfaces.Authentification;
 using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace ISPH.API.Controllers.API.Auth
+namespace ISPH.API.Controllers.ApiControllers.Authorization
 {
     [Route("users/employers/auth/")]
     [ApiController]
@@ -59,7 +59,7 @@ namespace ISPH.API.Controllers.API.Auth
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginEmployer(EmployerLoginDTO em)
+        public async Task<IActionResult> LoginEmployer(LoginDTO em)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = "Fill all fields" });
             var employer = await CreateEmployerIdentity(em.Email, em.Password);

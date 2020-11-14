@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ISPH.API.Controllers
+namespace ISPH.API.Controllers.ApiControllers
 {
     [Route("{controller}/")]
     [ApiController]
