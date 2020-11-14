@@ -1,0 +1,103 @@
+﻿<style>
+    .arrow {
+        margin-left: 20px;
+        color: darkorange;
+        font-size: 1.5em;
+        cursor: pointer;
+    }
+    .arrow:hover{
+        color: mediumspringgreen;
+    }
+</style>
+<script>
+    $(document).ready(function () {
+        $('div.filter-el').css('display', 'none');
+        $.get(
+            '/positions'
+        ).done(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                $('#filtered-position').append('<option value="' + data[i].name + '">' + data[i].name + '</option>');
+            }
+        });
+        $.get(
+            '/companies'
+        ).done(function (data) {
+            for (let i = 0; i < data.length; i++) {
+                $('#filtered-company').append('<option value="' + data[i].name + '">' + data[i].name + '</option>');
+            }
+        });
+        $('.arrow-pos').click(function () {
+            $('.filter-position').show();
+        });
+        $('.arrow-com').click(function () {
+            $('.filter-company').show();
+        });
+        $('.arrow-sal').click(function () {
+            $('.filter-salary').show();
+        });
+        $('#order-title').click(function () {
+
+        })
+
+
+        $('.filter-form').submit(function (e) {
+            e.preventDefault();
+            let filter = {
+                PositionName: $('#filtered-position').val(),
+                CompanyName: $('#filtered-company').val(),
+                Salary: $('#filtered-salary').val()
+            };
+            if (filter.PositionName === "none") filter.PositionName = "";
+            if (filter.CompanyName === "none") filter.CompanyName = "";
+            $.ajax({
+                method: "POST",
+                async: false,
+                url: "/advertisements/filter",
+                data: JSON.stringify(filter),
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    let ads = data;
+                    $('.advertisements-fromform').empty();
+                    if (ads.length == 0) $('.advertisements-fromform').append('<h1 style="display; block;color: black; font-size: 2.2em; margin: 0 auto;">Sorry, we could not find any advertisements for this filter"</h1>');
+                    else {
+                        for (let i = 0; i < data.length; i++) {
+                            $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
+                                '<h3>Salary: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+                        }
+                    }
+                    $(window).scrollTop(0);
+                },
+                error: function (response) {
+                    alert(JSON.stringify(response));
+                }
+            });
+        });
+    });
+</script>
+<div class="filterblock">
+    <h1 class="filter-title">Фильтр: </h1>
+    <form class="filter-form" method="post">
+        <h3 class="filter-el-title">Позиция: <i class="arrow arrow-pos">&#x2193;</i></h3>
+
+        <div class="filter-el filter-position">
+            <select id="filtered-position" name="filtered-position" class="adsfield">
+                <option value="none">Выберите позицию</option>
+            </select>
+        </div>
+
+        <h3 class="filter-el-title">Компания: <i class="arrow arrow-com">&#x2193;</i></h3>
+
+        <div class="filter-el filter-company">
+            <select id="filtered-company" name="filtered-company" class="adsfield">
+                <option value="none">Выберите компанию</option>
+            </select>
+        </div>
+
+        <h3 class="filter-el-title">Зарплата: <i class="arrow arrow-sal">&#x2193;</i></h3>
+
+        <div class="filter-el filter-salary">
+            <label for="filtered-salary"><input id="filtered-salary" style="font-size: 20px; height: 30px;" type="number" name="filtered-salary"></label>
+        </div>
+        <button type="submit" class="signout hoverbtn">Найти</button>
+    </form>
+</div>

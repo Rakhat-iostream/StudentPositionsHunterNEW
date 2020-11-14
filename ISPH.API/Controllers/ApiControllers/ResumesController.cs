@@ -50,10 +50,10 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpGet]
-        public async Task<ResumeDTO> GetResumeByStudentId(int id)
+        public async Task<Resume> GetResumeByStudentId(int id)
         {
             var resume = await _repos.GetById(id);
-            return _mapper.Map<ResumeDTO>(resume);
+            return _mapper.Map<Resume>(resume);
         }
 
         [HttpPost]

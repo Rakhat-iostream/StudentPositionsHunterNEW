@@ -1,4 +1,5 @@
-﻿using ISPH.Core.Models;
+﻿using ISPH.Core.DTO;
+using ISPH.Core.Models;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,7 @@ namespace ISPH.Core.Interfaces.Repositories
         Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerId);
         Task<IList<Advertisement>> GetAdvertisementsForCompany(int companyId);
         Task<IList<Advertisement>> GetFilteredAdvertisements(string value);
+        Task<IList<Advertisement>> GetFilteredAdvertisements(FilteredAdvertisementDTO ad);
 
         Task<IList<Advertisement>> GetAdvertisementsAmount(int amount);
     }

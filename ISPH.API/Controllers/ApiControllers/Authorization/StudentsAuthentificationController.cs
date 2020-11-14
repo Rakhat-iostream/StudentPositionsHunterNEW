@@ -1,5 +1,4 @@
-﻿
-using ISPH.Core.DTO;
+﻿using ISPH.Core.DTO;
 using ISPH.Core.DTO.Authorization;
 using ISPH.Core.Interfaces.Authentification;
 using ISPH.Core.Models;

@@ -32,6 +32,8 @@ namespace ISPH.API.Controllers.ApiControllers
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
 
+
+
         [HttpGet("amount={amount}")]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsAmount(int amount)
         {
@@ -65,6 +67,13 @@ namespace ISPH.API.Controllers.ApiControllers
             var filtered = await _repos.GetFilteredAdvertisements(value);
             return _mapper.Map<IList<AdvertisementDTO>>(filtered);
         }
+        [HttpPost("filter")]
+        public async Task<IList<AdvertisementDTO>> GetFilteredAdvertisements(FilteredAdvertisementDTO dto)
+        {
+            var ads = await _repos.GetFilteredAdvertisements(dto);
+            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+        }
+
 
 
         [HttpPost("emp={id}/add")]

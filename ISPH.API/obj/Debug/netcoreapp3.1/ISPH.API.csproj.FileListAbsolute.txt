@@ -161,3 +161,4 @@ C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\AutoMapper.Exte
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\bin\Debug\netcoreapp3.1\Microsoft.EntityFrameworkCore.Design.dll
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.csproj.CoreCompileInputs.cache
 C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\ISPH.API.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\ASUS\source\repos\ISPH\ISPH.API\obj\Debug\netcoreapp3.1\Razor\Views\Home\FIlterForm.cshtml.g.cs

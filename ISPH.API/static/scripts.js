@@ -57,6 +57,7 @@ $(document).ready(function () {
         e.preventDefault();
         let target = $('input[name="search"]').val();
         $('.inside-content').hide();
+        $('.filterblock').show();
         findInfo('/advertisements/search=' + target, target);
     });
     $('div.articles article a').hover(function () {
@@ -65,8 +66,6 @@ $(document).ready(function () {
     $('div.news article a').hover(function () {
         $('div.news article a').css('color', 'skyblue');
     });
-
-
 });
 function substr(index, str) {
         var s = "";

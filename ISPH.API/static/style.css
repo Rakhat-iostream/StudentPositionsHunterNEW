@@ -836,3 +836,111 @@ select::-ms-expand {
         .firstads .advertisement{
             padding: 10px;
         }
+
+
+
+/*Filter form style*/
+.filterblock {
+    background-color: rgba(0, 0, 0, 0.5);
+    font-family: Bahnschrift, Arial, Helvetica, sans-serif;
+    color: white;
+    display: none;
+    padding: 20px;
+    text-align: center;
+}
+
+.filter-title {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.sort-option {
+    list-style-type: none;
+    margin: 15px 0;
+    font-size: 1.3em;
+}
+
+.filter-form {
+    text-align: center;
+}
+
+.filter-el-title {
+    color: dodgerblue;
+    margin: 20px 0;
+}
+
+@media screen and (max-width: 600px) {
+    .col-25, .col-75, input[type=submit] {
+        width: 100%;
+        margin-top: 0;
+    }
+}
+
+
+
+#addads input {
+    font-size: 18px;
+}
+
+.adsfield {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: vertical;
+}
+
+label {
+    padding: 12px 12px 12px 0;
+    display: inline-block;
+}
+
+#adssubmit {
+    background-color: dodgerblue;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    float: right;
+}
+
+    #adssubmit:hover {
+        background-color: mediumspringgreen;
+    }
+
+.advertisement {
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.8);
+    padding: 20px;
+}
+
+.col-25 {
+    float: left;
+    width: 25%;
+    margin-top: 6px;
+}
+
+.col-75 {
+    float: left;
+    width: 75%;
+    margin-top: 6px;
+}
+
+/* Clear floats after the columns */
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* Firefox */
+#salary {
+    -moz-appearance: textfield;
+}

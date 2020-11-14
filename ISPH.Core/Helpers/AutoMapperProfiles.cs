@@ -18,7 +18,6 @@ namespace ISPH.Core.Helpers
             CreateMap<News, NewsDTO>();
             CreateMap<Position, PositionDTO>();
             CreateMap<Student, StudentDTO>();
-            CreateMap<Resume, ResumeDTO>();
         }
     }
 }
