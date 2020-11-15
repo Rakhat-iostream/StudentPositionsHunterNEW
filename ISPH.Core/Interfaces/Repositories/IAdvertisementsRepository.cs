@@ -12,7 +12,7 @@ namespace ISPH.Core.Interfaces.Repositories
     {
         Task<IList<Advertisement>> GetAdvertisementsByEntityId(int id, EntityType type);
         Task<IList<Advertisement>> GetFilteredAdvertisements(string value);
-        Task<IList<Advertisement>> GetFilteredAdvertisements(FilteredAdvertisementDTO ad);
+        Task<IList<Advertisement>> GetFilteredAdvertisements(FilteredAdvertisementDto ad);
         Task<int> GetAdvertisementsCount();
 
         Task<IList<Advertisement>> GetAdvertisementsPerPage(int page);

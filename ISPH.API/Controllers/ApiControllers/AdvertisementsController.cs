@@ -27,12 +27,12 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpGet]
-        public async Task<IList<AdvertisementDTO>> GetAdvertisementsPerPage(int page)
+        public async Task<IList<AdvertisementDto>> GetAdvertisementsPerPage(int page)
         {
             IList<Advertisement> ads;
             if (page == 0) ads = await _repos.GetAll();
             else ads = await _repos.GetAdvertisementsPerPage(page);
-            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+            return _mapper.Map<IList<AdvertisementDto>>(ads);
         }
 
         [HttpGet("count")]
@@ -42,50 +42,50 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpGet("amount={amount}")]
-        public async Task<IList<AdvertisementDTO>> GetAdvertisementsAmount(int amount)
+        public async Task<IList<AdvertisementDto>> GetAdvertisementsAmount(int amount)
         {
             var ads = await _repos.GetAdvertisementsAmount(amount);
-            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+            return _mapper.Map<IList<AdvertisementDto>>(ads);
         }
 
         [HttpGet("pos={id}")]
-        public async Task<IList<AdvertisementDTO>> GetAdvertisementsForPosition(int id)
+        public async Task<IList<AdvertisementDto>> GetAdvertisementsForPosition(int id)
         {
             var ads = await _repos.GetAdvertisementsByEntityId(id, EntityType.Position);
-            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+            return _mapper.Map<IList<AdvertisementDto>>(ads);
         }
         [HttpGet("emp={id}")]
-        public async Task<IList<AdvertisementDTO>> GetAdvertisementsByEmployer(int id)
+        public async Task<IList<AdvertisementDto>> GetAdvertisementsByEmployer(int id)
         {
             var ads = await _repos.GetAdvertisementsByEntityId(id, EntityType.Employer);
-            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+            return _mapper.Map<IList<AdvertisementDto>>(ads);
         }
         [HttpGet("com={id}")]
-        public async Task<IList<AdvertisementDTO>> GetAllAdvertisementsForCompany(int id)
+        public async Task<IList<AdvertisementDto>> GetAllAdvertisementsForCompany(int id)
         {
             var ads = await _repos.GetAdvertisementsByEntityId(id, EntityType.Company);
-            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+            return _mapper.Map<IList<AdvertisementDto>>(ads);
         }
         [HttpGet("search={value}")]
-        public async Task<IList<AdvertisementDTO>> GetAdvertisementsForSearchValue(string value)
+        public async Task<IList<AdvertisementDto>> GetAdvertisementsForSearchValue(string value)
         {
             value = value.ToLower();
             value = char.ToUpper(value[0]) + value.Substring(1);
             var filtered = await _repos.GetFilteredAdvertisements(value);
-            return _mapper.Map<IList<AdvertisementDTO>>(filtered);
+            return _mapper.Map<IList<AdvertisementDto>>(filtered);
         }
         [HttpPost("filter")]
-        public async Task<IList<AdvertisementDTO>> GetFilteredAdvertisements(FilteredAdvertisementDTO dto)
+        public async Task<IList<AdvertisementDto>> GetFilteredAdvertisements(FilteredAdvertisementDto dto)
         {
             var ads = await _repos.GetFilteredAdvertisements(dto);
-            return _mapper.Map<IList<AdvertisementDTO>>(ads);
+            return _mapper.Map<IList<AdvertisementDto>>(ads);
         }
 
 
 
         [HttpPost("emp={id}/add")]
         [Authorize(Roles = RoleType.Employer)]
-        public async Task<IActionResult> AddAdvertisement(AdvertisementDTO adv, int id)
+        public async Task<IActionResult> AddAdvertisement(AdvertisementDto adv, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Position pos = await _positionRepos.GetPositionByName(adv.PositionName);
@@ -106,14 +106,14 @@ namespace ISPH.API.Controllers.ApiControllers
 
 
         [HttpGet("id={id}")]
-        public async Task<AdvertisementDTO> GetAdvertisementById(int id)
+        public async Task<AdvertisementDto> GetAdvertisementById(int id)
         {
             var ad = await _repos.GetById(id);
-            return _mapper.Map<AdvertisementDTO>(ad);
+            return _mapper.Map<AdvertisementDto>(ad);
         }
         [HttpPut("id={id}/update")]
         [Authorize(Roles = RoleType.Employer)]
-        public async Task<IActionResult> UpdateAdvertisement(AdvertisementDTO advertisement, int id)
+        public async Task<IActionResult> UpdateAdvertisement(AdvertisementDto advertisement, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
 

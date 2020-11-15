@@ -30,14 +30,56 @@
     <list default="true" id="39f3324b-c5fd-49d7-b422-641b1ee68d94" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/contentModel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/contentModel.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ISPH/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.vs/ISPH/DesignTimeBuild/.dtbcache.v2" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ISPH/DesignTimeBuild/.dtbcache.v2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.ISPH/riderModule.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.ISPH/riderModule.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.vs/ISPH/v16/.suo" beforeDir="false" afterPath="$PROJECT_DIR$/.vs/ISPH/v16/.suo" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/AdvertisementsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/AdvertisementsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/ArticlesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/ArticlesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/Authorization/EmployersAuthentificationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/Authorization/EmployersAuthentificationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/Authorization/StudentsAuthentificationController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/Authorization/StudentsAuthentificationController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/CompaniesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/CompaniesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/EmployersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/EmployersController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/FavouritesController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/FavouritesController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/NewsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/NewsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/PositionsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/PositionsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Controllers/ApiControllers/StudentsController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/ApiControllers/StudentsController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.Views.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.Views.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.API.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/bin/Debug/netcoreapp3.1/ISPH.Infrastructure.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.Views.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.Views.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.Views.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.Views.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.csprojAssemblyReference.cache" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.dll" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/obj/Debug/netcoreapp3.1/ISPH.API.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/obj/project.packagespec.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ISPH.Core/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/AdvertisementDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/AdvertisementDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/ArticleDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/ArticleDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/Authorization/LoginDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/Authorization/LoginDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/CompanyDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/CompanyDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/EmployerDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/EmployerDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/FilteredAdvertisementDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/FilteredAdvertisementDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/NewsDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/NewsDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/PositionDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/PositionDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/DTO/StudentDTO.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/DTO/StudentDto.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/Enums/EntityType.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/Enums/EntityType.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/Helpers/AutoMapperProfiles.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/Helpers/AutoMapperProfiles.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/Interfaces/Repositories/IAdvertisementsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/Interfaces/Repositories/IAdvertisementsRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/bin/Debug/netstandard2.0/ISPH.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/bin/Debug/netstandard2.0/ISPH.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/bin/Debug/netstandard2.0/ISPH.Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/bin/Debug/netstandard2.0/ISPH.Core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Core/obj/Debug/netstandard2.0/ISPH.Core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/Repositories/AdvertisementsRepository.cs" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/Repositories/AdvertisementsRepository.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Core.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Core.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Core.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Core.pdb" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/bin/Debug/netstandard2.0/ISPH.Infrastructure.pdb" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.csprojAssemblyReference.cache" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.csprojAssemblyReference.cache" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/project.packagespec.json" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/project.packagespec.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.dll" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.dll" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.pdb" beforeDir="false" afterPath="$PROJECT_DIR$/../ISPH.Infrastructure/obj/Debug/netstandard2.0/ISPH.Infrastructure.pdb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +94,29 @@
       <list>
         <option value="$PROJECT_DIR$/Startup.cs" />
         <option value="$PROJECT_DIR$/Controllers/API/AdvertisementsController.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/Enums/EntityType.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/Authorization/LoginDTO.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/AdvertisementDto.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/ArticleDto.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/CompanyDto.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/EmployerDto.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/FilteredAdvertisementDto.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/NewsDto.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/StudentDto.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/Authorization/EmployersAuthentificationController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/Authorization/StudentsAuthentificationController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/AdvertisementsController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/ArticlesController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/CompaniesController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/EmployersController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/FavouritesController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/NewsController.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/StudentsController.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/Helpers/AutoMapperProfiles.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/DTO/PositionDto.cs" />
+        <option value="$PROJECT_DIR$/Controllers/ApiControllers/PositionsController.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Core/Interfaces/Repositories/IAdvertisementsRepository.cs" />
+        <option value="$PROJECT_DIR$/../ISPH.Infrastructure/Repositories/AdvertisementsRepository.cs" />
       </list>
     </option>
   </component>
@@ -64,6 +129,12 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="node.js.detected.package.eslint" value="true" />
+    <property name="node.js.detected.package.tslint" value="true" />
+    <property name="node.js.path.for.package.eslint" value="project" />
+    <property name="node.js.path.for.package.tslint" value="project" />
+    <property name="node.js.selected.package.eslint" value="(autodetect)" />
+    <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -109,6 +180,7 @@
       <updated>1603554443373</updated>
       <workItem from="1603554448929" duration="333000" />
       <workItem from="1604028544504" duration="126000" />
+      <workItem from="1605451357728" duration="1881000" />
     </task>
     <servers />
   </component>
@@ -131,6 +203,22 @@
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
   </component>
   <component name="WindowStateProjectService">
+    <state width="1485" height="197" key="GridCell.Tab.0.bottom" timestamp="1605453242946">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1485" height="197" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1605453242946" />
+    <state width="1485" height="197" key="GridCell.Tab.0.center" timestamp="1605453242945">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1485" height="197" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1605453242945" />
+    <state width="1485" height="197" key="GridCell.Tab.0.left" timestamp="1605453242945">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1485" height="197" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1605453242945" />
+    <state width="1485" height="197" key="GridCell.Tab.0.right" timestamp="1605453242946">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1485" height="197" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1605453242946" />
     <state x="277" y="0" key="SettingsEditor" timestamp="1603554677208">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

@@ -11,13 +11,13 @@ namespace ISPH.Core.Helpers
     {
         public AutoMapperProfiles()
         {
-            CreateMap<Advertisement, AdvertisementDTO>();
-            CreateMap<Article, ArticleDTO>();
-            CreateMap<Company, CompanyDTO>();
-            CreateMap<Employer, EmployerDTO>();
-            CreateMap<News, NewsDTO>();
-            CreateMap<Position, PositionDTO>();
-            CreateMap<Student, StudentDTO>();
+            CreateMap<Advertisement, AdvertisementDto>();
+            CreateMap<Article, ArticleDto>();
+            CreateMap<Company, CompanyDto>();
+            CreateMap<Employer, EmployerDto>();
+            CreateMap<News, NewsDto>();
+            CreateMap<Position, PositionDto>();
+            CreateMap<Student, StudentDto>();
         }
     }
 }

@@ -104,7 +104,7 @@ namespace ISPH.Infrastructure.Repositories
                 FromSqlRaw(sql).Include(adv => adv.Employer).ToListAsync();
         }
 
-        public async Task<IList<Advertisement>> GetFilteredAdvertisements(FilteredAdvertisementDTO ad)
+        public async Task<IList<Advertisement>> GetFilteredAdvertisements(FilteredAdvertisementDto ad)
         {
             var builder = new StringBuilder();
             string sql = "SELECT a.\"AdvertisementId\", e.\"EmployerId\", a.\"Title\", a.\"PositionId\"," +
@@ -146,7 +146,6 @@ namespace ISPH.Infrastructure.Repositories
             {
                 builder.Append(string.Format("a.\"Salary\" = {0}", pos));
             }
-
            builder.Append("ORDER BY a.\"Title\"");
             return await _context.Advertisements.FromSqlRaw(builder.ToString()).Include(adv => adv.Employer).ToListAsync();
         }

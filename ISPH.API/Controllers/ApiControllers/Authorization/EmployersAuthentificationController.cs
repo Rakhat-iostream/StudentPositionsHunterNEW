@@ -31,7 +31,7 @@ namespace ISPH.API.Controllers.ApiControllers.Authorization
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterEmployer(EmployerDTO em)
+        public async Task<IActionResult> RegisterEmployer(EmployerDto em)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = "Fill all fields" });
             var employer = new Employer()
@@ -61,7 +61,7 @@ namespace ISPH.API.Controllers.ApiControllers.Authorization
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginEmployer(LoginDTO em)
+        public async Task<IActionResult> LoginEmployer(LoginDto em)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = "Fill all fields" });
             var employer = await tokenService.CreateIdentity(em.Email, em.Password);

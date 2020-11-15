@@ -35,7 +35,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update/email")]
         [Authorize(Roles = RoleType.Employer)]
-        public async Task<IActionResult> UpdateEmployerEmailAsync(EmployerDTO em, int id)
+        public async Task<IActionResult> UpdateEmployerEmailAsync(EmployerDto em, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
                 Employer employer = await _repos.GetById(id);
@@ -50,7 +50,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update/company")]
         [Authorize(Roles = RoleType.Employer)]
-        public async Task<IActionResult> UpdateEmployerCompanyAsync(EmployerDTO em, int id)
+        public async Task<IActionResult> UpdateEmployerCompanyAsync(EmployerDto em, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Employer employer = await _repos.GetById(id);
@@ -67,7 +67,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update/password")]
         [Authorize(Roles = RoleType.Employer)]
-        public async Task<IActionResult> UpdateEmployerPasswordAsync(EmployerDTO st, int id)
+        public async Task<IActionResult> UpdateEmployerPasswordAsync(EmployerDto st, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Employer employer = await _repos.GetById(id);

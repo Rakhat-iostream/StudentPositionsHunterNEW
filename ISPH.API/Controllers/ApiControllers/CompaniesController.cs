@@ -28,22 +28,22 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IList<CompanyDTO>> GetAllCompanies()
+        public async Task<IList<CompanyDto>> GetAllCompanies()
         {
             var companies = await _repos.GetAll();
-            return _mapper.Map<IList<CompanyDTO>>(companies);
+            return _mapper.Map<IList<CompanyDto>>(companies);
         }
 
         [HttpGet("id={id}")]
         [AllowAnonymous]
-        public async Task<CompanyDTO> GetCompanyByIdAsync(int id)
+        public async Task<CompanyDto> GetCompanyByIdAsync(int id)
         {
             var com = await _repos.GetById(id);
-            return _mapper.Map<CompanyDTO>(com);
+            return _mapper.Map<CompanyDto>(com);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddCompanyAsync(CompanyDTO com)
+        public async Task<IActionResult> AddCompanyAsync(CompanyDto com)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Company company = new Company { Name = com.Name };
@@ -53,7 +53,7 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpPut("id={id}/update")]
-        public async Task<IActionResult> UpdateCompanyAsync(CompanyDTO com, int id)
+        public async Task<IActionResult> UpdateCompanyAsync(CompanyDto com, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Company company = await _repos.GetById(id);

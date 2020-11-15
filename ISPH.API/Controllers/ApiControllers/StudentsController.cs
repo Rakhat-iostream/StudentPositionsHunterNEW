@@ -22,10 +22,10 @@ namespace ISPH.API.Controllers.ApiControllers
         }
         [HttpGet]
         [Authorize(Roles = RoleType.Admin)]
-        public async Task<IList<StudentDTO>> GetAllStudents()
+        public async Task<IList<StudentDto>> GetAllStudents()
         {
             var students = await _repos.GetAll();
-            return students.Select(st => new StudentDTO() { FirstName = st.FirstName, Email = st.Email,
+            return students.Select(st => new StudentDto() { FirstName = st.FirstName, Email = st.Email,
                 LastName = st.LastName, ID = st.StudentId }).ToList();
         }
         [HttpGet("id={id}")]
@@ -37,7 +37,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update/email")]
         [Authorize(Roles = RoleType.Student)]
-        public async Task<IActionResult> UpdateStudentEmailAsync(StudentDTO st, int id)
+        public async Task<IActionResult> UpdateStudentEmailAsync(StudentDto st, int id)
         {
             if(!ModelState.IsValid) return BadRequest("Fill all fields");
             Student student = await _repos.GetById(id);
@@ -52,7 +52,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update/password")]
         [Authorize(Roles = RoleType.Student)]
-        public async Task<IActionResult> UpdateStudentPasswordAsync(StudentDTO st, int id)
+        public async Task<IActionResult> UpdateStudentPasswordAsync(StudentDto st, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Student student = await _repos.GetById(id);

@@ -45,19 +45,11 @@
           "target": "Package",
           "version": "[3.1.9, )"
         },
-        "Microsoft.EntityFrameworkCore.Tools": {
+        "Microsoft.EntityFrameworkCore.Design": {
           "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
           "suppressParent": "All",
           "target": "Package",
           "version": "[3.1.9, )"
-        },
-        "NLog": {
-          "target": "Package",
-          "version": "[4.7.5, )"
-        },
-        "NLog.Config": {
-          "target": "Package",
-          "version": "[4.7.5, )"
         },
         "Newtonsoft.Json": {
           "target": "Package",

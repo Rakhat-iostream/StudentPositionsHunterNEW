@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ISPH.Core.DTO
 {
-    public class PositionDTO
+    public class PositionDto
     {
         public int PositionId { get; set; }
         [Required]

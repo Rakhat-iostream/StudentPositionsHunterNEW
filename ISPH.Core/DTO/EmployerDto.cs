@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISPH.Core.DTO
 {
-    public class EmployerDTO
+    public class EmployerDto
     {
         public int EmployerId { get; set; }
         [Required]

@@ -28,21 +28,21 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpGet]
-        public async Task<IList<NewsDTO>> GetAllNewsAsync()
+        public async Task<IList<NewsDto>> GetAllNewsAsync()
         {
             var news = await _repos.GetAll();
-            return _mapper.Map<IList<NewsDTO>>(news);
+            return _mapper.Map<IList<NewsDto>>(news);
         }
 
         [HttpGet("id={id}")]
-        public async Task<NewsDTO> GetNewsByIdAsync(int id)
+        public async Task<NewsDto> GetNewsByIdAsync(int id)
         {
             var news = await _repos.GetById(id);
-            return _mapper.Map<NewsDTO>(news);
+            return _mapper.Map<NewsDto>(news);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddNewsAsync([FromForm] NewsDTO newsDTO)
+        public async Task<IActionResult> AddNewsAsync([FromForm] NewsDto newsDTO)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             string path = "/images/" + newsDTO.File.FileName;
@@ -65,7 +65,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update")]
         [Authorize(Roles = RoleType.Admin)]
-        public async Task<IActionResult> UpdateNewsAsync(NewsDTO newsDTO, int id)
+        public async Task<IActionResult> UpdateNewsAsync(NewsDto newsDTO, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
 

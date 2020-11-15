@@ -26,22 +26,22 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpGet]
         [AllowAnonymous]
-        public async Task<IList<PositionDTO>> GetAllPositionsAsync()
+        public async Task<IList<PositionDto>> GetAllPositionsAsync()
         {
             var positions = await _repos.GetAll();
-            return _mapper.Map<IList<PositionDTO>>(positions);
+            return _mapper.Map<IList<PositionDto>>(positions);
         }
 
         [HttpGet("id={id}")]
         [AllowAnonymous]
-        public async Task<PositionDTO> GetPositionByIdAsync(int id)
+        public async Task<PositionDto> GetPositionByIdAsync(int id)
         {
             var pos = await _repos.GetById(id);
-            return _mapper.Map<PositionDTO>(pos);
+            return _mapper.Map<PositionDto>(pos);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddPositionAsync(PositionDTO pos)
+        public async Task<IActionResult> AddPositionAsync(PositionDto pos)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Position position = new Position()
@@ -54,7 +54,7 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpPut("id={id}/update")]
-        public async Task<IActionResult> UpdatePositionAsync(PositionDTO pos, int id)
+        public async Task<IActionResult> UpdatePositionAsync(PositionDto pos, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
             Position position = await _repos.GetById(id);

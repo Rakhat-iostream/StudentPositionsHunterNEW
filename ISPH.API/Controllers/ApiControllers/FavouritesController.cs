@@ -28,10 +28,10 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpGet]
         [Authorize]
-        public async Task<IList<AdvertisementDTO>> GetFavourites(int studentId)
+        public async Task<IList<AdvertisementDto>> GetFavourites(int studentId)
         {
             var favs = await _repos.GetFavourites(studentId);
-            return _mapper.Map<IList<AdvertisementDTO>>(favs.Select(fav => fav.Advertisement));
+            return _mapper.Map<IList<AdvertisementDto>>(favs.Select(fav => fav.Advertisement));
         }
 
 

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\ASUS\.nuget\packages\nlog.config\4.7.5\contentFiles\any\any\nlog.config" t="Include" />
     <e p="C:\Users\ASUS\AppData\Local\JetBrains\Rider2020.2\extResources" t="IncludeRecursive" />
     <e p="C:\Users\ASUS\AppData\Local\JetBrains\Rider2020.2\resharper-host\Local\Transient\Rider\v202\SolutionCaches\_ISPH.-723350541.00" t="ExcludeRecursive" />
     <e p="C:\Users\ASUS\source\repos\ISPH\ISPH.API" t="IncludeRecursive">
@@ -9,7 +8,7 @@
       <e p="appsettings.json" t="Include" />
       <e p="bin" t="ExcludeRecursive" />
       <e p="Controllers" t="Include">
-        <e p="API" t="Include">
+        <e p="ApiControllers" t="Include">
           <e p="AdvertisementsController.cs" t="Include" />
           <e p="ArticlesController.cs" t="Include" />
           <e p="Authorization" t="Include">
@@ -18,12 +17,13 @@
           </e>
           <e p="CompaniesController.cs" t="Include" />
           <e p="EmployersController.cs" t="Include" />
+          <e p="FavouritesController.cs" t="Include" />
           <e p="NewsController.cs" t="Include" />
           <e p="PositionsController.cs" t="Include" />
           <e p="ResumesController.cs" t="Include" />
           <e p="StudentsController.cs" t="Include" />
         </e>
-        <e p="View" t="Include">
+        <e p="ViewControllers" t="Include">
           <e p="HomeController.cs" t="Include" />
         </e>
       </e>
@@ -53,10 +53,11 @@
           <e p="apple-iphone-logo-png-1_large.png" t="Include" />
           <e p="bi.jpg" t="Include" />
           <e p="codecode.jpg" t="Include" />
-          <e p="google.jpg" t="Include" />
           <e p="header.jpg" t="Include" />
           <e p="Iphone12news.jpg" t="Include" />
+          <e p="progarticle.jpeg" t="Include" />
           <e p="redbull.jpg" t="Include" />
+          <e p="siteoptimizeimg.jpg" t="Include" />
         </e>
         <e p="main.html" t="Include" />
         <e p="microsoft" t="Include">
@@ -69,7 +70,8 @@
           </e>
         </e>
         <e p="Resumes" t="Include">
-          <e p="CV Султанбек Хасенов (2).pdf" t="Include" />
+          <e p="CV Султанбек Хасенов.pdf" t="Include" />
+          <e p="Task - EF.pdf" t="Include" />
         </e>
         <e p="scripts.js" t="Include" />
         <e p="style.css" t="Include" />
@@ -83,6 +85,7 @@
           <e p="ArticleForm.cshtml" t="Include" />
           <e p="ArticlePage.cshtml" t="Include" />
           <e p="AuthorisationForm.cshtml" t="Include" />
+          <e p="FIlterForm.cshtml" t="Include" />
           <e p="Index.cshtml" t="Include" />
           <e p="NewsForm.cshtml" t="Include" />
           <e p="NewsPage.cshtml" t="Include" />
@@ -97,15 +100,17 @@
         <e p="AdvertisementDTO.cs" t="Include" />
         <e p="ArticleDTO.cs" t="Include" />
         <e p="Authorization" t="Include">
-          <e p="EmployerLoginDTO.cs" t="Include" />
-          <e p="StudentLoginDTO.cs" t="Include" />
+          <e p="LoginDTO.cs" t="Include" />
         </e>
         <e p="CompanyDTO.cs" t="Include" />
         <e p="EmployerDTO.cs" t="Include" />
+        <e p="FilteredAdvertisementDTO.cs" t="Include" />
         <e p="NewsDTO.cs" t="Include" />
         <e p="PositionDTO.cs" t="Include" />
-        <e p="ResumeDTO.cs" t="Include" />
         <e p="StudentDTO.cs" t="Include" />
+      </e>
+      <e p="Enums" t="Include">
+        <e p="EntityType.cs" t="Include" />
       </e>
       <e p="Helpers" t="Include">
         <e p="AutoMapperProfiles.cs" t="Include" />
@@ -120,6 +125,7 @@
           <e p="ICompanyRepository.cs" t="Include" />
           <e p="IEmployersRepository.cs" t="Include" />
           <e p="IEntityRepository.cs" t="Include" />
+          <e p="IFavouritesRepository.cs" t="Include" />
           <e p="INewsRepository.cs" t="Include" />
           <e p="IPositionsRepository.cs" t="Include" />
           <e p="IResumesRepository.cs" t="Include" />
@@ -132,6 +138,7 @@
         <e p="Article.cs" t="Include" />
         <e p="Company.cs" t="Include" />
         <e p="Employer.cs" t="Include" />
+        <e p="FavouriteAdvertisement.cs" t="Include" />
         <e p="News.cs" t="Include" />
         <e p="Position.cs" t="Include" />
         <e p="Resume.cs" t="Include" />
@@ -158,11 +165,6 @@
         <e p="ChatHub.cs" t="Include" />
       </e>
       <e p="ISPH.Infrastructure.csproj" t="IncludeRecursive" />
-      <e p="Migrations" t="Include">
-        <e p="20201027031625_FourthMigration.cs" t="Include" />
-        <e p="20201027031625_FourthMigration.Designer.cs" t="Include" />
-        <e p="EntityContextModelSnapshot.cs" t="Include" />
-      </e>
       <e p="obj" t="ExcludeRecursive">
         <e p="Debug" t="Include">
           <e p="netstandard2.0" t="Include">
@@ -176,16 +178,23 @@
         <e p="CompaniesRepository.cs" t="Include" />
         <e p="EmployersRepository.cs" t="Include" />
         <e p="EntityRepository.cs" t="Include" />
+        <e p="FavouritesRepository.cs" t="Include" />
         <e p="NewsRepository.cs" t="Include" />
         <e p="PositionsRepository.cs" t="Include" />
         <e p="ResumesRepository.cs" t="Include" />
         <e p="StudentRepository.cs" t="Include" />
       </e>
       <e p="Services" t="Include">
-        <e p="DataHashService.cs" t="Include" />
-        <e p="EmployersHashService.cs" t="Include" />
-        <e p="StudentsHashService.cs" t="Include" />
-        <e p="TokenCreatingService.cs" t="Include" />
+        <e p="Hashing" t="Include">
+          <e p="DataHashService.cs" t="Include" />
+          <e p="EmployersHashService.cs" t="Include" />
+          <e p="StudentsHashService.cs" t="Include" />
+        </e>
+        <e p="TokenConfiguration" t="Include">
+          <e p="EmployerTokenService.cs" t="Include" />
+          <e p="StudentTokenService.cs" t="Include" />
+          <e p="TokenCreatingService.cs" t="Include" />
+        </e>
       </e>
     </e>
   </component>

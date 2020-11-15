@@ -29,21 +29,21 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpGet]
-        public async Task<IList<ArticleDTO>> GetAllArticles()
+        public async Task<IList<ArticleDto>> GetAllArticles()
         {
             var arts = await _repos.GetAll();
-            return _mapper.Map<IList<ArticleDTO>>(arts);
+            return _mapper.Map<IList<ArticleDto>>(arts);
         }
 
         [HttpGet("id={id}")]
-        public async Task<ArticleDTO> GetArticleById(int id)
+        public async Task<ArticleDto> GetArticleById(int id)
         {
             var art = await _repos.GetById(id);
-            return _mapper.Map<ArticleDTO>(art);
+            return _mapper.Map<ArticleDto>(art);
         }
 
         [HttpPost("add")]
-        public async Task<IActionResult> AddArticle([FromForm] ArticleDTO art)
+        public async Task<IActionResult> AddArticle([FromForm] ArticleDto art)
         {
             if(!ModelState.IsValid) return BadRequest("Fill all fields");
             string path = "/images/" + art.File.FileName;
@@ -55,7 +55,7 @@ namespace ISPH.API.Controllers.ApiControllers
                 ImagePath = path
             };
             if (await _repos.HasEntity(article)) return BadRequest("This article already exists");
-            using (var stream = new FileStream(_env.WebRootPath + path, FileMode.Create))
+           await using(var stream = new FileStream(_env.WebRootPath + path, FileMode.Create))
             {
                 await art.File.CopyToAsync(stream);
             }
@@ -67,7 +67,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
         [HttpPut("id={id}/update")]
         [Authorize(Roles = RoleType.Admin)]
-        public async Task<IActionResult> UpdateArticle(ArticleDTO art, int id)
+        public async Task<IActionResult> UpdateArticle(ArticleDto art, int id)
         {
             if (!ModelState.IsValid) return BadRequest("Fill all fields");
 

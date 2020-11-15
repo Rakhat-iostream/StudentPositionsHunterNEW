@@ -5,7 +5,7 @@ using System.Text;
 
 namespace ISPH.Core.DTO.Authorization
 {
-   public class LoginDTO
+   public class LoginDto
     {
         [Required]
         public string Email { get; set; }

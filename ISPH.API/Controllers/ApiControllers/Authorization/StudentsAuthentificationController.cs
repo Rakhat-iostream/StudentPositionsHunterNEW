@@ -28,7 +28,7 @@ namespace ISPH.API.Controllers.ApiControllers.Authorization
         }
 
         [HttpPost("register")]
-        public async Task<IActionResult> RegisterStudent(StudentDTO st)
+        public async Task<IActionResult> RegisterStudent(StudentDto st)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = "Fill all fields"});
             var student = new Student()
@@ -51,7 +51,7 @@ namespace ISPH.API.Controllers.ApiControllers.Authorization
         }
 
         [HttpPost("login")]
-        public async Task<IActionResult> LoginStudent(LoginDTO st)
+        public async Task<IActionResult> LoginStudent(LoginDto st)
         {
             if (!ModelState.IsValid) return BadRequest(new { message = "Fill all fields" });
             var student = await tokenService.CreateIdentity(st.Email, st.Password);

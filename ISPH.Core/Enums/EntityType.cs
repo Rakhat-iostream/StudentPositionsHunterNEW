@@ -11,6 +11,5 @@ namespace ISPH.Core.Enums
         Position,
         Company,
         Advertisement,
-
     }
 }

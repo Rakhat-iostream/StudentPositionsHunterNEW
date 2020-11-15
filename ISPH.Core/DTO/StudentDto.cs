@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ISPH.Core.DTO
 {
-    public class StudentDTO
+    public class StudentDto
     {
         public int ID { get; set; }
         [Required]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ISPH.Core.DTO
 {
-    public class ArticleDTO
+    public class ArticleDto
     {
         public int ArticleId { get; set; }
         [Required]

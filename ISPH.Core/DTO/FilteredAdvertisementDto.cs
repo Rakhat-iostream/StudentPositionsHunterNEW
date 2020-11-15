@@ -4,7 +4,7 @@ using System.Text;
 
 namespace ISPH.Core.DTO
 {
-   public class FilteredAdvertisementDTO
+   public class FilteredAdvertisementDto
     {
         public int? Salary { get; set; }
         public string CompanyName { get; set; }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ISPH.Core.DTO
 {
-    public class AdvertisementDTO
+    public class AdvertisementDto
     {
         public int AdvertisementId { get; set; }
         public int EmployerId { get; set; }
