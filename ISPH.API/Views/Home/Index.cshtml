@@ -28,7 +28,7 @@
             color: crimson;
         }
         .hoverbtn {
-            border: none;
+            border: none !important;
             color: white;
             padding: 5px 20px;
             font-size: 22px;
@@ -182,7 +182,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                                     <h3 style="margin: 50px 0; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Вакансии по позициям: </h3>
                                     <div id="positions">
                                     </div>
-                                    <div style="background: dodgerblue; padding: 0 30px">
+                                    <div style="padding: 0 30px">
                                         <h1 style="margin: 50px 0; font-size: 3em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Статьи: </h1>
                                         <div class="articles">
                                         </div>
@@ -191,7 +191,7 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                                     <script>
                                         showFirstAdvertisements(3);
                                     </script>
-                                    <div class="advertisements firstads" style="padding-bottom: 30px;"></div>
+                                    <div class="advertisements firstads" style="padding-bottom: 30px; background: none"></div>
                                 }
                                 else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements/pos"))
                                 {
@@ -209,6 +209,14 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                                 {
                                     @await Html.PartialAsync("ArticlePage");
                                 }
+                                else if (HttpContextAccessor.HttpContext.Request.Path.Value.Contains("/advertisements"))
+                                {
+                                    <script>
+                                        const urlParams = new URLSearchParams(window.location.search);
+                                        const page = urlParams.get('page');
+                                        loadAdvertisements(page);
+                                    </script>
+                                }
                             }
                         </div>
                     </div>
@@ -217,7 +225,6 @@ padding: 10px 20px; background: rgba(0, 0, 0, 0.5); border: none;" placeholder="
                         <h1 style="margin: 50px 0; color: white; font-size: 2em; text-align: center; font-family: Candara, Bahnschrift, Arial, serif;">Новости: </h1>
                         <div class="news" onload="getNews();">
                         </div>
-
                             @await Html.PartialAsync("FilterForm");
                     </div>
                 }

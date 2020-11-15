@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 using ISPH.Infrastructure.Data;
 using ISPH.Core.Models;
 using ISPH.Core.Interfaces.Repositories;
-using ISPH.Infrastructure.Repositories.Services;
 using Microsoft.EntityFrameworkCore;
 using ISPH.Core.Interfaces.Authentification;
+using ISPH.Infrastructure.Repositories.Services.Hashing;
 
 namespace ISPH.Infrastructure.Repositories
 {
@@ -18,7 +18,7 @@ namespace ISPH.Infrastructure.Repositories
         }
         public async Task<Student> GetByEmail(string email)
         {
-            return await _context.Students.FirstOrDefaultAsync(student => student.Email == email);
+            return await _context.Students.AsNoTracking().AsQueryable().FirstOrDefaultAsync(student => student.Email == email);
         }
         public override async Task<bool> HasEntity(Student entity)
         {
@@ -26,13 +26,13 @@ namespace ISPH.Infrastructure.Repositories
         }
         public override async Task<IList<Student>> GetAll()
         {
-           return await _context.Students.AsQueryable().Include(student => student.Resume).
-                OrderBy(st => st.StudentId).ToListAsync();
+           return await _context.Students.AsQueryable().OrderBy(st => st.StudentId).Include(student => student.Resume)
+               .ToListAsync();
         }
 
         public override async Task<Student> GetById(int id)
         {
-            return await _context.Students.Include(st => st.Resume).FirstOrDefaultAsync(st => st.StudentId == id);
+            return await _context.Students.AsNoTracking().AsQueryable().Include(st => st.Resume).FirstOrDefaultAsync(st => st.StudentId == id);
         }
 
         public async Task<bool> UpdatePassword(Student student, string password)

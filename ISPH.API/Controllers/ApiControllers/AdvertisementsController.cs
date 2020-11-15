@@ -7,7 +7,7 @@ using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Configuration;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
+using ISPH.Core.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace ISPH.API.Controllers.ApiControllers
@@ -25,14 +25,21 @@ namespace ISPH.API.Controllers.ApiControllers
             _positionRepos = positionRepos;
             _mapper = mapper;
         }
+
         [HttpGet]
-        public async Task<IList<AdvertisementDTO>> GetAllAdvertisements()
+        public async Task<IList<AdvertisementDTO>> GetAdvertisementsPerPage(int page)
         {
-            var ads = await _repos.GetAll();
+            IList<Advertisement> ads;
+            if (page == 0) ads = await _repos.GetAll();
+            else ads = await _repos.GetAdvertisementsPerPage(page);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
 
-
+        [HttpGet("count")]
+        public async Task<int> GetAdvertisementsCount()
+        {
+            return await _repos.GetAdvertisementsCount();
+        }
 
         [HttpGet("amount={amount}")]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsAmount(int amount)
@@ -44,19 +51,19 @@ namespace ISPH.API.Controllers.ApiControllers
         [HttpGet("pos={id}")]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsForPosition(int id)
         {
-            var ads = await _repos.GetAdvertisementsForPosition(id);
+            var ads = await _repos.GetAdvertisementsByEntityId(id, EntityType.Position);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
         [HttpGet("emp={id}")]
         public async Task<IList<AdvertisementDTO>> GetAdvertisementsByEmployer(int id)
         {
-            var ads = await _repos.GetAdvertisementsForEmployer(id);
+            var ads = await _repos.GetAdvertisementsByEntityId(id, EntityType.Employer);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
         [HttpGet("com={id}")]
         public async Task<IList<AdvertisementDTO>> GetAllAdvertisementsForCompany(int id)
         {
-            var ads = await _repos.GetAdvertisementsForCompany(id);
+            var ads = await _repos.GetAdvertisementsByEntityId(id, EntityType.Company);
             return _mapper.Map<IList<AdvertisementDTO>>(ads);
         }
         [HttpGet("search={value}")]

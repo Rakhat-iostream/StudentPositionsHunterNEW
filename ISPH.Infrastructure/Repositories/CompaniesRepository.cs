@@ -16,8 +16,8 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<IList<Company>> GetAll()
         {
-            return await _context.Companies.AsQueryable().Include(company => company.Employers).
-                OrderBy(company => company.CompanyId)
+            return await _context.Companies.AsQueryable().
+                OrderBy(company => company.CompanyId).Include(company => company.Employers)
                .ToListAsync();
         }
        
@@ -28,7 +28,7 @@ namespace ISPH.Infrastructure.Repositories
 
         public async Task<Company> GetCompanyByName(string name)
         {
-            return await _context.Companies.FirstOrDefaultAsync(company => company.Name == name);
+            return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(company => company.Name == name);
         }
     }
 }

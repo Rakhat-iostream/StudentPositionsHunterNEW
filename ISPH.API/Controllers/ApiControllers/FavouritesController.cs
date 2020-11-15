@@ -27,7 +27,7 @@ namespace ISPH.API.Controllers.ApiControllers
 
 
         [HttpGet]
-        [Authorize(Roles = RoleType.Admin)]
+        [Authorize]
         public async Task<IList<AdvertisementDTO>> GetFavourites(int studentId)
         {
             var favs = await _repos.GetFavourites(studentId);
@@ -42,7 +42,6 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpPost("ad={adId}/add")]
-        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> AddToFavourites(int studentId, int adId)
         {
             var fav = new FavouriteAdvertisement() { AdvertisementId = adId, StudentId = studentId };
@@ -51,7 +50,6 @@ namespace ISPH.API.Controllers.ApiControllers
         }
 
         [HttpPost("ad={adId}/delete")]
-        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> DeleteFromFavourites(int studentId, int adId)
         {
             var fav = await _repos.GetById(studentId, adId);

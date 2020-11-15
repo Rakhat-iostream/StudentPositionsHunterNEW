@@ -177,15 +177,20 @@
                             });
                         });
 
-                        $.get(
-                            '@url' + '/favourites'
-                        ).done(function (data) {
-                            let ads = data;
-                            $('.userads').append('<h1 style="color: white; text-align: center; margin: 20px 0;">Мое избранное: </h1>');
-                            for (let i = 0; i < ads.length; i++) {
-                                $('.userads').append('<div class="ads"><div class="signs"><i class="fas fa-star" style="color: yellow; font-size: 25px;"></i>' +
-                                    '</div><h2 class="ads-title">' + ads[i].title + '</h2><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>'
-                                    + '<div class="empty"></div>');
+                        $.ajax({
+                            method: "GET",
+                            url: '@url' + '/favourites',
+                            headers: {
+                                'Authorization': 'Bearer @HttpContextAccessor.HttpContext.Session.GetString("Token")'
+                            },
+                            success: function (data) {
+                                let ads = data;
+                                $('.userads').append('<h1 style="color: white; text-align: center; margin: 20px 0;">Мое избранное: </h1>');
+                                for (let i = 0; i < ads.length; i++) {
+                                    $('.userads').append('<div class="ads"><div class="signs"><i class="fas fa-star" style="color: yellow; font-size: 25px;"></i>' +
+                                        '</div><h2 class="ads-title">' + ads[i].title + '</h2><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>'
+                                        + '<div class="empty"></div>');
+                                }
                             }
                         });
                     }

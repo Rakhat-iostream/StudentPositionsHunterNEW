@@ -6,7 +6,7 @@ $(document).ready(function () {
             let art = data;
             for (let i = 0; i < art.length; i++) {
                 $('div.articles').append('<article style="margin-bottom: 30px;">' +
-                    '<img src="' + art[i].imagePath + '" style="display: block; max-width: 100%;">' +
+                    '<img src="' + art[i].imagePath + '" style="display: block; max-width: 100%; height: 150px !important; text-align: center">' +
                     '<h2 class="article-title">' + art[i].title + '</h2>' + '<h3 style="color: orange; margin-bottom: 40px">' + art[i].publishDateString + '</h3>' +
                     '<p><a class="signout" style="color: white; text-decoration: none; margin-top: 20px; background: dodgerblue; padding: 10px 20px" href="/home/articles/id=' + art[i].articleId + '">Learn more...</a></p>' +
                     '</article>');
@@ -97,9 +97,46 @@ function showFirstAdvertisements(amount) {
     ).done(function (data) {
         let ads = data;
         for (let i = 0; i < data.length; i++) {
-            $('.firstads').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
-                '<h3>Salary: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+            $('.firstads').append('<div class="advertisement"><h3>' + ads[i].title + '</h3>' +
+                '<h4>Salary: ' + ads[i].salary + ' KZT</h4><h4 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h4><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
         }
-        $('.firstads').append('<div style="text-align: right;"><a class="signout hoverbtn" style="background: orange; font-size: 1.2em;"">Learn more...</a></div>');
+        $('.firstads').append('<div style="text-align: right;"><a href="/home/advertisements?page=1" class="signout hoverbtn" style="background: orange; font-size: 1.2em;"">Learn more...</a></div>');
+    });
+};
+
+function loadAdvertisements(page) {
+    $.get(
+        '/advertisements?page=' + page
+    ).done(function (data) {
+        let ads = data;
+        $('.advertisements-fromform').empty();
+        $('.filterblock').show();
+            for (let i = 0; i < data.length; i++) {
+                $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
+                    '<h3>Salary: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
+        }
+        addPrevNextButtons(page);
+    });
+};
+function addPrevNextButtons(page) {
+    $.get(
+        '/advertisements/count'
+    ).done(function (response) {
+        let hasPrev = page - 1 > 0;
+        let hasNext = Number(page) * 4 <= response;
+        $('.advertisements-fromform').append('<div style="display: flex;" class="prevnext"></div>');
+        if (hasPrev) {
+            $('.prevnext').append('<div style="flex: 0 0 10%; max-width: 10%">' +
+                '<a href="/home/advertisements?page=' + (page - 1) + '" class="signout hoverbtn" style="background: orange; font-size: 1.2em;"">Prev</a></div>');
+            if (!hasNext)
+                $('.prevnext').append('<div style="flex: 0 0 90%; max-width: 90%"></div></div>');
+            else
+                $('.prevnext').append('<div style="flex: 0 0 80%; max-width: 80%"></div></div>');
+        }
+        else $('.prevnext').append('<div style="flex: 0 0 90%; max-width: 90%"></div></div>');
+
+        if (hasNext) {
+            $('.prevnext').append('<div style="flex: 0 0 10%; max-width: 10%"><a href="/home/advertisements?page=' + (Number(page) + 1) + '" class="signout hoverbtn" style="background: orange; font-size: 1.2em;"">Next</a></div>');
+        }
     });
 }

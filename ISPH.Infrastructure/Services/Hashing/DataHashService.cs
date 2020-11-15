@@ -1,7 +1,7 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace ISPH.Infrastructure.Repositories.Services
+namespace ISPH.Infrastructure.Repositories.Services.Hashing
 {
     public abstract class DataHashService<T>
     {

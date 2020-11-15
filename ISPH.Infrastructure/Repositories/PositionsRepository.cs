@@ -17,17 +17,17 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<IList<Position>> GetAll()
         {
-           return await _context.Positions.AsQueryable().Include(pos => pos.Advertisements).ToListAsync();
+           return await _context.Positions.AsQueryable().Include(pos => pos.Advertisements).OrderBy(pos => pos.Name).ToListAsync();
         }
 
         public override async Task<Position> GetById(int id)
         {
-            return await _context.Positions.Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.PositionId == id);
+            return await _context.Positions.AsNoTracking().AsQueryable().Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.PositionId == id);
         }
 
         public async Task<Position> GetPositionByName(string name)
         {
-            return await _context.Positions.AsNoTracking().Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.Name == name);
+            return await _context.Positions.AsNoTracking().AsQueryable().Include(pos => pos.Advertisements).FirstOrDefaultAsync(pos => pos.Name == name);
         }
 
         public override async Task<bool> HasEntity(Position entity)

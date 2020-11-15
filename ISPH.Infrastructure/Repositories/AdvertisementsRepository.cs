@@ -1,5 +1,6 @@
 ﻿
 using ISPH.Core.DTO;
+using ISPH.Core.Enums;
 using ISPH.Core.Interfaces.Repositories;
 using ISPH.Core.Models;
 using ISPH.Infrastructure.Data;
@@ -15,8 +16,14 @@ namespace ISPH.Infrastructure.Repositories
 {
     public class AdvertisementsRepository : EntityRepository<Advertisement>, IAdvertisementsRepository
     {
+        private readonly IDictionary<EntityType, FilteredAds> filteredMap;
+        private delegate Task<IList<Advertisement>> FilteredAds(int id);
         public AdvertisementsRepository(EntityContext context) : base(context)
         {
+            filteredMap = new Dictionary<EntityType, FilteredAds>();
+            if (!filteredMap.ContainsKey(EntityType.Company)) filteredMap.Add(EntityType.Company, GetAdvertisementsForCompany);
+            if (!filteredMap.ContainsKey(EntityType.Employer)) filteredMap.Add(EntityType.Employer, GetAdvertisementsForEmployer);
+            if (!filteredMap.ContainsKey(EntityType.Position)) filteredMap.Add(EntityType.Position, GetAdvertisementsForPosition);
         }
         public override async Task<bool> Create(Advertisement entity)
         {
@@ -39,42 +46,54 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<IList<Advertisement>> GetAll()
         {
-          return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).
-                OrderBy(adv => adv.AdvertisementId).ToListAsync();
+          return await _context.Advertisements.AsQueryable().OrderBy(adv => adv.Title).Include(adv => adv.Employer).
+                ToListAsync();
         }
 
         public async Task<IList<Advertisement>> GetAdvertisementsAmount(int amount)
         {
-            return await _context.Advertisements.AsQueryable().Include(adv => adv.Employer).OrderBy(adv => adv.Title).Take(amount).ToListAsync();
+            return await _context.Advertisements.AsQueryable().OrderBy(adv => adv.Title).Include(adv => adv.Employer).Take(amount).ToListAsync();
+        }
+
+        public async Task<IList<Advertisement>> GetAdvertisementsPerPage(int page)
+        {
+            return await _context.Advertisements.AsQueryable().OrderBy(adv => adv.Title).Include(adv => adv.Employer).Skip((page - 1) * 4).Take(4).ToListAsync();
         }
 
         public override async Task<Advertisement> GetById(int id)
         {
-            return await _context.Advertisements.AsNoTracking().Include(adv => adv.Employer).FirstOrDefaultAsync(adv => adv.AdvertisementId == id);
+            return await _context.Advertisements.AsNoTracking().AsQueryable().Include(adv => adv.Employer).FirstOrDefaultAsync(adv => adv.AdvertisementId == id);
+        }
+
+
+        public async Task<IList<Advertisement>> GetAdvertisementsByEntityId(int id, EntityType type)
+        {
+           return await filteredMap[type].Invoke(id);
         }
 
 
 
-
-
-        public async Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerid)
+        //Ads for specific model id
+        private async Task<IList<Advertisement>> GetAdvertisementsForEmployer(int employerid)
         {
             return await _context.Advertisements.AsQueryable().Where(adv => adv.EmployerId == employerid).
                  Include(adv => adv.Employer).ToListAsync();
         }
 
-        public async Task<IList<Advertisement>> GetAdvertisementsForPosition(int positionId)
+        private async Task<IList<Advertisement>> GetAdvertisementsForPosition(int positionId)
         {
             return await _context.Advertisements.AsQueryable().Where(adv => adv.PositionId == positionId).
                 Include(adv => adv.Employer).ToListAsync();
         }
 
-        public async Task<IList<Advertisement>> GetAdvertisementsForCompany(int companyId)
+        private async Task<IList<Advertisement>> GetAdvertisementsForCompany(int companyId)
         {
             return await _context.Advertisements.AsQueryable().
                 Include(adv => adv.Employer).Where(adv => adv.Employer.CompanyId == companyId).ToListAsync();
         }
 
+
+        //filtering
         public async Task<IList<Advertisement>> GetFilteredAdvertisements(string value)
         {
             string sql = string.Format("SELECT a.\"AdvertisementId\", e.\"EmployerId\", a.\"Title\", a.\"PositionId\"," +
@@ -130,6 +149,11 @@ namespace ISPH.Infrastructure.Repositories
 
            builder.Append("ORDER BY a.\"Title\"");
             return await _context.Advertisements.FromSqlRaw(builder.ToString()).Include(adv => adv.Employer).ToListAsync();
+        }
+
+        public async Task<int> GetAdvertisementsCount()
+        {
+            return await _context.Advertisements.CountAsync();
         }
     }
 }

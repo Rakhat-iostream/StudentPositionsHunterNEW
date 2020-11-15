@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace ISPH.Infrastructure.Repositories.Services
+namespace ISPH.Infrastructure.Repositories.Services.Hashing
 {
     public class EmployersHashService : DataHashService<Employer>
     {

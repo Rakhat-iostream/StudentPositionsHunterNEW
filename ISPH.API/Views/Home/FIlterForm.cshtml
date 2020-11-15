@@ -64,6 +64,8 @@
                             $('.advertisements-fromform').append('<div class="advertisement"><h1>' + ads[i].title + '</h1>' +
                                 '<h3>Salary: ' + ads[i].salary + ' KZT</h3><h3 style="margin: 20px 0; color: mediumspringgreen;">Company: ' + ads[i].employer.companyName + '</h3><a href="/home/advertisements/id=' + ads[i].advertisementId + '">Learn more...</a></div>');
                         }
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const page = urlParams.get('page');
                     }
                     $(window).scrollTop(0);
                 },

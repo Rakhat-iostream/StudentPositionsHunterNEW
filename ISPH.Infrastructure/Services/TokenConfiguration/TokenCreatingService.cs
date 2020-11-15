@@ -1,14 +1,22 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿using ISPH.Core.Interfaces.Authentification;
+using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-namespace ISPH.Infrastructure.Services
+using System.Threading.Tasks;
+
+namespace ISPH.Infrastructure.Services.TokenConfiguration
 {
-    public static class TokenCreatingService
+    public abstract class TokenCreatingService<T>
     {
-        public static string CreateToken(ClaimsIdentity identity, out string identityName, IConfiguration Configuration)
+       protected readonly IUserAuthRepository<T> _repos;
+        public TokenCreatingService(IUserAuthRepository<T> repos)
+        {
+            _repos = repos;
+        }
+        public string CreateToken(ClaimsIdentity identity, out string identityName, IConfiguration Configuration)
         {
             var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Token").Value));
             var token = new JwtSecurityToken(
@@ -24,5 +32,6 @@ namespace ISPH.Infrastructure.Services
             return encodedToken;
         }
 
+        public abstract Task<ClaimsIdentity> CreateIdentity(string email, string password);
     }
 }
