@@ -1,15 +1,15 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
 
-namespace ISPH.Infrastructure.Repositories.Services.Hashing
+namespace ISPH.Infrastructure.Services.Hashing
 {
     public abstract class DataHashService<T>
     {
-        public void CreateHashedPassword(string password, out byte[] hashedPassword, out byte[] SaltPassword)
+        public void CreateHashedPassword(string password, out byte[] hashedPassword, out byte[] saltPassword)
         {
             using (var hmac = new HMACSHA512())
             {
-                SaltPassword = hmac.Key;
+                saltPassword = hmac.Key;
                 hashedPassword = hmac.ComputeHash(Encoding.UTF8.GetBytes(password));
             }
         }

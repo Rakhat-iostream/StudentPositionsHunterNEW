@@ -7,39 +7,39 @@ namespace ISPH.Infrastructure.Repositories
 {
    public abstract class EntityRepository<T> : IEntityRepository<T> where T : class
     {
-        protected readonly EntityContext _context;
-        public EntityRepository(EntityContext context)
+        protected readonly EntityContext Context;
+        protected EntityRepository(EntityContext context)
         {
-            _context = context;
+            Context = context;
         }
         public virtual async Task<bool> Create(T entity)
         {
-            _context.Set<T>().Add(entity);
-            return await _context.SaveChangesAsync() > 0;
+            await Context.Set<T>().AddAsync(entity);
+            return await Context.SaveChangesAsync() > 0;
         }
 
         public virtual async Task<bool> Delete(T entity)
         {
-            _context.Set<T>().Remove(entity);
-            return await _context.SaveChangesAsync() > 0;
+            Context.Set<T>().Remove(entity);
+            return await Context.SaveChangesAsync() > 0;
         }
 
         public virtual async Task<IList<T>> GetAll()
         {
-            return await _context.Set<T>().ToListAsync();
+            return await Context.Set<T>().ToListAsync();
         }
 
         public virtual async Task<T> GetById(int id)
         {
-            return await _context.Set<T>().FindAsync(id);
+            return await Context.Set<T>().FindAsync(id);
         }
 
         public abstract Task<bool> HasEntity(T entity);
 
         public virtual async Task<bool> Update(T entity)
         {
-            _context.Set<T>().Update(entity);
-            return await _context.SaveChangesAsync() > 0;
+            Context.Set<T>().Update(entity);
+            return await Context.SaveChangesAsync() > 0;
         }
     }
 }

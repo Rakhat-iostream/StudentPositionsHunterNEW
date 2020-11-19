@@ -17,11 +17,11 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<bool> HasEntity(Article entity)
         {
-            return await _context.Articles.AnyAsync(Article => Article.Title == entity.Title);
+            return await Context.Articles.AnyAsync(art => art.Title == entity.Title);
         }
         public override async Task<IList<Article>> GetAll()
         {
-           return await _context.Articles.AsQueryable().OrderByDescending(article => article.PublishDate).ToListAsync();
+           return await Context.Articles.AsQueryable().OrderByDescending(art => art.PublishDate).ToListAsync();
         }
     }
 }

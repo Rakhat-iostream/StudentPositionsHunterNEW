@@ -13,19 +13,20 @@ namespace ISPH.Infrastructure.Repositories
         public ResumesRepository(EntityContext context) : base(context)
         {
         }
-        public async override Task<Resume> GetById(int id)
+        public override async Task<Resume> GetById(int id)
         {
-            return await _context.Resumes.AsNoTracking().FirstOrDefaultAsync(res => res.StudentId == id);
+            return await Context.Resumes.AsNoTracking().FirstOrDefaultAsync(res => res.StudentId == id);
         }
 
         public override async Task<bool> HasEntity(Resume resume)
         {
-            return await _context.Resumes.AnyAsync(res => res.StudentId == resume.StudentId);
+            return await Context.Resumes.AnyAsync(res => res.StudentId == resume.StudentId);
         }
 
         public override async Task<IList<Resume>> GetAll()
         {
-            return await _context.Resumes.AsQueryable().OrderBy(res => res.Id).Include(res => res.Student).ToListAsync();
+            return await Context.Resumes.AsQueryable().OrderBy(res => res.Id).
+                Include(res => res.Student).ToListAsync();
         }
     }
 }

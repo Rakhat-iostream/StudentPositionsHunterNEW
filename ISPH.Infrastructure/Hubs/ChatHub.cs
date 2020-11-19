@@ -10,31 +10,31 @@ namespace ISPH.Infrastructure.Hubs
 {
     public class ChatHub : Hub
     {
-        private static string groupname;
-        private static int number = 0;
-        private readonly LinkedList<string> users = new LinkedList<string>();
+        private static string _groupname;
+        private static int _number = 0;
+        private readonly LinkedList<string> _users = new LinkedList<string>();
         public async Task Send(string message, string userName, string employerName, string role)
         {
-            if (!string.IsNullOrEmpty(role) && role != "employer") groupname = userName + " " + employerName; 
-            if(number != 2)
+            if (!string.IsNullOrEmpty(role) && role != "employer") _groupname = userName + " " + employerName; 
+            if(_number != 2)
             {
-                users.AddLast(Context.ConnectionId);
-                await Groups.AddToGroupAsync(Context.ConnectionId, groupname);
-                number++;
+                _users.AddLast(Context.ConnectionId);
+                await Groups.AddToGroupAsync(Context.ConnectionId, _groupname);
+                _number++;
             }
-            await Clients.Group(groupname).SendAsync("Send", message, userName);
+            await Clients.Group(_groupname).SendAsync("Send", message, userName);
         }
 
         public async Task SendResume(string url)
         {
-            await Clients.Group(groupname).SendAsync("SendResume", url);
+            await Clients.Group(_groupname).SendAsync("SendResume", url);
         }
         public override Task OnDisconnectedAsync(Exception exception)
         {
-            foreach (var id in users)
-                Groups.RemoveFromGroupAsync(id, groupname);
-            number = 0;
-            users.Clear();
+            foreach (var id in _users)
+                Groups.RemoveFromGroupAsync(id, _groupname);
+            _number = 0;
+            _users.Clear();
             return base.OnDisconnectedAsync(exception);
         }
     }

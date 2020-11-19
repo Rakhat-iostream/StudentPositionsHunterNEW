@@ -12,13 +12,13 @@ namespace ISPH.Infrastructure.Services.TokenConfiguration
     public abstract class TokenCreatingService<T>
     {
        protected readonly IUserAuthRepository<T> _repos;
-        public TokenCreatingService(IUserAuthRepository<T> repos)
+        protected TokenCreatingService(IUserAuthRepository<T> repos)
         {
             _repos = repos;
         }
-        public string CreateToken(ClaimsIdentity identity, out string identityName, IConfiguration Configuration)
+        public string CreateToken(ClaimsIdentity identity, out string identityName, IConfiguration configuration)
         {
-            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration.GetSection("AppSettings:Token").Value));
+            var securityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration.GetSection("AppSettings:Token").Value));
             var token = new JwtSecurityToken(
                 claims: identity.Claims,
                 audience: AuthentificationOptions.AUDIENCE,

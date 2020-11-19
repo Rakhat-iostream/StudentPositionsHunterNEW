@@ -16,19 +16,19 @@ namespace ISPH.Infrastructure.Repositories
 
         public override async Task<IList<Company>> GetAll()
         {
-            return await _context.Companies.AsQueryable().
+            return await Context.Companies.AsQueryable().
                 OrderBy(company => company.CompanyId).Include(company => company.Employers)
                .ToListAsync();
         }
        
         public override async Task<bool> HasEntity(Company entity)
         {
-            return await _context.Companies.AnyAsync(company => company.Name == entity.Name);
+            return await Context.Companies.AnyAsync(company => company.Name == entity.Name);
         }
 
         public async Task<Company> GetCompanyByName(string name)
         {
-            return await _context.Companies.AsNoTracking().FirstOrDefaultAsync(company => company.Name == name);
+            return await Context.Companies.AsNoTracking().FirstOrDefaultAsync(company => company.Name == name);
         }
     }
 }

@@ -12,7 +12,6 @@ namespace ISPH.Infrastructure.Services.TokenConfiguration
     {
         public StudentTokenService(IUserAuthRepository<Student> repos) : base(repos)
         {
-
         }
         public override async Task<ClaimsIdentity> CreateIdentity(string email, string password)
         {

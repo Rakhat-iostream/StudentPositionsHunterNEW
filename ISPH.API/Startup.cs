@@ -33,8 +33,7 @@ namespace ISPH.API
             services.AddControllers().AddNewtonsoftJson(options =>
             {
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            }
-            );
+            });
             services.AddDbContext<EntityContext>(options => options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRepositories();
             services.AddSession(options =>

@@ -14,11 +14,11 @@ namespace ISPH.Infrastructure.Repositories
         }
         public override async Task<bool> HasEntity(News entity)
         {
-            return await _context.News.AnyAsync(News => News.Title == entity.Title);
+            return await Context.News.AnyAsync(news => news.Title == entity.Title);
         }
         public override async Task<IList<News>> GetAll()
         {
-          return await _context.News.AsQueryable().OrderByDescending(news => news.PublishDate).ToListAsync();
+          return await Context.News.AsQueryable().OrderByDescending(news => news.PublishDate).ToListAsync();
         }
     }
 }

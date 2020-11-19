@@ -29,7 +29,6 @@ namespace ISPH.API.Controllers.ApiControllers
         
 
         [HttpPost("add")]
-        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> AddResume(IFormFile file, int id)
         {
             if(file != null)
@@ -73,7 +72,6 @@ namespace ISPH.API.Controllers.ApiControllers
 
 
         [HttpDelete("delete")]
-        [Authorize(Roles = RoleType.Student)]
         public async Task<IActionResult> DeleteResumeAsync(int id)
         {
             var file = await _repos.GetById(id);
